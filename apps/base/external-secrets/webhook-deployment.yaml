@@ -17,6 +17,9 @@ spec:
       hostNetwork: false
       serviceAccountName: external-secrets-webhook
       automountServiceAccountToken: true
+      labels:
+        app.kubernetes.io/name: external-secrets-webhook
+        app.kubernetes.io/instance: external-secrets
       containers:
         - name: webhook
           securityContext:
