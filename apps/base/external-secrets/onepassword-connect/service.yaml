@@ -1,0 +1,18 @@
+---
+# Source: connect/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: onepassword-connect
+  namespace: external-secrets
+  labels:
+    app.kubernetes.io/component: connect
+spec:
+  type: ClusterIP
+  selector:
+    app: onepassword-connect
+  ports:
+    - port: 8081
+      name: connect-sync
+    - port: 8080
+      name: connect-api

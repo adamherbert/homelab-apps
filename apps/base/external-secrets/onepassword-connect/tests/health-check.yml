@@ -1,0 +1,16 @@
+---
+# Source: connect/templates/tests/health-check.yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "connect-health-check"
+  namespace: external-secrets
+  annotations:
+    helm.sh/hook: test
+    helm.sh/hook-weight: "1"
+spec:
+  restartPolicy: Never
+  containers:
+    - name: curl
+      image: curlimages/curl
+      command: ["curl", "http://onepassword-connect:8080/health"]

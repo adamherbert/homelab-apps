@@ -3,6 +3,30 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - external-secrets-application.yaml
-  - onepassword-connect-application.yaml
-  - onepassword-clustersecretstore.yaml
+  - namespace.yaml
+  - cert-controller-deployment.yaml
+  - cert-controller-rbac.yaml
+  - cert-controller-serviceaccount.yaml
+  - crds/acraccesstoken.yaml
+  - crds/clusterexternalsecret.yaml
+  - crds/clustersecretstore.yaml
+  - crds/ecrauthorizationtoken.yaml
+  - crds/externalsecret.yaml
+  - crds/fake.yaml
+  - crds/gcraccesstoken.yaml
+  - crds/githubaccesstoken.yaml
+  - crds/password.yaml
+  - crds/pushsecret.yaml
+  - crds/secretstore.yaml
+  - crds/uuid.yaml
+  - crds/vaultdynamicsecret.yaml
+  - crds/webhook.yaml
+  - deployment.yaml
+  - rbac.yaml
+  - serviceaccount.yaml
+  - validatingwebhook.yaml
+  - webhook-deployment.yaml
+  - webhook-secret.yaml
+  - webhook-service.yaml
+  - webhook-serviceaccount.yaml
+  - onepassword-connect
