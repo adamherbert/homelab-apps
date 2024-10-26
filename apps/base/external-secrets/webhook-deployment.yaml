@@ -13,14 +13,14 @@ spec:
       app.kubernetes.io/name: external-secrets-webhook
       app.kubernetes.io/instance: external-secrets
   template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: external-secrets-webhook
+        app.kubernetes.io/instance: external-secrets
     spec:
       hostNetwork: false
       serviceAccountName: external-secrets-webhook
       automountServiceAccountToken: true
-      metadata:
-        labels:
-          app.kubernetes.io/name: external-secrets-webhook
-          app.kubernetes.io/instance: external-secrets
       containers:
         - name: webhook
           securityContext:
