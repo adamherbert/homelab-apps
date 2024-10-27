@@ -11,7 +11,6 @@ metadata:
     helm.sh/resource-policy: keep
   # END annotations
   labels:
-    app: 'cert-manager'
     app.kubernetes.io/name: 'cert-manager'
     app.kubernetes.io/instance: 'cert-manager'
     # Generated labels
@@ -334,7 +333,6 @@ metadata:
     helm.sh/resource-policy: keep
   # END annotations
   labels:
-    app: 'cert-manager'
     app.kubernetes.io/name: 'cert-manager'
     app.kubernetes.io/instance: 'cert-manager'
     # Generated labels
@@ -1105,7 +1103,6 @@ metadata:
     helm.sh/resource-policy: keep
   # END annotations
   labels:
-    app: 'cert-manager'
     app.kubernetes.io/name: 'cert-manager'
     app.kubernetes.io/instance: 'cert-manager'
     # Generated labels
@@ -4314,7 +4311,6 @@ metadata:
     helm.sh/resource-policy: keep
   # END annotations
   labels:
-    app: 'cert-manager'
     app.kubernetes.io/name: 'cert-manager'
     app.kubernetes.io/instance: 'cert-manager'
     # Generated labels
@@ -8043,7 +8039,6 @@ metadata:
     helm.sh/resource-policy: keep
   # END annotations
   labels:
-    app: 'cert-manager'
     app.kubernetes.io/name: 'cert-manager'
     app.kubernetes.io/instance: 'cert-manager'
     app.kubernetes.io/component: "crds"
@@ -11772,7 +11767,6 @@ metadata:
     helm.sh/resource-policy: keep
   # END annotations
   labels:
-    app: 'cert-manager'
     app.kubernetes.io/name: 'cert-manager'
     app.kubernetes.io/instance: 'cert-manager'
     app.kubernetes.io/component: "crds"
