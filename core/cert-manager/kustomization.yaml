@@ -19,4 +19,4 @@ resources:
   - webhook-service.yaml
   - webhook-serviceaccount.yaml
   - webhook-validating-webhook.yaml
-  - cluster-issuer/internal-cluster-issuer.yaml
+  #- cluster-issuer/internal-cluster-issuer.yaml
