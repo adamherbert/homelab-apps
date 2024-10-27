@@ -2,8 +2,8 @@ apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: internal
-  annotations:
-    argocd.argoproj.io/sync-wave: "-5" # Only deploy the certs after cert-manager and traefik are deployed
+  # annotations:
+  #   argocd.argoproj.io/sync-wave: "-5" # Only deploy the certs after cert-manager and traefik are deployed
 spec:
   acme:
     server: https://step-ca.home.8none1.com/acme/acme/directory
