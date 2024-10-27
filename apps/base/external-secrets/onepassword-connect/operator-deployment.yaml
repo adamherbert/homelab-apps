@@ -35,7 +35,7 @@ spec:
           args: [--zap-log-level=info]
           env:
             - name: WATCH_NAMESPACE
-              value:
+              value: ""
             - name: POD_NAME
               valueFrom:
                 fieldRef:
