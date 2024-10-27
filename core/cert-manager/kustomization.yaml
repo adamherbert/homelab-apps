@@ -10,8 +10,8 @@ resources:
   - rbac.yaml
   - service.yaml
   - serviceaccount.yaml
-  - startupapicheck-job.yaml
   - startupapicheck-rbac.yaml
+  - startupapicheck-job.yaml
   - startupapicheck-serviceaccount.yaml
   - webhook-deployment.yaml
   - webhook-mutating-webhook.yaml
