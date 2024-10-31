@@ -6,7 +6,7 @@ metadata:
   name: onepassword-connect
   namespace: external-secrets
   labels:
-    app.kubernetes.io/component: connect
+    app.kubernetes.io/component: onepassword-connect
 spec:
   type: ClusterIP
   selector:
