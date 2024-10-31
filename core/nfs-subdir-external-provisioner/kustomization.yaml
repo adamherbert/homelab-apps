@@ -7,3 +7,4 @@ resources:
   - rbac.yaml
   - deployment.yaml
   - storageclass.yaml
+  - storageclass-patch.yaml

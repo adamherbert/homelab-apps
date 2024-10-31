@@ -1,0 +1,47 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: patch-storageclass-sa
+  namespace: nfs-subdir-external-provisioner
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: storageclass-patch-role
+rules:
+  - apiGroups: ["storage.k8s.io"]
+    resources: ["storageclasses"]
+    verbs: ["get", "patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: storageclass-patch-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: storageclass-patch-role
+subjects:
+  - kind: ServiceAccount
+    name: patch-storageclass-sa
+    namespace: nfs-subdir-external-provisioner
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: patch-local-path-storageclass
+spec:
+  template:
+    spec:
+      serviceAccountName: patch-storageclass-sa
+      containers:
+        - name: patch-local-path-storageclass
+          image: bitnami/kubectl:latest
+          command:
+            - /bin/sh
+            - -c
+            - |
+              kubectl patch storageclass local-path -p '{"metadata": {"annotations": {"storageclass.kubernetes.io/is-default-class": "false"}}}'
+      restartPolicy: OnFailure
+  backoffLimit: 4
