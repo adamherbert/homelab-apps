@@ -23,7 +23,8 @@ rules:
     resources: ["events"]
     verbs: ["get", "create", "update", "patch"]
   - apiGroups: ["admissionregistration.k8s.io"]
-    resources: ["validatingwebhookconfigurations", "mutatingwebhookconfigurations"]
+    resources:
+      ["validatingwebhookconfigurations", "mutatingwebhookconfigurations"]
     verbs: ["get", "list", "watch", "update", "patch"]
   - apiGroups: ["apiregistration.k8s.io"]
     resources: ["apiservices"]
@@ -60,7 +61,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: cert-manager-cainjector:leaderelection
-  namespace: kube-system
+  namespace: cert-manager
   labels:
     app: cainjector
     app.kubernetes.io/name: cainjector
@@ -77,7 +78,11 @@ rules:
   #   see cmd/cainjector/start.go#L137
   - apiGroups: ["coordination.k8s.io"]
     resources: ["leases"]
-    resourceNames: ["cert-manager-cainjector-leader-election", "cert-manager-cainjector-leader-election-core"]
+    resourceNames:
+      [
+        "cert-manager-cainjector-leader-election",
+        "cert-manager-cainjector-leader-election-core",
+      ]
     verbs: ["get", "update", "patch"]
   - apiGroups: ["coordination.k8s.io"]
     resources: ["leases"]
@@ -90,7 +95,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: cert-manager-cainjector:leaderelection
-  namespace: kube-system
+  namespace: cert-manager
   labels:
     app: cainjector
     app.kubernetes.io/name: cainjector
