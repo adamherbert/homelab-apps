@@ -153,7 +153,7 @@ spec:
       spec:
         accessModes:
           - ReadWriteOnce
-        storageClassName: wazuh-storage
+        storageClassName: nfs-subdir-external-provisioner
         resources:
           requests:
             storage: 500Mi
