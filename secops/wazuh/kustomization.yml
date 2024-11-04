@@ -34,6 +34,7 @@ resources:
   - secrets/dashboard-cred-secret.yaml
   - secrets/indexer-cred-secret.yaml
 
+  - certs/wazuh-ca.yaml
   - certs/admin.yaml
   - certs/dashboard.yaml
   - certs/filebeat.yaml
