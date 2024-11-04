@@ -8,7 +8,7 @@ spec:
   issuerRef:
     group: cert-manager.io
     kind: Issuer
-    name: selfsigning-issuer
+    name: wazuh-issuer
   secretName: node-tls
   commonName: "indexer"
   dnsNames:
