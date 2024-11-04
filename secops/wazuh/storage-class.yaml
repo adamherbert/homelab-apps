@@ -7,15 +7,15 @@
 
 # Wazuh StorageClass
 
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: wazuh-storage
-parameters:
-  archiveOnDelete: "true"
-  onDelete: retain
-  pathPattern: /${.PVC.namespace}-${.PVC.name}
-provisioner: cluster.local/nfs-subdir-external-provisioner
-reclaimPolicy: Delete
-mountOptions:
-  - nfsvers=3
+# apiVersion: storage.k8s.io/v1
+# kind: StorageClass
+# metadata:
+#   name: wazuh-storage
+# parameters:
+#   archiveOnDelete: "true"
+#   onDelete: retain
+#   pathPattern: /${.PVC.namespace}-${.PVC.name}
+# provisioner: cluster.local/nfs-subdir-external-provisioner
+# reclaimPolicy: Delete
+# mountOptions:
+#   - nfsvers=3
