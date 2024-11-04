@@ -32,8 +32,8 @@ spec:
         helm.sh/chart: cert-manager-v1.16.1
       annotations:
         prometheus.io/path: "/metrics"
-        prometheus.io/scrape: 'true'
-        prometheus.io/port: '9402'
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9402"
     spec:
       serviceAccountName: cert-manager
       enableServiceLinks: false
@@ -46,32 +46,32 @@ spec:
           image: "quay.io/jetstack/cert-manager-controller:v1.16.1"
           imagePullPolicy: IfNotPresent
           args:
-          - --v=2
-          - --cluster-resource-namespace=$(POD_NAMESPACE)
-          - --leader-election-namespace=kube-system
-          - --acme-http01-solver-image=quay.io/jetstack/cert-manager-acmesolver:v1.16.1
-          - --default-issuer-name=internal
-          - --default-issuer-kind=ClusterIssuer
-          - --default-issuer-group=cert-manager.io
-          - --max-concurrent-challenges=60
+            - --v=2
+            - --cluster-resource-namespace=$(POD_NAMESPACE)
+            - --leader-election-namespace=cert-manager
+            - --acme-http01-solver-image=quay.io/jetstack/cert-manager-acmesolver:v1.16.1
+            - --default-issuer-name=internal
+            - --default-issuer-kind=ClusterIssuer
+            - --default-issuer-group=cert-manager.io
+            - --max-concurrent-challenges=60
           ports:
-          - containerPort: 9402
-            name: http-metrics
-            protocol: TCP
-          - containerPort: 9403
-            name: http-healthz
-            protocol: TCP
+            - containerPort: 9402
+              name: http-metrics
+              protocol: TCP
+            - containerPort: 9403
+              name: http-healthz
+              protocol: TCP
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
               drop:
-              - ALL
+                - ALL
             readOnlyRootFilesystem: true
           env:
-          - name: POD_NAMESPACE
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.namespace
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
           # LivenessProbe settings are based on those used for the Kubernetes
           # controller-manager. See:
           # https://github.com/kubernetes/kubernetes/blob/806b30170c61a38fedd54cc9ede4cd6275a1ad3b/cmd/kubeadm/app/util/staticpod/utils.go#L241-L245
