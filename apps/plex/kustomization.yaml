@@ -7,4 +7,5 @@ resources:
   - serviceaccount.yaml
   - statefulset.yaml
   - service.yaml
+  - certificate.yaml
   - ingress.yaml
