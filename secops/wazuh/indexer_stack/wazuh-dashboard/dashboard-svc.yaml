@@ -12,6 +12,8 @@ kind: Service
 metadata:
   name: dashboard
   namespace: wazuh
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: wazuh.lab.8none1.com
   labels:
     app: wazuh-dashboard
 spec:
