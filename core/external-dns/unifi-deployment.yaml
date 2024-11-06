@@ -34,12 +34,13 @@ spec:
             allowPrivilegeEscalation: false
             capabilities:
               drop:
-              - ALL
+                - ALL
             privileged: false
             readOnlyRootFilesystem: true
             runAsGroup: 65532
             runAsNonRoot: true
             runAsUser: 65532
+          resources: {}
           image: registry.k8s.io/external-dns/external-dns:v0.15.0
           imagePullPolicy: IfNotPresent
           args:
@@ -79,6 +80,7 @@ spec:
             timeoutSeconds: 5
         - name: webhook
           image: ghcr.io/kashalls/external-dns-unifi-webhook:main
+          resources: {}
           imagePullPolicy: IfNotPresent
           env:
             - name: UNIFI_HOST
@@ -87,7 +89,7 @@ spec:
                   key: host
                   name: external-dns-unifi-secret
             - name: UNIFI_EXTERNAL_CONTROLLER
-              value: false
+              value: "false"
             - name: UNIFI_USER
               valueFrom:
                 secretKeyRef:
