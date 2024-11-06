@@ -1,0 +1,27 @@
+---
+# Source: plex-media-server/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: plex-media-server-ingress
+  labels:
+    name: plex-media-server-ingress
+    app: plex-media-server
+    app.kubernetes.io/name: plex-media-server
+spec:
+  ingressClassName: ingress
+  rules:
+  - host: plex.lab.8none1.com
+    http:
+      paths:
+      - path: '/'
+        pathType: Prefix
+        backend:
+          service:
+            name: plex-media-server
+            port:
+              number: 32400
+  tls:
+  - hosts:
+    - plex.lab.8none1.com
+    secretName: plex-media-server-ingress-tls
