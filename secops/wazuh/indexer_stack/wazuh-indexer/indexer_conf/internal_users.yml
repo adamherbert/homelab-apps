@@ -18,7 +18,7 @@ admin:
   description: "Demo admin user"
 
 kibanaserver:
-  hash: "$2a$12$4AcgAt3xwOWadA5s5blL6ev39OXDNhmOesEoo33eZtrq2N0YrU3H."
+  hash: "$2y$12$sDmUu0YIbDuc9rpsHFkFte4Q/zKe1w.VjaCDeHVRH3AObk5xsGlVS"
   reserved: true
   description: "Demo kibanaserver user"
 
