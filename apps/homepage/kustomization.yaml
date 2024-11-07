@@ -6,6 +6,7 @@ resources:
   - namespace.yaml
   - rbac.yaml
   - configmap.yaml
+  - certificate.yaml
   - deployment.yaml
   - service.yaml
   - ingress.yaml
