@@ -17,6 +17,8 @@ spec:
     group: cert-manager.io
     kind: Issuer
     name: selfsigning-issuer
+  additionalOutputFormats:
+    - type: CombinedPEM
   secretName: wazuh-pki-ca
   commonName: "wazuh-ca"
   subject:
