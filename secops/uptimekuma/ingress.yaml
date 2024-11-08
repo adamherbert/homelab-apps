@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: uptime-kuma-ingress
+  namespace: uptimekuma
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: uptimekuma.lab.8none1.com # Replace with your domain
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: uptime-kuma-service
+                port:
+                  number: 3001
+  tls:
+    - hosts:
+        - uptimekuma.lab.8none1.com
+      secretName: uptime-kuma-ingress-tls
