@@ -1,0 +1,28 @@
+---
+# Source: authentik/templates/server/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: authentik-server
+  namespace: "authentik"
+  labels:
+    app.kubernetes.io/name: "authentik"
+    app.kubernetes.io/component: "server"
+    app.kubernetes.io/part-of: "authentik"
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: "authentik.lab.8none1.com"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: authentik-server
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - "authentik.lab.8none1.com"
+      secretName: authentik-ingress-tls

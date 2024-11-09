@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: authentik-ingress-tls
+  namespace: authentik
+spec:
+  secretName: authentik-ingress-tls
+  issuerRef:
+    name: internal
+    kind: ClusterIssuer
+  commonName: authentik.lab.8none1.com # Replace with your domain
+  dnsNames:
+    - authentik.lab.8none1.com # Replace with your domain

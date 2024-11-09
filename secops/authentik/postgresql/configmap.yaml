@@ -1,0 +1,14 @@
+---
+# Source: authentik/charts/postgresql/templates/primary/extended-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgresql-extended-configuration
+  namespace: "authentik"
+  labels:
+    app.kubernetes.io/name: postgresql
+    app.kubernetes.io/component: postgresql
+    app.kubernetes.io/part-of: authentik
+data:
+  override.conf: |-
+    max_connections = 500
