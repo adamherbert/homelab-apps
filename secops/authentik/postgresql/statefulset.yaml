@@ -25,6 +25,7 @@ spec:
       name: postgresql
       labels:
         app.kubernetes.io/name: postgresql
+        app.kubernetes.io/component: postgresql
         app.kubernetes.io/part-of: authentik
     spec:
       serviceAccountName: default
