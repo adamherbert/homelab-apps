@@ -1,3 +1,5 @@
 .envrc
 /secrets
 .DS_Store
+*/*/charts
+*/*/build
