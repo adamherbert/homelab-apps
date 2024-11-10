@@ -25,16 +25,6 @@ spec:
         app.kubernetes.io/part-of: "authentik"
     spec:
       terminationGracePeriodSeconds: 30
-      initContainers:
-        - name: update-ca-certificates
-          image: ghcr.io/goauthentik/server:2024.10.1
-          command: ["update-ca-certificates"]
-          securityContext:
-            runAsUser: 0
-          volumeMounts:
-            - name: cm-internal-intermediate-ca
-              mountPath: /usr/local/share/ca-certificates/cm-internal-intermediate-fullchain.crt
-              subPath: cm-internal-intermediate-fullchain.crt
       containers:
         - name: server
           image: ghcr.io/goauthentik/server:2024.10.1
@@ -52,6 +42,8 @@ spec:
               value: "0.0.0.0:9443"
             - name: AUTHENTIK_LISTEN__METRICS
               value: "0.0.0.0:9300"
+            - name: SSL_CERT_DIR
+              value: /usr/local/share/ca-certificates
           envFrom:
             - secretRef:
                 name: authentik
