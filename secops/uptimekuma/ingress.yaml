@@ -14,9 +14,9 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: uptime-kuma-service
+                name: authentik-server.authentik.svc.cluster.local
                 port:
-                  number: 3001
+                  number: 80
   tls:
     - hosts:
         - uptimekuma.lab.8none1.com
