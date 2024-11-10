@@ -26,6 +26,16 @@ spec:
     spec:
       serviceAccountName: authentik
       terminationGracePeriodSeconds: 30
+      initContainers:
+        - name: update-ca-certificates
+          image: ghcr.io/goauthentik/server:2024.10.1
+          command: ["update-ca-certificates"]
+          securityContext:
+            runAsUser: 0
+          volumeMounts:
+            - name: cm-internal-intermediate-ca
+              mountPath: /usr/local/share/ca-certificates/cm-internal-intermediate-fullchain.crt
+              subPath: cm-internal-intermediate-fullchain.crt
       containers:
         - name: worker
           image: ghcr.io/goauthentik/server:2024.10.1
@@ -66,6 +76,10 @@ spec:
             successThreshold: 1
             timeoutSeconds: 1
           resources: {}
+      volumes:
+        - name: cm-internal-intermediate-ca
+          secret:
+            secretName: cm-internal-intermediate-ca
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:

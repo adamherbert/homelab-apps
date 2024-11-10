@@ -27,8 +27,10 @@ spec:
       terminationGracePeriodSeconds: 30
       initContainers:
         - name: update-ca-certificates
-          image: ghcr.io/goauthentik/server:latest
+          image: ghcr.io/goauthentik/server:2024.10.1
           command: ["update-ca-certificates"]
+          securityContext:
+            runAsUser: 0
           volumeMounts:
             - name: cm-internal-intermediate-ca
               mountPath: /usr/local/share/ca-certificates/cm-internal-intermediate-fullchain.crt

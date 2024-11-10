@@ -5,6 +5,7 @@ kind: Kustomization
 resources:
   - secrets.yaml
   - rbac.yaml
+  - intermal-ca-external-secret.yaml
   # Postgres Components
   - postgresql/secrets.yaml
   - postgresql/configmap.yaml
@@ -16,7 +17,6 @@ resources:
   - redis/service.yaml
   - redis/statefulset.yaml
   # Authentik Server Components
-  - server/intermal-ca-external-secret.yaml
   - server/service.yaml
   - server/deployment.yaml
   - server/ingress.yaml
