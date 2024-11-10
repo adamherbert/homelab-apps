@@ -16,6 +16,7 @@ resources:
   - redis/service.yaml
   - redis/statefulset.yaml
   # Authentik Server Components
+  - server/intermal-ca-external-secret.yaml
   - server/service.yaml
   - server/deployment.yaml
   - server/ingress.yaml

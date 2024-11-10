@@ -25,9 +25,21 @@ spec:
         app.kubernetes.io/part-of: "authentik"
     spec:
       terminationGracePeriodSeconds: 30
+      initContainers:
+        - name: update-ca-certificates
+          image: ghcr.io/goauthentik/server:latest
+          command: ["update-ca-certificates"]
+          volumeMounts:
+            - name: cm-internal-intermediate-ca
+              mountPath: /usr/local/share/ca-certificates/cm-internal-intermediate-fullchain.crt
+              subPath: cm-internal-intermediate-fullchain.crt
       containers:
         - name: server
           image: ghcr.io/goauthentik/server:2024.10.1
+          volumeMounts:
+            - name: cm-internal-intermediate-ca
+              mountPath: /usr/local/share/ca-certificates/cm-internal-intermediate-fullchain.crt
+              subPath: cm-internal-intermediate-fullchain.crt
           imagePullPolicy: IfNotPresent
           args:
             - server
@@ -79,6 +91,10 @@ spec:
             successThreshold: 1
             timeoutSeconds: 1
           resources: {}
+      volumes:
+        - name: cm-internal-intermediate-ca
+          secret:
+            secretName: cm-internal-intermediate-ca
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
