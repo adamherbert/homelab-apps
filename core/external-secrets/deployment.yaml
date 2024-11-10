@@ -47,4 +47,11 @@ spec:
             - containerPort: 8080
               protocol: TCP
               name: metrics
+          resources:
+            requests:
+              cpu: 100m # 0.1 CPU
+              memory: 256Mi # 256 MB RAM
+            limits:
+              cpu: 250m # 0.25 CPU
+              memory: 512Mi # 512 MB RAM
       dnsPolicy: ClusterFirst

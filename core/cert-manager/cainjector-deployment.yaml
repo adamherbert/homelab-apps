@@ -63,5 +63,12 @@ spec:
               drop:
                 - ALL
             readOnlyRootFilesystem: true
+          resources:
+            requests:
+              cpu: 50m # 0.05 CPU
+              memory: 128Mi # 128 MB RAM
+            limits:
+              cpu: 100m # 0.1 CPU
+              memory: 256Mi # 256 MB RAM
       nodeSelector:
         kubernetes.io/os: linux

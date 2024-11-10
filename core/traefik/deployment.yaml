@@ -37,7 +37,13 @@ spec:
         - image: docker.io/traefik:v3.2.0
           imagePullPolicy: IfNotPresent
           name: traefik
-          resources: {}
+          resources:
+            requests:
+              cpu: 500m # 0.5 CPU
+              memory: 512Mi # 512 MB RAM
+            limits:
+              cpu: 1000m # 1 CPU
+              memory: 1Gi # 1 GB RAM
           readinessProbe:
             httpGet:
               path: /ping

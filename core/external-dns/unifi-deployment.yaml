@@ -40,7 +40,13 @@ spec:
             runAsGroup: 65532
             runAsNonRoot: true
             runAsUser: 65532
-          resources: {}
+          resources:
+            requests:
+              cpu: 100m # 0.1 CPU
+              memory: 128Mi # 128 MB RAM
+            limits:
+              cpu: 250m # 0.25 CPU
+              memory: 256Mi # 256 MB RAM
           image: registry.k8s.io/external-dns/external-dns:v0.15.0
           imagePullPolicy: IfNotPresent
           args:

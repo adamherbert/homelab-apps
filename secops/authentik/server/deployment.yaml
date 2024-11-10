@@ -84,7 +84,13 @@ spec:
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 1
-          resources: {}
+          resources:
+            requests:
+              cpu: 250m # 0.25 CPU
+              memory: 512Mi # 512 MB RAM
+            limits:
+              cpu: 500m # 0.5 CPU
+              memory: 1Gi # 1 GB RAM
       volumes:
         - name: cm-internal-intermediate-ca
           secret:

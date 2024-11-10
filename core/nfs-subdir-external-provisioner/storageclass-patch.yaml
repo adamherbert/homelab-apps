@@ -43,5 +43,12 @@ spec:
             - -c
             - |
               kubectl patch storageclass local-path -p '{"metadata": {"annotations": {"storageclass.kubernetes.io/is-default-class": "false"}}}'
+          resources:
+            requests:
+              cpu: 100m # 0.1 CPU
+              memory: 128Mi # 128 MB RAM
+            limits:
+              cpu: 250m # 0.25 CPU
+              memory: 256Mi # 256 MB RAM
       restartPolicy: OnFailure
   backoffLimit: 4

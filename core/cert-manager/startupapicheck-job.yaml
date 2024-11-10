@@ -57,5 +57,12 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
+          resources:
+            requests:
+              cpu: 10m # 0.01 CPU
+              memory: 64Mi # 64 MB RAM
+            limits:
+              cpu: 25m # 0.025 CPU
+              memory: 128Mi # 128 MB RAM
       nodeSelector:
         kubernetes.io/os: linux

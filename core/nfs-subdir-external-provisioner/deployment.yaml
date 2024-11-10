@@ -31,6 +31,13 @@ spec:
               value: 172.16.0.5
             - name: NFS_PATH
               value: /volume1/k3s/prod
+          resources:
+            requests:
+              cpu: 50m # 0.05 CPU
+              memory: 64Mi # 64 MB RAM
+            limits:
+              cpu: 100m # 0.1 CPU
+              memory: 128Mi # 128 MB RAM
       volumes:
         - name: nfs-subdir-external-provisioner-root
           nfs:

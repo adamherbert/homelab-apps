@@ -140,10 +140,12 @@ spec:
                   exec pg_isready -U "authentik" -d "dbname=authentik" -h 127.0.0.1 -p 5432
                   [ -f /opt/bitnami/postgresql/tmp/.initialized ] || [ -f /bitnami/postgresql/.initialized ]
           resources:
-            limits: {}
             requests:
-              cpu: 250m
-              memory: 256Mi
+              cpu: 250m # 0.25 CPU
+              memory: 512Mi # 512 MB RAM
+            limits:
+              cpu: 500m # 0.5 CPU
+              memory: 1Gi # 1 GB RAM
           volumeMounts:
             - name: postgresql-extended-config
               mountPath: /bitnami/postgresql/conf/conf.d/
