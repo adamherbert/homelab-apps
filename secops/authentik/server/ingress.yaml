@@ -9,6 +9,8 @@ metadata:
     app.kubernetes.io/name: "authentik"
     app.kubernetes.io/component: "server"
     app.kubernetes.io/part-of: "authentik"
+  annotations:
+    cert-manager.io/cluster-issuer: internal
 spec:
   ingressClassName: traefik
   rules:
