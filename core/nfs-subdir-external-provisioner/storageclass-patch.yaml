@@ -31,6 +31,9 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: patch-local-path-storageclass
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
 spec:
   ttlSecondsAfterFinished: 100
   template:
