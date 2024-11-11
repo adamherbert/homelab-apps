@@ -1,6 +1,15 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
-  ]
+    "config:base"
+  ],
+  "kubernetes": {
+    "fileMatch": ["\\.yml$", "\\.yaml$"]
+  },
+  "kustomize": {
+    "fileMatch": [
+      "(^|/)kustomization\\.ya?ml$"
+    ],
+    "pinDigests": false
+  }
 }
