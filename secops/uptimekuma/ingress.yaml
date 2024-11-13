@@ -5,7 +5,7 @@ metadata:
   namespace: uptimekuma
   annotations:
     cert-manager.io/cluster-issuer: internal
-    traefik.ingress.kubernetes.io/router.middlewares: traefik-ak-outpost-authentik-embedded-outpost@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: authentik-ak-outpost-authentik-embedded-outpost@kubernetescrd
 spec:
   ingressClassName: traefik
   rules:
