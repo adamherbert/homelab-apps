@@ -7,3 +7,4 @@ resources:
   - service.yaml
   - ingressclass.yaml
   - middleware.yaml
+  - ingress.yaml
