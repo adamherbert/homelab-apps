@@ -19,7 +19,7 @@ spec:
               service:
                 name: traefik
                 port:
-                  number: 8080
+                  name: dashboard
   tls:
     - hosts:
         - traefik-dashboard.lab.8none1.com
