@@ -24,6 +24,13 @@ spec:
                 name: authentik-server
                 port:
                   number: 80
+          - path: /outpost.goauthentik.io/
+            pathType: Prefix
+            backend:
+              service:
+                name: ak-outpost-authentik-embedded-outpost
+                port:
+                  number: 9000
   tls:
     - hosts:
         - "authentik.lab.8none1.com"
