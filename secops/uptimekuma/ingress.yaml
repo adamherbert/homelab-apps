@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: uptime-kuma-ingress
+  namespace: uptimekuma
+  annotations:
+    cert-manager.io/cluster-issuer: internal
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.middlewares: "traefik/authentik-oauth2@kubernetescrd"
+spec:
+  rules:
+    - host: uptimekuma.lab.8none1.com # Replace with your domain
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: uptime-kuma
+                port:
+                  number: 3001
+  tls:
+    - hosts:
+        - uptimekuma.lab.8none1.com
+      secretName: uptime-kuma-ingress-tls
