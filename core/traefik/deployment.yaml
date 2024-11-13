@@ -72,10 +72,10 @@ spec:
               containerPort: 8080
               protocol: "TCP"
             - name: "web"
-              containerPort: 8000
+              containerPort: 80
               protocol: "TCP"
             - name: "websecure"
-              containerPort: 8443
+              containerPort: 443
               protocol: "TCP"
           securityContext:
             allowPrivilegeEscalation: false
@@ -93,8 +93,9 @@ spec:
             - "--global.sendanonymoususage"
             - "--entryPoints.metrics.address=:9100/tcp"
             - "--entryPoints.traefik.address=:8080/tcp"
-            - "--entryPoints.web.address=:8000/tcp"
-            - "--entryPoints.websecure.address=:8443/tcp"
+            - "--entryPoints.web.address=:80/tcp"
+            - "--entryPoints.websecure.address=:443/tcp"
+            - "--entryPoints.websecure.http.tls=true"
             - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
             - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
             - "--api.dashboard=true"
@@ -106,7 +107,6 @@ spec:
             - "--providers.kubernetesingress"
             - "--providers.kubernetesingress.allowEmptyServices=true"
             - "--providers.kubernetesingress.ingressendpoint.publishedservice=traefik/traefik"
-            - "--entryPoints.websecure.http.tls=true"
             - "--log.level=INFO"
 
           env:
