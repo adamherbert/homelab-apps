@@ -96,7 +96,7 @@ spec:
             - "--entryPoints.web.address=:80/tcp"
             - "--entryPoints.websecure.address=:443/tcp"
             - "--entryPoints.websecure.http.tls=true"
-            - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+            - "--entrypoints.web.http.redirections.entryPoint.to=:443"
             - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
             - "--api.dashboard=true"
             - "--ping=true"
