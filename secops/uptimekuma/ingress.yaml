@@ -6,7 +6,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: internal
     kubernetes.io/ingress.class: traefik
-    traefik.ingress.kubernetes.io/router.middlewares: traefik/authentik-oauth2@kubernetescrd
+    #traefik.ingress.kubernetes.io/router.middlewares: traefik/authentik-oauth2@kubernetescrd
 spec:
   rules:
     - host: uptimekuma.lab.8none1.com # Replace with your domain
