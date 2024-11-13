@@ -6,6 +6,8 @@ kind: Ingress
 metadata:
   name: dashboard
   namespace: traefik
+  annotations:
+    cert-manager.io/cluster-issuer: internal
 spec:
   rules:
     - host: traefik-dashboard.lab.8none1.com
