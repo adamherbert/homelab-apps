@@ -18,3 +18,7 @@ spec:
                 name: traefik
                 port:
                   number: 8080
+  tls:
+    - hosts:
+        - traefik-dashboard.lab.8none1.com
+      secretName: traefik-dashboard-ingress-tls
