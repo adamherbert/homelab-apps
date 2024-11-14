@@ -4,6 +4,6 @@ kind: Kustomization
 
 resources:
   - namespace.yaml
-  - radarr-sts.yaml
-  - radarr-service.yaml
-  - ingress.yaml
+  # - radarr-sts.yaml
+  # - radarr-service.yaml
+  # - ingress.yaml
