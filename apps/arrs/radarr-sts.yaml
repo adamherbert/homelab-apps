@@ -33,7 +33,7 @@ spec:
           name: radarr
           volumeMounts:
             - mountPath: /config
-              name: radarr-config
+              name: config
             - mountPath: /movies
               name: movies
             - mountPath: /downloads
@@ -48,17 +48,13 @@ spec:
           nfs:
             server: 172.16.0.5
             path: /volume1/Movies
-            mountOptions:
-              - nolock
         - name: movie-downloads
           nfs:
             server: 172.16.0.5
             path: /volume1/downloads/radarr
-            mountOptions:
-              - nolock
   volumeClaimTemplates:
     - metadata:
-        name: radarr-config
+        name: config
       spec:
         accessModes: ["ReadWriteOnce"]
         storageClassName: nfs-subdir-external-provisioner
