@@ -14,8 +14,6 @@ spec:
       app.kubernetes.io/name: radarr
       app.kubernetes.io/part-of: arrs
       app: radarr
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:
