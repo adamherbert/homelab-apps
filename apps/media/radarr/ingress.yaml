@@ -8,6 +8,7 @@ metadata:
   namespace: media
   annotations:
     cert-manager.io/cluster-issuer: internal
+#    traefik.ingress.kubernetes.io/router.middlewares: authentik-ak-outpost-authentik-embedded-outpost@kubernetescrd
 spec:
   rules:
     - host: radarr.lab.8none1.com
@@ -20,4 +21,7 @@ spec:
                 name: radarr
                 port:
                   name: radarr
-  tls: []
+  tls:
+    - hosts:
+        - radarr.lab.8none1.com
+      secretName: radarr-ingress-tls
