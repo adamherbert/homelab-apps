@@ -8,6 +8,6 @@ resources:
   - persistentvolumes.yaml
   - pvc.yaml
   # Radarr
-  - radarr/statefulset.yaml
+  # - radarr/statefulset.yaml
   - radarr/service.yaml
   - radarr/ingress.yaml
