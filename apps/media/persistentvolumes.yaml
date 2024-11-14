@@ -6,6 +6,9 @@ metadata:
   namespace: media
 spec:
   volumeMode: Filesystem
+  capacity:
+    storage: 10Ti
+  persistentVolumeReclaimPolicy: Retain
   accessModes:
     - ReadWriteMany
   mountOptions:
@@ -27,6 +30,9 @@ metadata:
   namespace: media
 spec:
   volumeMode: Filesystem
+  capacity:
+    storage: 10Ti
+  persistentVolumeReclaimPolicy: Retain
   accessModes:
     - ReadWriteMany
   mountOptions:
@@ -48,6 +54,9 @@ metadata:
   namespace: media
 spec:
   volumeMode: Filesystem
+  capacity:
+    storage: 10Ti
+  persistentVolumeReclaimPolicy: Retain
   accessModes:
     - ReadWriteMany
   mountOptions:
@@ -69,6 +78,9 @@ metadata:
   namespace: media
 spec:
   volumeMode: Filesystem
+  capacity:
+    storage: 10Ti
+  persistentVolumeReclaimPolicy: Retain
   accessModes:
     - ReadWriteMany
   mountOptions:
