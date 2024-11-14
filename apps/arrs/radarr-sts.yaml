@@ -37,9 +37,9 @@ spec:
             - mountPath: /config
               name: radarr-config
             - mountPath: /movies
-              name: Movies
+              name: movies
             - mountPath: /downloads
-              name: MovieDownloads
+              name: movie-downloads
       restartPolicy: Always
       volumes:
         - name: radarr-config
@@ -50,11 +50,11 @@ spec:
             resources:
               requests:
                 storage: 1Gi
-        - name: Movies
+        - name: movies
           nfs:
             server: 172.16.0.5
             path: /volume1/Movies
-        - name: MovieDownloads
+        - name: movie-downloads
           nfs:
             server: 172.16.0.5
             path: /volume1/downloads/radarr
