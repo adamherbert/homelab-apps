@@ -20,3 +20,7 @@ spec:
                 name: radarr
                 port:
                   name: radarr
+  tls:
+    - hosts:
+        - arrs.lab.8none1.com
+      secretName: arrs-ingress-tls
