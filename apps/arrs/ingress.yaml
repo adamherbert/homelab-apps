@@ -10,10 +10,10 @@ metadata:
     cert-manager.io/cluster-issuer: internal
 spec:
   rules:
-    - host: arrs.lab.8none1.com
+    - host: rad.arr.lab.8none1.com
       http:
         paths:
-          - path: /radarr
+          - path: /
             pathType: Prefix
             backend:
               service:
@@ -22,5 +22,6 @@ spec:
                   name: radarr
   tls:
     - hosts:
-        - arrs.lab.8none1.com
+        - rad.arr.lab.8none1.com
+        - son.arr.lab.8none1.com
       secretName: arrs-ingress-tls
