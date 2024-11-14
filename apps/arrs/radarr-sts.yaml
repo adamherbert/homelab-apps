@@ -53,7 +53,9 @@ spec:
             server: 172.16.0.5
             path: /volume1/downloads/radarr
   volumeClaimTemplates:
-    - metadata:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
         name: config
       spec:
         accessModes: ["ReadWriteOnce"]
