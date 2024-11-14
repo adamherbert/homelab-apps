@@ -39,6 +39,13 @@ spec:
             - name: radarr
               containerPort: 7878
               protocol: TCP
+      volumes:
+        - name: movies
+          persistentVolumeClaim:
+            claimName: movies
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: downloads
       restartPolicy: Always
   volumeClaimTemplates:
     - apiVersion: v1

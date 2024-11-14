@@ -6,6 +6,7 @@ resources:
   - namespace.yaml
   - configmap-env.yaml
   - persistentvolumes.yaml
+  - pvc.yaml
   # Radarr
   - radarr/statefulset.yaml
   - radarr/service.yaml

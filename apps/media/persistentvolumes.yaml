@@ -4,6 +4,9 @@ kind: PersistentVolume
 metadata:
   name: movies
   namespace: media
+  labels:
+    app: media
+    volume: movies
 spec:
   volumeMode: Filesystem
   capacity:
@@ -28,6 +31,9 @@ kind: PersistentVolume
 metadata:
   name: tv
   namespace: media
+  labels:
+    app: media
+    volume: tv
 spec:
   volumeMode: Filesystem
   capacity:
@@ -52,6 +58,9 @@ kind: PersistentVolume
 metadata:
   name: home-movies
   namespace: media
+  labels:
+    app: media
+    volume: home-movies
 spec:
   volumeMode: Filesystem
   capacity:
@@ -76,6 +85,9 @@ kind: PersistentVolume
 metadata:
   name: downloads
   namespace: media
+  labels:
+    app: media
+    volume: downloads
 spec:
   volumeMode: Filesystem
   capacity:
