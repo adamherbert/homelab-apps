@@ -11,9 +11,10 @@ spec:
   storageClassName: ""
   accessModes:
     - ReadWriteMany
-  matchLabels:
-    app: media
-    volume: movies
+  selector:
+    matchLabels:
+      app: media
+      volume: movies
   resources:
     requests:
       storage: 10Ti
@@ -30,9 +31,10 @@ spec:
   storageClassName: ""
   accessModes:
     - ReadWriteMany
-  matchLabels:
-    app: media
-    volume: tv
+  selector:
+    matchLabels:
+      app: media
+      volume: tv
   resources:
     requests:
       storage: 10Ti
@@ -49,9 +51,10 @@ spec:
   storageClassName: ""
   accessModes:
     - ReadWriteMany
-  matchLabels:
-    app: media
-    volume: home-movies
+  selector:
+    matchLabels:
+      app: media
+      volume: home-movies
   resources:
     requests:
       storage: 10Ti
@@ -68,9 +71,10 @@ spec:
   storageClassName: ""
   accessModes:
     - ReadWriteMany
-  matchLabels:
-    app: media
-    volume: downloads
+  selector:
+    matchLabels:
+      app: media
+      volume: downloads
   resources:
     requests:
       storage: 10Ti
