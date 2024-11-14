@@ -6,6 +6,8 @@ kind: Ingress
 metadata:
   name: radarr
   namespace: arrs
+  annotations:
+    cert-manager.io/cluster-issuer: internal
 spec:
   rules:
     - host: arrs.lab.8none1.com
