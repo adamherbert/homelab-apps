@@ -38,6 +38,10 @@ spec:
               name: movies
             - mountPath: /downloads
               name: movie-downloads
+          ports:
+            - name: radarr
+              containerPort: 7878
+              protocol: TCP
       restartPolicy: Always
       volumes:
         - name: movies
