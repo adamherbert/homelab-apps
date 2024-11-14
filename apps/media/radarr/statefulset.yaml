@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: radarr
+    app.kubernetes.io/name: radarr
+    app.kubernetes.io/part-of: arrs
+  name: radarr
+  namespace: media
+spec:
+  serviceName: radarr
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: radarr
+      app.kubernetes.io/part-of: arrs
+      app: radarr
+  template:
+    metadata:
+      labels:
+        app: radarr
+        app.kubernetes.io/name: radarr
+        app.kubernetes.io/part-of: arrs
+    spec:
+      containers:
+        - image: linuxserver/radarr:5.14.0
+          name: radarr
+          envFrom:
+            - configMapRef:
+                name: media-env
+          volumeMounts:
+            - mountPath: /config
+              name: config
+            - mountPath: /movies
+              name: movies
+            - mountPath: /downloads
+              name: downloads
+          ports:
+            - name: radarr
+              containerPort: 7878
+              protocol: TCP
+      restartPolicy: Always
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: config
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: nfs-subdir-external-provisioner
+        resources:
+          requests:
+            storage: 20Gi
+        mountOptions:
+          - nfsvers=4
+          - rsize=1048576
+          - wsize=1048576
+          - hard
+          - timeo=600
+          - retrans=2
+          - sync
+          - nolock
