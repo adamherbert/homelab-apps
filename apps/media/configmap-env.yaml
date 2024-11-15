@@ -9,4 +9,3 @@ data:
   PUID: "1030"
   PGID: "65536"
   TZ: "America/New_York"
-  DOTNET_SYSTEM_NET_SOCKETS_IPV6: "0"
