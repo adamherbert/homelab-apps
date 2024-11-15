@@ -9,5 +9,4 @@ data:
   PUID: "1030"
   PGID: "65536"
   TZ: "America/New_York"
-  MONO_TLS_PROVIDER: "legacy"
-  MONO_DNS_PREFER_IPV4: "true"
+  DOTNET_SYSTEM_NET_SOCKETS_IPV6: "0"
