@@ -10,3 +10,4 @@ data:
   PGID: "65536"
   TZ: "America/New_York"
   MONO_TLS_PROVIDER: "legacy"
+  MONO_DNS_PREFER_IPV4: "true"
