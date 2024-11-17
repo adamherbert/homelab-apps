@@ -22,7 +22,7 @@ spec:
               #   port:
               #     name: radarr
               service:
-                name: authentik-outpost
+                name: ak-outpost-proxy-outpost.authentik.svc.cluster.local
                 port:
                   name: http
   tls:
