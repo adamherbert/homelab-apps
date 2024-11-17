@@ -11,4 +11,5 @@ resources:
   # Radarr
   - radarr/statefulset.yaml
   - radarr/service.yaml
-  - radarr/ingress.yaml
+  # - radarr/ingress.yaml
+  - radarr/ingressroute.yaml
