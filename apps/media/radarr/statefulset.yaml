@@ -63,7 +63,7 @@ spec:
         name: config
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: nfs-subdir-external-provisioner
+        storageClassName: synology-iscsi-storage
         resources:
           requests:
             storage: 20Gi
