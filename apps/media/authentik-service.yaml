@@ -5,4 +5,4 @@ metadata:
   namespace: authentik
 spec:
   type: ExternalName
-  externalName: authentik-ak-outpost-authentik-embedded-outpost.authentik.svc.cluster.local
+  externalName: ak-outpost-authentik-embedded-outpost.authentik.svc.cluster.local
