@@ -8,7 +8,7 @@ metadata:
   namespace: media
   annotations:
     cert-manager.io/cluster-issuer: internal
-    #traefik.ingress.kubernetes.io/router.middlewares: authentik-ak-outpost-authentik-embedded-outpost@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: authentik-ak-outpost-authentik-embedded-outpost@kubernetescrd
 spec:
   rules:
     - host: radarr.lab.8none1.com
@@ -17,14 +17,10 @@ spec:
           - path: /
             pathType: Prefix
             backend:
-              # service:
-              #   name: radarr
-              #   port:
-              #     name: radarr
               service:
-                name: ak-outpost-proxy-outpost.authentik.svc.cluster.local
+                name: radarr
                 port:
-                  name: http
+                  name: radarr
   tls:
     - hosts:
         - radarr.lab.8none1.com
