@@ -10,4 +10,4 @@ spec:
   ports:
     - name: http
       port: 9000
-  externalName: authentik-outpost.authentik.svc.cluster.local
+  externalName: ak-outpost-authentik-embedded-outpost.authentik.svc.cluster.local
