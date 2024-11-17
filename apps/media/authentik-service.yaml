@@ -5,9 +5,12 @@ metadata:
   name: authentik-outpost
   namespace: media
 spec:
-  type: ExternalName
-  externalName: ak-outpost-authentik-embedded-outpost.authentik.svc.cluster.local
+  type: ClusterIP
+  ClusterIP: None
   ports:
     - name: http
-      port: 9000
+      port: 80
       targetPort: 9000
+  selector:
+    app.kubernetes.io/name: "authentik"
+    app.kubernetes.io/component: "server"
