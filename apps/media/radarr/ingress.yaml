@@ -17,10 +17,14 @@ spec:
           - path: /
             pathType: Prefix
             backend:
+              # service:
+              #   name: radarr
+              #   port:
+              #     name: radarr
               service:
-                name: radarr
+                name: authentik-ak-outpost-authentik-embedded-outpost
                 port:
-                  name: radarr
+                  name: http
   tls:
     - hosts:
         - radarr.lab.8none1.com
