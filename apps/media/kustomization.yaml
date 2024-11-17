@@ -12,5 +12,4 @@ resources:
   - radarr/statefulset.yaml
   - radarr/service.yaml
   # - radarr/ingress.yaml
-  - authentik-service.yaml
   - radarr/ingressroute.yaml
