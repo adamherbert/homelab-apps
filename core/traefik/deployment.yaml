@@ -107,7 +107,7 @@ spec:
             - "--providers.kubernetesingress"
             - "--providers.kubernetesingress.allowEmptyServices=true"
             - "--providers.kubernetesingress.ingressendpoint.publishedservice=traefik/traefik"
-            # - "--providers.kubernetescrd.allowCrossNamespace=true"
+            - "--providers.kubernetescrd.allowCrossNamespace=true"
             - "--log.level=INFO"
 
           env:
