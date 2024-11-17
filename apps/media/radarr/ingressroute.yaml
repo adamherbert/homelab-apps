@@ -24,8 +24,8 @@ spec:
     - match: Host(`radarr.lab.8none1.com`)
       kind: Rule
       services:
-        - name: authentik-outpost
-          namespace: media # Specify the namespace of the service
+        - name: ak-outpost-authentik-embedded-outpost
+          namespace: authentik # Specify the namespace of the service
           port: 9000 # Specify the target port
   tls:
     secretName: radarr-ingress-tls
