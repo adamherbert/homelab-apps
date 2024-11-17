@@ -5,9 +5,5 @@ metadata:
   name: authentik-outpost
   namespace: media
 spec:
-  type: ClusterIP
-  clusterIP: None
-  ports:
-    - name: http
-      port: 9000
+  type: ExternalName
   externalName: ak-outpost-authentik-embedded-outpost.authentik.svc.cluster.local
