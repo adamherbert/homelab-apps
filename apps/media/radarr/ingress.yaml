@@ -22,7 +22,7 @@ spec:
               #   port:
               #     name: radarr
               service:
-                name: authentik-ak-outpost-authentik-embedded-outpost
+                name: authentik-outpost
                 port:
                   name: http
   tls:
