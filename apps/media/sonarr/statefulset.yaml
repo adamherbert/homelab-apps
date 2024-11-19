@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: sonarr
+    app.kubernetes.io/name: sonarr
+    app.kubernetes.io/part-of: arrs
+  name: sonarr
+  namespace: media
+spec:
+  serviceName: sonarr
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: sonarr
+      app.kubernetes.io/part-of: arrs
+      app: sonarr
+  template:
+    metadata:
+      labels:
+        app: sonarr
+        app.kubernetes.io/name: sonarr
+        app.kubernetes.io/part-of: arrs
+    spec:
+      initContainers:
+        - name: init-config
+          image: busybox:latest
+          command:
+            - sh
+            - /scripts/arr-init-config.sh
+          volumeMounts:
+            - name: arr-init-config
+              mountPath: /scripts
+            - name: config
+              mountPath: /config
+      containers:
+        - image: linuxserver/sonarr:4.0.10
+          name: sonarr
+          envFrom:
+            - configMapRef:
+                name: media-env
+          volumeMounts:
+            - mountPath: /config
+              name: config
+            - mountPath: /tv
+              name: tv
+            - mountPath: /downloads
+              name: downloads
+          ports:
+            - name: sonarr
+              containerPort: 7878
+              protocol: TCP
+      dnsPolicy: None
+      dnsConfig:
+        nameservers:
+          - 10.43.0.10 # CoreDNS IP
+          - 172.16.0.1
+        searches:
+          - namespace.svc.cluster.local
+          - svc.cluster.local
+          - cluster.local
+      volumes:
+        - name: tv
+          persistentVolumeClaim:
+            claimName: tv
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: downloads
+        - name: arr-init-config
+          configMap:
+            name: arr-init-config
+      restartPolicy: Always
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: config
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: synology-iscsi-storage
+        resources:
+          requests:
+            storage: 20Gi

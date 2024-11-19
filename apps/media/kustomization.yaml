@@ -12,7 +12,10 @@ resources:
   - radarr/statefulset.yaml
   - radarr/service.yaml
   - radarr/ingress.yaml
-  # - radarr/ingressroute.yaml
+  # Sonarr
+  - sonarr/statefulset.yaml
+  - sonarr/service.yaml
+  - sonarr/ingress.yaml
 
 configMapGenerator:
   - name: arr-init-config

@@ -1,0 +1,27 @@
+---
+# https://kubernetes.io/docs/concepts/services-networking/ingress/#the-ingress-resource
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sonarr
+  namespace: media
+  annotations:
+    cert-manager.io/cluster-issuer: internal
+    traefik.ingress.kubernetes.io/router.middlewares: authentik-ak-outpost-authentik-embedded-outpost@kubernetescrd
+spec:
+  rules:
+    - host: sonarr.lab.8none1.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: sonarr
+                port:
+                  name: sonarr
+  tls:
+    - hosts:
+        - sonarr.lab.8none1.com
+      secretName: sonarr-ingress-tls
