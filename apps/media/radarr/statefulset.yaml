@@ -22,6 +22,17 @@ spec:
         app.kubernetes.io/name: radarr
         app.kubernetes.io/part-of: arrs
     spec:
+      initContainers:
+        - name: init-config
+          image: busybox:latest
+          command:
+            - sh
+            - /scripts/arr-init-config.sh
+          volumeMounts:
+            - name: arr-init-config
+              mountPath: /scripts
+            - name: config
+              mountPath: /config
       containers:
         - image: linuxserver/radarr:5.14.0
           name: radarr
@@ -55,6 +66,9 @@ spec:
         - name: downloads
           persistentVolumeClaim:
             claimName: downloads
+        - name: arr-init-config
+          configMap:
+            name: arr-init-config
       restartPolicy: Always
   volumeClaimTemplates:
     - apiVersion: v1
