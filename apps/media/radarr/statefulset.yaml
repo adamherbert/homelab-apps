@@ -6,7 +6,6 @@ metadata:
     app.kubernetes.io/name: radarr
     app.kubernetes.io/part-of: arrs
   name: radarr
-  namespace: media
 spec:
   serviceName: radarr
   replicas: 1
@@ -38,7 +37,7 @@ spec:
           name: radarr
           envFrom:
             - configMapRef:
-                name: media-env
+                name: arr-env
           volumeMounts:
             - mountPath: /config
               name: config

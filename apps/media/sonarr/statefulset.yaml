@@ -6,7 +6,6 @@ metadata:
     app.kubernetes.io/name: sonarr
     app.kubernetes.io/part-of: arrs
   name: sonarr
-  namespace: media
 spec:
   serviceName: sonarr
   replicas: 1
@@ -38,7 +37,7 @@ spec:
           name: sonarr
           envFrom:
             - configMapRef:
-                name: media-env
+                name: arr-env
           volumeMounts:
             - mountPath: /config
               name: config
