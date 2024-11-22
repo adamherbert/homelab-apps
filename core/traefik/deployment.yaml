@@ -108,8 +108,7 @@ spec:
             - "--providers.kubernetesingress.allowEmptyServices=true"
             - "--providers.kubernetesingress.ingressendpoint.publishedservice=traefik/traefik"
             - "--providers.kubernetescrd.allowCrossNamespace=true"
-            - "--log.level=DEBUG"
-
+            - "--log.level=INFO"
           env:
             - name: POD_NAME
               valueFrom:
