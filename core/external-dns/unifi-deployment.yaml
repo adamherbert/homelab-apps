@@ -61,8 +61,9 @@ spec:
             - --registry=txt
             - --txt-owner-id=default
             - --txt-prefix=k8s.
-            - --domain-filter=lab.8none1.com
-            - --domain-filter=home.8none1.com
+            - --domain-filter=8none1.com
+            # - --domain-filter=lab.8none1.com
+            # - --domain-filter=home.8none1.com
             - --provider=webhook
             - --ignore-ingress-tls-spec
           ports:
