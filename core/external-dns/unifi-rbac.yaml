@@ -30,7 +30,7 @@ rules:
   - apiGroups: ["extensions", "networking.k8s.io"]
     resources: ["ingresses"]
     verbs: ["get", "watch", "list"]
-  - apiGroups: ["traefik.containo.us", "traefik.io"]
+  - apiGroups: ["traefik.io"]
     resources: ["ingressroutes", "ingressroutetcps", "ingressrouteudps"]
     verbs: ["get", "watch", "list"]
 ---
