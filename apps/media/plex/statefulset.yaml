@@ -24,15 +24,6 @@ spec:
       tolerations: []
       nodeSelector: {}
       affinity: {}
-      dnsPolicy: None
-      dnsConfig:
-        nameservers:
-          - 10.43.0.10 # CoreDNS IP
-          - 172.16.0.1
-        searches:
-          - namespace.svc.cluster.local
-          - svc.cluster.local
-          - cluster.local
       volumes:
         - name: pms-transcode
           emptyDir: {}
