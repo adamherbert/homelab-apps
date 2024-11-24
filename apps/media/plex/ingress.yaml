@@ -9,11 +9,11 @@ metadata:
     app: plex-media-server
     app.kubernetes.io/name: plex-media-server
   annotations:
-    cert-manager.io/cluster-issuer: internal
-    external-dns.alpha.kubernetes.io/hostname: plex.lab.8none1.com
+    cert-manager.io/cluster-issuer: external
+    external-dns.alpha.kubernetes.io/hostname: plex2.home.8none1.com
 spec:
   rules:
-    - host: plex.lab.8none1.com
+    - host: plex2.home.8none1.com
       http:
         paths:
           - path: "/"
@@ -25,5 +25,5 @@ spec:
                   number: 32400
   tls:
     - hosts:
-        - plex.lab.8none1.com
+        - plex2.home.8none1.com
       secretName: plex-media-server-ingress-tls
