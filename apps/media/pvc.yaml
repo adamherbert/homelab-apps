@@ -59,6 +59,25 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  name: music
+  labels:
+    app: media
+    volume: music
+spec:
+  storageClassName: ""
+  accessModes:
+    - ReadWriteMany
+  selector:
+    matchLabels:
+      app: media
+      volume: music
+  resources:
+    requests:
+      storage: 10Ti
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
   name: downloads
   labels:
     app: media
