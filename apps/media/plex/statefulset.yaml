@@ -45,7 +45,7 @@ spec:
             - name: ADVERTISE_IP
               value: https://plex.lab.8none1.com:443
             - name: PLEX_CLAIM
-              value: "claim-BhueDc3WYTAJQsMZZZzv"
+              value: "claim-8DrcnvvQtxGyVUnYrrBu"
             - name: TZ
               value: America/New_York
           volumeMounts:
