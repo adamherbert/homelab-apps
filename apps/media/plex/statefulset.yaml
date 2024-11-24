@@ -37,9 +37,9 @@ spec:
               name: pms
           env:
             - name: ADVERTISE_IP
-              value: plex.lab.8none1.com:443
+              value: https://plex.lab.8none1.com:443
             - name: PLEX_CLAIM
-              value: "claim-YsCQ6N4v6xPai63myomE"
+              value: "claim-3YBHbG5xv9zscjDUfcDP"
             - name: TZ
               value: America/New_York
           volumeMounts:
