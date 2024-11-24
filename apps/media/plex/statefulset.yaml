@@ -27,6 +27,12 @@ spec:
       volumes:
         - name: pms-transcode
           emptyDir: {}
+        - name: movies
+          persistentVolumeClaim:
+            claimName: movies
+        - name: tv
+          persistentVolumeClaim:
+            claimName: tv
       terminationGracePeriodSeconds: 120
       containers:
         - name: plex-media-server-pms
@@ -39,7 +45,7 @@ spec:
             - name: ADVERTISE_IP
               value: https://plex.lab.8none1.com:443
             - name: PLEX_CLAIM
-              value: "claim-HCHaA3_QoySCRJqBmvdk"
+              value: "claim-BhueDc3WYTAJQsMZZZzv"
             - name: TZ
               value: America/New_York
           volumeMounts:
@@ -47,6 +53,10 @@ spec:
               mountPath: /config
             - name: pms-transcode
               mountPath: /transcode
+            - name: movies
+              mountPath: /movies
+            - name: tv
+              mountPath: /tv
   volumeClaimTemplates:
     - metadata:
         name: pms-config
