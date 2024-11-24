@@ -19,5 +19,7 @@ resources:
   - webhook-service.yaml
   - webhook-serviceaccount.yaml
   - webhook-validating-webhook.yaml
-  - cluster-issuer/external-secret.yaml
-  - cluster-issuer/internal-cluster-issuer.yaml
+  - internal-cluster-issuer/external-secret.yaml
+  - internal-cluster-issuer/internal-cluster-issuer.yaml
+  - external-cluster-issuer/external-secret.yaml
+  - external-cluster-issuer/external-cluster-issuer.yaml
