@@ -1,0 +1,18 @@
+---
+# Source: plex-media-server/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: plex-media-server
+  labels:
+    app: plex-media-server
+    app.kubernetes.io/name: plex-media-server
+spec:
+  type: ClusterIP
+  ports:
+    - port: 32400
+      targetPort: 32400
+      protocol: TCP
+      name: pms
+  selector:
+    app: plex-media-server

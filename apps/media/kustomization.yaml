@@ -15,6 +15,7 @@ resources:
   - sonarr/statefulset.yaml
   - sonarr/service.yaml
   - sonarr/ingress.yaml
+  - plex
 
 configMapGenerator:
   - name: arr-init-config
