@@ -87,8 +87,6 @@ spec:
               mountPath: /data
             - name: tmp
               mountPath: /tmp
-            - name: plugins-storage
-              mountPath: /plugins-storage
           args:
             - "--global.checknewversion"
             - "--global.sendanonymoususage"
@@ -134,6 +132,9 @@ spec:
               memory: 1Gi # 1 GB RAM
           ports:
             - containerPort: 8080
+          volumeMounts:
+            - name: plugins-storage
+              mountPath: /plugins-storage
           env:
             - name: PARANOIA
               value: "1"
