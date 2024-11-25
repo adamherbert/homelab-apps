@@ -87,8 +87,6 @@ spec:
               mountPath: /data
             - name: tmp
               mountPath: /tmp
-            - name: plugins-storage
-              mountPath: /plugins-storage
           args:
             - "--global.checknewversion"
             - "--global.sendanonymoususage"
@@ -110,8 +108,6 @@ spec:
             - "--providers.kubernetesingress.allowEmptyServices=true"
             - "--providers.kubernetesingress.ingressendpoint.publishedservice=traefik/traefik"
             - "--providers.kubernetescrd.allowCrossNamespace=true"
-            - "--experimental.plugins.traefik-modsecurity-plugin.modulename=github.com/acouvreur/traefik-modsecurity-plugin"
-            - "--experimental.plugins.traefik-modsecurity-plugin.version=v1.3.0"
             - "--entryPoints.websecure.http.middlewares=traefik-modsecurity-plugin@kubernetescrd"
             - "--log.level=INFO"
           env:
@@ -127,8 +123,6 @@ spec:
         - name: data
           emptyDir: {}
         - name: tmp
-          emptyDir: {}
-        - name: plugins-storage
           emptyDir: {}
       securityContext:
         runAsGroup: 65532
