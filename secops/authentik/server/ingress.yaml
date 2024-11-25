@@ -10,11 +10,11 @@ metadata:
     app.kubernetes.io/component: "server"
     app.kubernetes.io/part-of: "authentik"
   annotations:
-    cert-manager.io/cluster-issuer: internal
+    cert-manager.io/cluster-issuer: external
 spec:
   ingressClassName: traefik
   rules:
-    - host: "authentik.lab.8none1.com"
+    - host: "auth.home.8none1.com"
       http:
         paths:
           - path: /outpost.goauthentik.io/
@@ -33,5 +33,5 @@ spec:
                   number: 80
   tls:
     - hosts:
-        - "authentik.lab.8none1.com"
+        - "auth.home.8none1.com"
       secretName: authentik-ingress-tls

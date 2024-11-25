@@ -21,6 +21,5 @@ resources:
   - server/service.yaml
   - server/deployment.yaml
   - server/ingress.yaml
-  - server/certificate.yaml
   # Authentik Worker Components
   - worker/deployment.yaml
