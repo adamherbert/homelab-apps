@@ -6,5 +6,5 @@ spec:
   plugin:
     traefik-modsecurity-plugin:
       MaxBodySize: "10485760"
-      ModsecurityUrl: http://modsecurity.traefik.svc.cluster.local:8090
+      ModsecurityUrl: http://modsecurity.traefik.svc.cluster.local:80
       TimeoutMillis: "2000"
