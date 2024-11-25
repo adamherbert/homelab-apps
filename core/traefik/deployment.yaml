@@ -123,22 +123,6 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
-        - name: modsecurity
-          image: owasp/modsecurity-crs:latest
-          resources:
-            requests:
-              cpu: 500m # 0.5 CPU
-              memory: 512Mi # 512 MB RAM
-            limits:
-              cpu: 1000m # 1 CPU
-              memory: 1Gi # 1 GB RAM
-          ports:
-            - containerPort: 8090
-          env:
-            - name: PARANOIA
-              value: "1" # Adjust as needed
-            - name: ANOMALYIN
-              value: "5" # Adjust as needed
       volumes:
         - name: data
           emptyDir: {}

@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: modsecurity
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: modsecurity
+  template:
+    metadata:
+      labels:
+        app: modsecurity
+    spec:
+      containers:
+        - name: modsecurity
+          image: owasp/modsecurity-crs:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: PARANOIA
+              value: "1" # Adjust as needed
+            - name: ANOMALYIN
+              value: "5" # Adjust as needed
+          resources:
+            requests:
+              memory: 256Mi
+              cpu: 500m
+            limits:
+              memory: 512Mi
+              cpu: 1
