@@ -4,12 +4,12 @@ kind: Service
 metadata:
   name: modsecurity
   labels:
-    app.kubernetes.io/name: traefik
+    app: modsecurity
 spec:
   ports:
     - port: 8080
       targetPort: 8080
       protocol: TCP
   selector:
-    app.kubernetes.io/name: traefik
+    app: modsecurity
   type: ClusterIP
