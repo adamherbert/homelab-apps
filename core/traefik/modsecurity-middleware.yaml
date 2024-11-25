@@ -15,5 +15,5 @@ metadata:
   name: modsecurity-plugin
 spec:
   forwardAuth:
-    address: http://localhost:8080
+    address: http://localhost:9090
     trustForwardHeader: true

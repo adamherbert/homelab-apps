@@ -133,7 +133,7 @@ spec:
               cpu: 1000m # 1 CPU
               memory: 1Gi # 1 GB RAM
           ports:
-            - containerPort: 8080
+            - containerPort: 9090
           volumeMounts:
             - name: plugins-storage
               mountPath: /plugins-storage
@@ -146,6 +146,8 @@ spec:
               value: "1"
             - name: ANOMALYIN
               value: "5"
+            - name: PORT
+              value: "9090"
             - name: BACKEND
               value: "http://dummy"
       volumes:
