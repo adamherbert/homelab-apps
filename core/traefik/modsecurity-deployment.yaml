@@ -16,7 +16,7 @@ spec:
         - name: modsecurity
           image: owasp/modsecurity-crs:4.8.0-nginx-202411071011
           ports:
-            - containerPort: 80
+            - containerPort: 8080
           env:
             - name: PARANOIA
               value: "1" # Adjust as needed
