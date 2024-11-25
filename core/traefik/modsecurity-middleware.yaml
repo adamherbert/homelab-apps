@@ -12,8 +12,8 @@
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
-  name: modsecurity-plugin
+  name: modsecurity
 spec:
   forwardAuth:
-    address: http://localhost:9090
+    address: http://modsecurity.traefik.svc.cluster.local:8080
     trustForwardHeader: true
