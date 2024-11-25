@@ -133,8 +133,10 @@ spec:
           ports:
             - containerPort: 8080
           volumeMounts:
-            - name: plugins-storage
+            - name: modsecurity-storage
               mountPath: /plugins-storage
+            - name: modsecurity-config
+              mountPath: /etc/nginx
           env:
             - name: PARANOIA
               value: "1"
@@ -147,7 +149,9 @@ spec:
           emptyDir: {}
         - name: tmp
           emptyDir: {}
-        - name: plugins-storage
+        - name: modsecurity-storage
+          emptyDir: {}
+        - name: modsecurity-config
           emptyDir: {}
       securityContext:
         runAsGroup: 65532
