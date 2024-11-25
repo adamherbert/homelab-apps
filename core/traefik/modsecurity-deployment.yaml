@@ -22,6 +22,8 @@ spec:
               value: "1" # Adjust as needed
             - name: ANOMALYIN
               value: "5" # Adjust as needed
+            - name: PORT
+              value: "8080"
           resources:
             requests:
               memory: 256Mi
