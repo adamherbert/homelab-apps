@@ -112,7 +112,7 @@ spec:
             - "--providers.kubernetescrd.allowCrossNamespace=true"
             - "--experimental.plugins.traefik-modsecurity-plugin.modulename=github.com/acouvreur/traefik-modsecurity-plugin"
             - "--experimental.plugins.traefik-modsecurity-plugin.version=v1.3.0"
-            - "--entryPoints.websecure.http.middlewares=traefik-modsecurity-plugin@kubernetescrd"
+            - "--entryPoints.web.http.middlewares=traefik-modsecurity-plugin@kubernetescrd"
             - "--log.level=INFO"
           env:
             - name: POD_NAME
