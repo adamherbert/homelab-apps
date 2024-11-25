@@ -6,6 +6,6 @@ resources:
   - deployment.yaml
   - service.yaml
   - ingressclass.yaml
-  - modsecurity-deployment.yaml
-  - modsecurity-service.yaml
+  # - modsecurity-deployment.yaml
+  # - modsecurity-service.yaml
   - modsecurity-middleware.yaml
