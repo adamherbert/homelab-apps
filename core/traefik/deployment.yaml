@@ -87,7 +87,7 @@ spec:
               mountPath: /data
             - name: tmp
               mountPath: /tmp
-            - name: modsecurity-storage
+            - name: plugins-storage
               mountPath: /plugins-storage
           args:
             - "--global.checknewversion"
@@ -135,9 +135,11 @@ spec:
           ports:
             - containerPort: 8080
           volumeMounts:
-            - name: modsecurity-storage
+            - name: plugins-storage
               mountPath: /plugins-storage
             - name: modsecurity-config
+              mountPath: /etc/modsecurity.d
+            - name: nginx-config
               mountPath: /etc/nginx
           env:
             - name: PARANOIA
@@ -151,7 +153,9 @@ spec:
           emptyDir: {}
         - name: tmp
           emptyDir: {}
-        - name: modsecurity-storage
+        - name: plugins-storage
+          emptyDir: {}
+        - name: nginx-config
           emptyDir: {}
         - name: modsecurity-config
           emptyDir: {}
