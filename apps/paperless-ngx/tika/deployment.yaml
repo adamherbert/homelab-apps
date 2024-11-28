@@ -36,7 +36,7 @@ spec:
             runAsGroup: 35002
             runAsNonRoot: true
             runAsUser: 35002
-          image: "apache/tika:2.9.2.1"
+          image: "apache/tika:3.0.0.0"
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: sec-ctx-vol
