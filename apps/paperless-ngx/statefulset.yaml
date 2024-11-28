@@ -23,7 +23,7 @@ spec:
       automountServiceAccountToken: false
       containers:
         - name: paperless-ngx
-          image: "ghcr.io/paperless-ngx/paperless-ngx:2.10.1"
+          image: "ghcr.io/paperless-ngx/paperless-ngx:2.13.5"
           imagePullPolicy: IfNotPresent
           envFrom:
             - configMapRef:
