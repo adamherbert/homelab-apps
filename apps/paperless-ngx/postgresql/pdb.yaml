@@ -1,0 +1,15 @@
+---
+# Source: paperless-ngx/charts/postgresql/templates/primary/pdb.yaml
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: postgresql
+  labels:
+    app: postgresql
+    part-of: paperless-ngx
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: postgresql
+      part-of: paperless-ngx

@@ -1,0 +1,56 @@
+---
+# Source: paperless-ngx/charts/gotenberg/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gotenberg
+  labels:
+    app: gotenberg
+    part-of: paperless-ngx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gotenberg
+      part-of: paperless-ngx
+  template:
+    metadata:
+      labels:
+        app: gotenberg
+        part-of: paperless-ngx
+    spec:
+      serviceAccountName: gotenberg
+      containers:
+        - name: gotenberg
+          image: "docker.io/gotenberg/gotenberg:8.0.1"
+          imagePullPolicy: IfNotPresent
+          args:
+            - gotenberg
+            - --api-port=3000
+            - --api-start-timeout=30s
+            - --api-timeout=30s
+            - --api-root-path=/
+            - --chromium-start-timeout=20s
+            - --chromium-allow-list=file:///tmp/.*
+            - --chromium-disable-javascript=true
+            - --libreoffice-restart-after=10
+            - --libreoffice-start-timeout=20s
+            - --webhook-max-retry=4
+            - --webhook-retry-min-wait=1s
+            - --webhook-retry-max-wait=30s
+            - --webhook-client-timeout=30s
+            - --prometheus-collect-interval=1s
+            - --prometheus-namespace=gotenberg
+            - --log-format=auto
+            - --log-level=warn
+            - --gotenberg-graceful-shutdown-duration=30s
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          ports:
+            - name: http
+              containerPort: 3000

@@ -1,0 +1,15 @@
+---
+# Source: paperless-ngx/charts/redis/templates/master/pdb.yaml
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: redis-master
+  labels:
+    app: redis
+    part-of: paperless-ngx
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: redis
+      part-of: paperless-ngx

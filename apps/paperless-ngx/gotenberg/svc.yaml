@@ -1,0 +1,19 @@
+---
+# Source: paperless-ngx/charts/gotenberg/templates/svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: gotenberg
+  labels:
+    app: gotenberg
+    part-of: paperless-ngx
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 3000
+      protocol: TCP
+      name: http
+  selector:
+    app: gotenberg
+    part-of: paperless-ngx

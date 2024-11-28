@@ -1,0 +1,84 @@
+---
+# Source: paperless-ngx/templates/statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: paperless-ngx
+  labels:
+    app: paperless-ngx
+    part-of: paperless-ngx
+spec:
+  serviceName: paperless-ngx
+  replicas: 1
+  selector:
+    matchLabels:
+      app: paperless-ngx
+  template:
+    metadata:
+      labels:
+        app: paperless-ngx
+        part-of: paperless-ngx
+    spec:
+      serviceAccountName: paperless-ngx
+      automountServiceAccountToken: false
+      containers:
+        - name: paperless-ngx
+          image: "ghcr.io/paperless-ngx/paperless-ngx:2.10.1"
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: paperless-ngx-general
+          env:
+            - name: PAPERLESS_REDIS
+              valueFrom:
+                secretKeyRef:
+                  name: paperless-ngx-redis-auth
+                  key: uri
+            - name: PAPERLESS_DBUSER
+              valueFrom:
+                secretKeyRef:
+                  name: paperless-ngx-postgresql-auth
+                  key: postgres-user
+            - name: PAPERLESS_DBPASS
+              valueFrom:
+                secretKeyRef:
+                  name: paperless-ngx-postgresql-auth
+                  key: postgres-user-password
+            - name: PAPERLESS_ADMIN_USER
+              valueFrom:
+                secretKeyRef:
+                  name: paperless-ngx-admin
+                  key: username
+            - name: PAPERLESS_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: paperless-ngx-admin
+                  key: password
+            - name: PAPERLESS_APPS
+              valueFrom:
+                secretKeyRef:
+                  name: paperless-ngx-oauth
+                  key: PAPERLESS_APPS
+            - name: PAPERLESS_SOCIALACCOUNT_PROVIDERS
+              valueFrom:
+                secretKeyRef:
+                  name: paperless-ngx-oauth
+                  key: PAPERLESS_SOCIALACCOUNT_PROVIDERS
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          volumeMounts:
+            - name: paperless-ngx-data
+              mountPath: /usr/src/paperless/data
+              subPath: data
+            - name: paperless-ngx-data
+              mountPath: /usr/src/paperless/media
+              subPath: media
+      volumes:
+        - name: paperless-ngx-data
+          persistentVolumeClaim:
+            claimName: paperless-ngx-data
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Retain
+    whenScaled: Retain

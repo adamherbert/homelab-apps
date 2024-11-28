@@ -1,0 +1,19 @@
+---
+# Source: paperless-ngx/charts/tika/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: tika
+  labels:
+    app: tika
+    part-of: paperless-ngx
+spec:
+  type: ClusterIP
+  ports:
+    - port: 9998
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: tika
+    part-of: paperless-ngx

@@ -1,0 +1,27 @@
+---
+# Source: paperless-ngx/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: paperless-ngx-general
+  labels:
+    app: paperless-ngx
+    part-of: paperless-ngx
+data:
+  PAPERLESS_PORT: "8000"
+  USERMAP_UID: "1035"
+  USERMAP_GID: "65538"
+  PAPERLESS_URL: "https://paperless.home.8none1.com"
+  PAPERLESS_BIND_ADDR: "0.0.0.0"
+  PAPERLESS_ENABLE_COMPRESSION: "1"
+  PAPERLESS_INDEX_TASK_CRON: "0 0 * * *"
+  PAPERLESS_REDIS_PREFIX: ""
+  PAPERLESS_DBENGINE: "postgresql"
+  PAPERLESS_DBHOST: "postgresql"
+  PAPERLESS_DBPORT: "5432"
+  PAPERLESS_DBNAME: "paperless"
+  PAPERLESS_DBSSLMODE: "prefer"
+  PAPERLESS_TIKA_ENABLED: "true"
+  PAPERLESS_TIKA_ENDPOINT: "http://tika:9998"
+  PAPERLESS_TIKA_GOTENBERG_ENDPOINT: "http://gotenberg:80"
+  TRUSTED_PROXIES: "10.42.0.0/16"

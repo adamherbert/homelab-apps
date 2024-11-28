@@ -1,0 +1,23 @@
+---
+# Source: paperless-ngx/charts/redis/templates/networkpolicy.yaml
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: redis
+  labels:
+    app: redis
+    part-of: paperless-ngx
+spec:
+  podSelector:
+    matchLabels:
+      app: redis
+      part-of: paperless-ngx
+  policyTypes:
+    - Ingress
+    - Egress
+  egress:
+    - {}
+  ingress:
+    # Allow inbound connections
+    - ports:
+        - port: 6379

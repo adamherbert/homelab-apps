@@ -1,0 +1,20 @@
+---
+# Source: paperless-ngx/templates/svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: paperless-ngx
+  labels:
+    app: paperless-ngx
+    part-of: paperless-ngx
+spec:
+  type: ClusterIP
+  selector:
+    app: paperless-ngx
+  internalTrafficPolicy: Cluster
+  sessionAffinity: None
+  ports:
+    - port: 8000
+      targetPort: 8000
+      protocol: TCP
+      name: http

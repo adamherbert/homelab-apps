@@ -1,0 +1,43 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: paperless-ngx
+
+resources:
+  # Base resources
+  - namespace.yaml
+  - configmap.yaml
+  - rbac.yaml
+  - secrets.yaml
+  - pvc.yaml
+  # Postgresql
+  - postgresql/pdb.yaml
+  - postgresql/networkpolicy.yaml
+  - postgresql/serviceaccount.yaml
+  - postgresql/secrets.yaml
+  - postgresql/statefulset.yaml
+  - postgresql/svc.yaml
+  - postgresql/svc-headless.yaml
+  # Redis
+  - redis/pdb.yaml
+  - redis/networkpolicy.yaml
+  - redis/serviceaccount.yaml
+  - redis/secret.yaml
+  - redis/configmap.yaml
+  - redis/health-configmap.yaml
+  - redis/scripts-configmap.yaml
+  - redis/statefulset.yaml
+  - redis/service.yaml
+  - redis/headless-svc.yaml
+  # Gotenberg
+  - gotenberg/serviceaccount.yaml
+  - gotenberg/deployment.yaml
+  - gotenberg/svc.yaml
+  # Tika
+  - tika/serviceaccount.yaml
+  - tika/deployment.yaml
+  - tika/service.yaml
+  # Paperless
+  - statefulset.yaml
+  - svc.yaml
+  - ingress.yaml
