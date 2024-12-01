@@ -1,0 +1,38 @@
+---
+# Source: phpipam/templates/service.yaml
+kind: Service
+apiVersion: v1
+metadata:
+  name: phpipam-db
+  labels:
+    app: phpipam
+    component: mysql
+    part-of: phpipam
+spec:
+  ports:
+    - name: mysql
+      protocol: TCP
+      port: 3306
+      targetPort: 3306
+  selector:
+    app: phpipam
+    component: mysql
+---
+# Source: phpipam/templates/service.yaml
+kind: Service
+apiVersion: v1
+metadata:
+  name: phpipam-web
+  labels:
+    app: phpipam
+    component: web
+    part-of: phpipam
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
+  selector:
+    app: phpipam
+    component: web

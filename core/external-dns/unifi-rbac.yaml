@@ -6,8 +6,8 @@ metadata:
   name: external-dns-unifi
   namespace: external-dns
   labels:
-    app.kubernetes.io/name: external-dns
-    app.kubernetes.io/instance: unifi
+    name: external-dns
+    instance: unifi
 ---
 # Source: external-dns/templates/clusterrole.yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -15,8 +15,8 @@ kind: ClusterRole
 metadata:
   name: external-dns-unifi
   labels:
-    app.kubernetes.io/name: external-dns
-    app.kubernetes.io/instance: unifi
+    name: external-dns
+    instance: unifi
 rules:
   - apiGroups: [""]
     resources: ["nodes"]
@@ -40,8 +40,8 @@ kind: ClusterRoleBinding
 metadata:
   name: external-dns-unifi-viewer
   labels:
-    app.kubernetes.io/name: external-dns
-    app.kubernetes.io/instance: unifi
+    name: external-dns
+    instance: unifi
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole

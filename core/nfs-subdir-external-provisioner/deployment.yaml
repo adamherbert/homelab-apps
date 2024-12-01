@@ -28,7 +28,7 @@ spec:
             - name: PROVISIONER_NAME
               value: k8s-sigs.io/nfs-subdir-external-provisioner
             - name: NFS_SERVER
-              value: 172.16.0.5
+              value: 172.16.2.5
             - name: NFS_PATH
               value: /volume1/k3s/prod
           resources:
@@ -41,5 +41,5 @@ spec:
       volumes:
         - name: nfs-subdir-external-provisioner-root
           nfs:
-            server: 172.16.0.5
+            server: 172.16.2.5
             path: /volume1/k3s/prod

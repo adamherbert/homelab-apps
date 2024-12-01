@@ -3,7 +3,6 @@ kind: DaemonSet
 apiVersion: apps/v1
 metadata:
   name: synology-csi-node
-  namespace: synology-csi
 spec:
   selector:
     matchLabels:

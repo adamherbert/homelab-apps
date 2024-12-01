@@ -1,0 +1,28 @@
+---
+# Source: phpipam/templates/ingress.yaml
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: phpipam-web
+  annotations:
+    cert-manager.io/cluster-issuer: external
+  labels:
+    app: phpipam
+    component: web
+    part-of: phpipam
+spec:
+  tls:
+    - hosts:
+        - ipam.home.8none1.com
+      secretName: "phpipam-cert"
+  rules:
+    - host: ipam.home.8none1.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: phpipam-web
+                port:
+                  number: 80

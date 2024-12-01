@@ -1,0 +1,18 @@
+---
+# Source: phpipam/templates/pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: phpipam-mysql
+  labels:
+    app: phpipam
+    component: mysql
+    part-of: phpipam
+    volume: phpipam-mysql
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 30Gi
+  storageClassName: synology-iscsi-storage

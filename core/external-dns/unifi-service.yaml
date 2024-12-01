@@ -6,12 +6,13 @@ metadata:
   name: external-dns-unifi
   namespace: external-dns
   labels:
-    app.kubernetes.io/name: external-dns
+    name: external-dns
+    instance: unifi
 spec:
   type: ClusterIP
   selector:
-    app.kubernetes.io/name: external-dns
-    app.kubernetes.io/instance: unifi
+    name: external-dns
+    instance: unifi
   ports:
     - name: http
       port: 7979

@@ -3,11 +3,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: plex-media-server-ingress
+  name: plex-server
   labels:
-    name: plex-media-server-ingress
-    app: plex-media-server
-    app.kubernetes.io/name: plex-media-server
+    app: plex-server
   annotations:
     cert-manager.io/cluster-issuer: external
     external-dns.alpha.kubernetes.io/hostname: plex2.home.8none1.com
@@ -20,10 +18,10 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: plex-media-server
+                name: plex-server
                 port:
-                  number: 32400
+                  name: plex-server
   tls:
     - hosts:
         - plex2.home.8none1.com
-      secretName: plex-media-server-ingress-tls
+      secretName: plex-server-ingress-tls

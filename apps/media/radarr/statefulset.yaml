@@ -3,23 +3,20 @@ kind: StatefulSet
 metadata:
   labels:
     app: radarr
-    app.kubernetes.io/name: radarr
-    app.kubernetes.io/part-of: arrs
+    part-of: media
   name: radarr
 spec:
   serviceName: radarr
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: radarr
-      app.kubernetes.io/part-of: arrs
       app: radarr
+      part-of: media
   template:
     metadata:
       labels:
         app: radarr
-        app.kubernetes.io/name: radarr
-        app.kubernetes.io/part-of: arrs
+        part-of: media
     spec:
       initContainers:
         - name: init-config
@@ -40,7 +37,7 @@ spec:
                 name: arr-env
           volumeMounts:
             - mountPath: /config
-              name: config
+              name: radarr-config
             - mountPath: /movies
               name: movies
             - mountPath: /downloads
@@ -64,7 +61,10 @@ spec:
     - apiVersion: v1
       kind: PersistentVolumeClaim
       metadata:
-        name: config
+        name: radarr-config
+        labels:
+          app: radarr
+          part-of: media
       spec:
         accessModes: ["ReadWriteOnce"]
         storageClassName: synology-iscsi-storage

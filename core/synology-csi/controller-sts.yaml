@@ -3,7 +3,6 @@ kind: StatefulSet
 apiVersion: apps/v1
 metadata:
   name: synology-csi-controller
-  namespace: synology-csi
 spec:
   serviceName: "synology-csi-controller"
   replicas: 1

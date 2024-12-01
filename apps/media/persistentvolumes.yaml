@@ -5,6 +5,7 @@ metadata:
   name: movies
   labels:
     app: media
+    part-of: media
     volume: movies
 spec:
   volumeMode: Filesystem
@@ -23,7 +24,7 @@ spec:
     - sync
   nfs:
     path: /volume1/Movies
-    server: 172.16.0.5
+    server: 172.16.2.5
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -31,6 +32,7 @@ metadata:
   name: tv
   labels:
     app: media
+    part-of: media
     volume: tv
 spec:
   volumeMode: Filesystem
@@ -49,7 +51,7 @@ spec:
     - sync
   nfs:
     path: /volume1/TV
-    server: 172.16.0.5
+    server: 172.16.2.5
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -57,6 +59,7 @@ metadata:
   name: home-movies
   labels:
     app: media
+    part-of: media
     volume: home-movies
 spec:
   volumeMode: Filesystem
@@ -75,7 +78,7 @@ spec:
     - sync
   nfs:
     path: /volume1/HomeMovies
-    server: 172.16.0.5
+    server: 172.16.2.5
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -83,6 +86,7 @@ metadata:
   name: music
   labels:
     app: media
+    part-of: media
     volume: music
 spec:
   volumeMode: Filesystem
@@ -101,7 +105,7 @@ spec:
     - sync
   nfs:
     path: /volume1/Music
-    server: 172.16.0.5
+    server: 172.16.2.5
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -109,6 +113,7 @@ metadata:
   name: downloads
   labels:
     app: media
+    part-of: media
     volume: downloads
 spec:
   volumeMode: Filesystem
@@ -127,4 +132,4 @@ spec:
     - sync
   nfs:
     path: /volume1/downloads
-    server: 172.16.0.5
+    server: 172.16.2.5

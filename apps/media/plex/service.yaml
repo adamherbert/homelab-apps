@@ -3,16 +3,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: plex-media-server
+  name: plex-server
   labels:
-    app: plex-media-server
-    app.kubernetes.io/name: plex-media-server
+    app: plex-server
 spec:
   type: ClusterIP
   ports:
     - port: 32400
       targetPort: 32400
       protocol: TCP
-      name: pms
+      name: plex-server
   selector:
-    app: plex-media-server
+    app: plex-server

@@ -5,6 +5,7 @@ metadata:
   name: movies
   labels:
     app: media
+    part-of: media
     volume: movies
 spec:
   storageClassName: ""
@@ -13,6 +14,7 @@ spec:
   selector:
     matchLabels:
       app: media
+      part-of: media
       volume: movies
   resources:
     requests:
@@ -24,6 +26,7 @@ metadata:
   name: tv
   labels:
     app: media
+    part-of: media
     volume: tv
 spec:
   storageClassName: ""
@@ -32,6 +35,7 @@ spec:
   selector:
     matchLabels:
       app: media
+      part-of: media
       volume: tv
   resources:
     requests:
@@ -43,6 +47,7 @@ metadata:
   name: home-movies
   labels:
     app: media
+    part-of: media
     volume: home-movies
 spec:
   storageClassName: ""
@@ -51,6 +56,7 @@ spec:
   selector:
     matchLabels:
       app: media
+      part-of: media
       volume: home-movies
   resources:
     requests:
@@ -62,6 +68,7 @@ metadata:
   name: music
   labels:
     app: media
+    part-of: media
     volume: music
 spec:
   storageClassName: ""
@@ -70,6 +77,7 @@ spec:
   selector:
     matchLabels:
       app: media
+      part-of: media
       volume: music
   resources:
     requests:
@@ -81,6 +89,7 @@ metadata:
   name: downloads
   labels:
     app: media
+    part-of: media
     volume: downloads
 spec:
   storageClassName: ""
@@ -89,6 +98,7 @@ spec:
   selector:
     matchLabels:
       app: media
+      part-of: media
       volume: downloads
   resources:
     requests:
