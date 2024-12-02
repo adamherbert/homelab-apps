@@ -60,21 +60,20 @@ spec:
             #   name: logs
             - mountPath: /app/config
               name: homepage-config
-      volumes:
-        - name: homepage-config
-          persistentVolumeClaim:
-            claimName: homepage-config
+      # volumes:
       #   - name: homepage-config
       #     configMap:
       #       name: homepage
       #   - name: logs
       #     emptyDir: {}
   volumeClaimTemplates:
-    - metadata:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
         name: homepage-config
       spec:
         accessModes:
-          - ReadWriteOnce
+          - "ReadWriteOnce"
         resources:
           requests:
-            storage: 1Gi
+            storage: "8Gi"
