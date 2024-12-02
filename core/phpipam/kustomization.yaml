@@ -3,8 +3,12 @@ kind: Kustomization
 namespace: phpipam
 resources:
   - namespace.yaml
-  - deployment.yaml
-  - ingress.yaml
-  - pvc.yaml
   - secrets.yaml
+  - serviceaccount.yaml
+  - phpipam-db-pv.yaml
+  - phpipam-db-pvc.yaml
+  - phpipam-db-statefulset.yaml
+  - phpipam-cron-deployment.yaml
+  - phpipam-web-deployment.yaml
   - service.yaml
+  - ingress.yaml

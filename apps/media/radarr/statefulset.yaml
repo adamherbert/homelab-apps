@@ -27,7 +27,7 @@ spec:
           volumeMounts:
             - name: arr-init-config
               mountPath: /scripts
-            - name: config
+            - name: radarr-config
               mountPath: /config
       containers:
         - image: linuxserver/radarr:5.15.1
@@ -56,18 +56,7 @@ spec:
         - name: arr-init-config
           configMap:
             name: arr-init-config
+        - name: radarr-config
+          persistentVolumeClaim:
+            claimName: radarr-config
       restartPolicy: Always
-  volumeClaimTemplates:
-    - apiVersion: v1
-      kind: PersistentVolumeClaim
-      metadata:
-        name: radarr-config
-        labels:
-          app: radarr
-          part-of: media
-      spec:
-        accessModes: ["ReadWriteOnce"]
-        storageClassName: synology-iscsi-storage
-        resources:
-          requests:
-            storage: 20Gi

@@ -6,12 +6,12 @@ metadata:
   name: external-dns-unifi
   namespace: external-dns
   labels:
-    name: external-dns
+    app: external-dns
     instance: unifi
 spec:
   type: ClusterIP
   selector:
-    name: external-dns
+    app: external-dns
     instance: unifi
   ports:
     - name: http

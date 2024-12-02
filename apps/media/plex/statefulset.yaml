@@ -18,6 +18,9 @@ spec:
     spec:
       serviceAccountName: plex-server
       volumes:
+        - name: plex-server-config
+          persistentVolumeClaim:
+            claimName: plex-server-config
         - name: plex-server-transcode
           emptyDir: {}
         - name: movies
@@ -26,6 +29,9 @@ spec:
         - name: tv
           persistentVolumeClaim:
             claimName: tv
+        - name: music
+          persistentVolumeClaim:
+            claimName: music
         - name: home-movies
           persistentVolumeClaim:
             claimName: home-movies
@@ -55,12 +61,3 @@ spec:
               mountPath: /mnt/HomeMovies
             - name: music
               mountPath: /mnt/Music
-  volumeClaimTemplates:
-    - metadata:
-        name: plex-server-config
-      spec:
-        accessModes: ["ReadWriteOnce"]
-        storageClassName: synology-iscsi-storage
-        resources:
-          requests:
-            storage: 20Gi

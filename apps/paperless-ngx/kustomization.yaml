@@ -15,6 +15,7 @@ resources:
   - postgresql/networkpolicy.yaml
   - postgresql/serviceaccount.yaml
   - postgresql/secrets.yaml
+  - postgresql/postgresql-data-pvc.yaml
   - postgresql/statefulset.yaml
   - postgresql/svc.yaml
   - postgresql/svc-headless.yaml
@@ -26,6 +27,7 @@ resources:
   - redis/configmap.yaml
   - redis/health-configmap.yaml
   - redis/scripts-configmap.yaml
+  - redis/redis-data-pvc.yaml
   - redis/statefulset.yaml
   - redis/service.yaml
   - redis/headless-svc.yaml

@@ -6,7 +6,7 @@ metadata:
   name: external-dns-unifi
   namespace: external-dns
   labels:
-    name: external-dns
+    app: external-dns
     instance: unifi
 ---
 # Source: external-dns/templates/clusterrole.yaml
@@ -15,7 +15,7 @@ kind: ClusterRole
 metadata:
   name: external-dns-unifi
   labels:
-    name: external-dns
+    app: external-dns
     instance: unifi
 rules:
   - apiGroups: [""]
@@ -40,7 +40,7 @@ kind: ClusterRoleBinding
 metadata:
   name: external-dns-unifi-viewer
   labels:
-    name: external-dns
+    app: external-dns
     instance: unifi
 roleRef:
   apiGroup: rbac.authorization.k8s.io

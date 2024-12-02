@@ -39,7 +39,6 @@ spec:
                     part-of: paperless-ngx
                 topologyKey: kubernetes.io/hostname
               weight: 1
-        nodeAffinity:
       enableServiceLinks: true
       terminationGracePeriodSeconds: 30
       containers:
@@ -143,18 +142,6 @@ spec:
             name: redis-configuration
         - name: empty-dir
           emptyDir: {}
-  volumeClaimTemplates:
-    - apiVersion: v1
-      kind: PersistentVolumeClaim
-      metadata:
-        name: redis-data
-        labels:
-          app: redis
-          part-of: paperless-ngx
-      spec:
-        accessModes:
-          - "ReadWriteOnce"
-        storageClassName: synology-iscsi-storage
-        resources:
-          requests:
-            storage: "8Gi"
+        - name: redis-data
+          persistentVolumeClaim:
+            claimName: redis-data

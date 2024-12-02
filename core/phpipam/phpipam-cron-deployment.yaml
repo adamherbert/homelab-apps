@@ -1,0 +1,49 @@
+---
+# Source: phpipam/templates/deployment.yaml
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: phpipam-cron
+  labels:
+    app: phpipam
+    component: cron
+    part-of: phpipam
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phpipam
+      component: cron
+  template:
+    metadata:
+      name: phpipam-cron
+      labels:
+        app: phpipam
+        component: cron
+    spec:
+      containers:
+        - name: phpipam-cron
+          image: "phpipam/phpipam-cron:v1.7.3"
+          env:
+            - name: "IPAM_DATABASE_HOST"
+              value: phpipam-db
+            - name: "IPAM_DATABASE_USER"
+              value: phpipam
+            - name: "IPAM_DATABASE_NAME"
+              value: phpipam
+            - name: "IPAM_DATABASE_WEBHOST"
+              value: "%"
+            - name: "SCAN_INTERVAL"
+              value: 1h
+            - name: "IPAM_DATABASE_PASS"
+              valueFrom:
+                secretKeyRef:
+                  name: phpipam-secrets
+                  key: phpipam-mysql-pass
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 2048Mi
+            requests:
+              cpu: 50m
+              memory: 32Mi

@@ -24,7 +24,7 @@ spec:
           volumeMounts:
             - name: arr-init-config
               mountPath: /scripts
-            - name: config
+            - name: sonarr-config
               mountPath: /config
       containers:
         - image: linuxserver/sonarr:4.0.11
@@ -34,7 +34,7 @@ spec:
                 name: arr-env
           volumeMounts:
             - mountPath: /config
-              name: config
+              name: sonarr-config
             - mountPath: /tv
               name: tv
             - mountPath: /downloads
@@ -53,15 +53,7 @@ spec:
         - name: arr-init-config
           configMap:
             name: arr-init-config
+        - name: sonarr-config
+          persistentVolumeClaim:
+            claimName: sonarr-config
       restartPolicy: Always
-  volumeClaimTemplates:
-    - apiVersion: v1
-      kind: PersistentVolumeClaim
-      metadata:
-        name: sonarr-config
-      spec:
-        accessModes: ["ReadWriteOnce"]
-        storageClassName: synology-iscsi-storage
-        resources:
-          requests:
-            storage: 20Gi

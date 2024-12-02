@@ -37,8 +37,6 @@ spec:
                     part-of: paperless-ngx
                 topologyKey: kubernetes.io/hostname
               weight: 1
-        nodeAffinity:
-
       securityContext:
         fsGroup: 1001
         fsGroupChangePolicy: Always
@@ -159,7 +157,7 @@ spec:
               subPath: app-tmp-dir
             - name: dshm
               mountPath: /dev/shm
-            - name: data
+            - name: postgresql-data
               mountPath: /bitnami/postgresql
       volumes:
         - name: empty-dir
@@ -167,15 +165,6 @@ spec:
         - name: dshm
           emptyDir:
             medium: Memory
-  volumeClaimTemplates:
-    - apiVersion: v1
-      kind: PersistentVolumeClaim
-      metadata:
-        name: data
-      spec:
-        storageClassName: synology-iscsi-storage
-        accessModes:
-          - "ReadWriteOnce"
-        resources:
-          requests:
-            storage: "5Gi"
+        - name: postgresql-data
+          persistentVolumeClaim:
+            claimName: postgresql-data

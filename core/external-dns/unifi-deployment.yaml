@@ -12,14 +12,14 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      name: external-dns
+      app: external-dns
       instance: unifi
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        name: external-dns
+        app: external-dns
         instance: unifi
     spec:
       serviceAccountName: external-dns-unifi

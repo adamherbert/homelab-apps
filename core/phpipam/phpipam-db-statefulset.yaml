@@ -1,0 +1,59 @@
+---
+# Source: phpipam/templates/deployment.yaml
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: phpipam-db
+  labels:
+    app: phpipam
+    component: mysql
+    part-of: phpipam
+spec:
+  serviceName: phpipam
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phpipam
+      component: mysql
+  template:
+    metadata:
+      name: phpipam-db
+      labels:
+        app: phpipam
+        component: mysql
+    spec:
+      containers:
+        - name: phpipam-db
+          image: "mariadb:11.4.4"
+          ports:
+            - containerPort: 3306
+              protocol: TCP
+              name: mysql
+          volumeMounts:
+            - name: phpipam-db
+              mountPath: /var/lib/mysql
+          env:
+            - name: "MARIADB_RANDOM_ROOT_PASSWORD"
+              value: "yes"
+            - name: "MYSQL_LOG_CONSOLE"
+              value: "true"
+            - name: "MARIADB_DATABASE"
+              value: phpipam
+            - name: "MARIADB_USER"
+              value: phpipam
+            - name: "MARIADB_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: phpipam-secrets
+                  key: phpipam-mysql-pass
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 2048Mi
+            requests:
+              cpu: 50m
+              memory: 128Mi
+      volumes:
+        - name: phpipam-db
+          persistentVolumeClaim:
+            claimName: phpipam-db-pvc
