@@ -60,7 +60,10 @@ spec:
             #   name: logs
             - mountPath: /app/config
               name: homepage-config
-      # volumes:
+      volumes:
+        - name: homepage-config
+          persistentVolumeClaim:
+            claimName: homepage-config
       #   - name: homepage-config
       #     configMap:
       #       name: homepage
