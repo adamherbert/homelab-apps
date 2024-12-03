@@ -8,6 +8,15 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: internal
     traefik.ingress.kubernetes.io/router.middlewares: authentik-ak-outpost-authentik-embedded-outpost@kubernetescrd
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Sonarr
+    gethomepage.dev/group: Media
+    gethomepage.dev/icon: sonarr.png
+    gethomepage.dev/name: Sonarr
+    gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_SONARR_API_KEY}}"
+    gethomepage.dev/widget.type: "sonarr"
+    gethomepage.dev/widget.url: "https://sonarr.lab.8none1.com"
+    gethomepage.dev/pod-selector: ""
 spec:
   rules:
     - host: sonarr.lab.8none1.com
