@@ -5,9 +5,7 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - rbac.yaml
-  # - configmap.yaml
   - pvc.yaml
-  - certificate.yaml
   - deployment.yaml
   - service.yaml
   - ingress.yaml
