@@ -11,6 +11,15 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: internal
     traefik.ingress.kubernetes.io/router.middlewares: authentik-ak-outpost-authentik-embedded-outpost@kubernetescrd
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Radarr
+    gethomepage.dev/group: Media
+    gethomepage.dev/icon: radarr.png
+    gethomepage.dev/name: Radarr
+    gethomepage.dev/key: "{{RADARR_API_KEY}}"
+    gethomepage.dev/widget.type: "radarr"
+    gethomepage.dev/widget.url: "https://radarr.lab.8none1.com"
+    gethomepage.dev/pod-selector: ""
 spec:
   rules:
     - host: radarr.lab.8none1.com
