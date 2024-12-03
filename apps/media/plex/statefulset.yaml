@@ -45,7 +45,11 @@ spec:
               name: pms
           env:
             - name: ADVERTISE_IP
-              value: https://plex2.home.8none1.com
+              value: https://plex.home.8none1.com
+            - name: PLEX_UID
+              value: "1030"
+            - name: PLEX_GID
+              value: "65536"
             - name: TZ
               value: America/New_York
           volumeMounts:
