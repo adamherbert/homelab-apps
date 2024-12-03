@@ -16,7 +16,7 @@ metadata:
     gethomepage.dev/group: Media
     gethomepage.dev/icon: radarr.png
     gethomepage.dev/name: Radarr
-    gethomepage.dev/key: "{{HOMEPAGE_VAR_RADARR_API_KEY}}"
+    gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_RADARR_API_KEY}}"
     gethomepage.dev/widget.type: "radarr"
     gethomepage.dev/widget.url: "https://radarr.lab.8none1.com"
     gethomepage.dev/pod-selector: ""
