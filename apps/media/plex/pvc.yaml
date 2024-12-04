@@ -34,18 +34,17 @@
 #       storage: 20Gi
 #   storageClassName: synology-iscsi-storage
 #   volumeName: plex-server-config
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: plex-server-config
-  labels:
-    app: plex-server
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 20Gi
-  storageClassName: nfs-subdir-external-provisioner
-  volumeName: plex-server-config
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: plex-server-config
+#   labels:
+#     app: plex-server
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 20Gi
+#   volumeName: plex-server-config

@@ -65,3 +65,13 @@ spec:
               mountPath: /mnt/HomeMovies
             - name: music
               mountPath: /mnt/Music
+  volumeClaimTemplates:
+    - metadata:
+        name: plex-server-config
+        namespace: media
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 20Gi
