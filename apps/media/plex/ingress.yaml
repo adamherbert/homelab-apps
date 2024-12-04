@@ -8,10 +8,10 @@ metadata:
     app: plex-server
   annotations:
     cert-manager.io/cluster-issuer: external
-    external-dns.alpha.kubernetes.io/hostname: plex2.home.8none1.com
+    external-dns.alpha.kubernetes.io/hostname: plex.home.8none1.com
 spec:
   rules:
-    - host: plex2.home.8none1.com
+    - host: plex.home.8none1.com
       http:
         paths:
           - path: "/"
@@ -23,5 +23,5 @@ spec:
                   name: plex-server
   tls:
     - hosts:
-        - plex2.home.8none1.com
+        - plex.home.8none1.com
       secretName: plex-server-ingress-tls
