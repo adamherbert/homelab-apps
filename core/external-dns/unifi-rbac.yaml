@@ -33,6 +33,17 @@ rules:
   - apiGroups: ["traefik.io"]
     resources: ["ingressroutes", "ingressroutetcps", "ingressrouteudps"]
     verbs: ["get", "watch", "list"]
+  - apiGroups: ["gateway.networking.k8s.io"]
+    resources:
+      [
+        "gateways",
+        "httproutes",
+        "grpcroutes",
+        "tlsroutes",
+        "tcproutes",
+        "udproutes",
+      ]
+    verbs: ["get", "watch", "list"]
 ---
 # Source: external-dns/templates/clusterrolebinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
