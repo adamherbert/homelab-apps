@@ -54,6 +54,7 @@ spec:
             - --default-issuer-kind=ClusterIssuer
             - --default-issuer-group=cert-manager.io
             - --max-concurrent-challenges=60
+            - --enable-gateway-api
           ports:
             - containerPort: 9402
               name: http-metrics
