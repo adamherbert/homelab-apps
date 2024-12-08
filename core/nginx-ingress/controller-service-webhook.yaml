@@ -1,0 +1,26 @@
+---
+# Source: nginx-ingress/templates/controller-service-webhook.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    helm.sh/chart: nginx-ingress-4.11.3
+    app.kubernetes.io/name: nginx-ingress
+    app.kubernetes.io/instance: nginx-ingress
+    app.kubernetes.io/version: "1.11.3"
+    app.kubernetes.io/part-of: nginx-ingress
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: controller
+  name: nginx-ingress-controller-admission
+  namespace: nginx-ingress
+spec:
+  type: ClusterIP
+  ports:
+    - name: https-webhook
+      port: 443
+      targetPort: webhook
+      appProtocol: https
+  selector:
+    app.kubernetes.io/name: nginx-ingress
+    app.kubernetes.io/instance: nginx-ingress
+    app.kubernetes.io/component: controller
