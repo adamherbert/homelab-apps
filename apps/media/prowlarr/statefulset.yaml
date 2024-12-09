@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: prowlarr
+    part-of: media
+  name: prowlarr
+spec:
+  serviceName: prowlarr
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prowlarr
+      part-of: media
+  template:
+    metadata:
+      labels:
+        app: prowlarr
+        part-of: media
+    spec:
+      initContainers:
+        - name: init-config
+          image: busybox:latest
+          command:
+            - sh
+            - /scripts/arr-init-config.sh
+          volumeMounts:
+            - name: arr-init-config
+              mountPath: /scripts
+            - name: prowlarr-config
+              mountPath: /config
+      containers:
+        - image: linuxserver/prowlarr:1.27.0.4852-ls94
+          name: prowlarr
+          envFrom:
+            - configMapRef:
+                name: arr-env
+          volumeMounts:
+            - mountPath: /config
+              name: prowlarr-config
+          ports:
+            - name: prowlarr
+              containerPort: 9696
+              protocol: TCP
+      volumes:
+        # - name: movies
+        #   persistentVolumeClaim:
+        #     claimName: movies
+        # - name: downloads
+        #   persistentVolumeClaim:
+        #     claimName: downloads
+        - name: arr-init-config
+          configMap:
+            name: arr-init-config
+        - name: prowlarr-config
+          persistentVolumeClaim:
+            claimName: prowlarr-config
+      restartPolicy: Always
+  volumeClaimTemplates:
+    - metadata:
+        name: prowlarr-config
+        namespace: media
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 2Gi

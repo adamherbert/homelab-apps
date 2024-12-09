@@ -17,6 +17,14 @@ resources:
   - sonarr/statefulset.yaml
   - sonarr/service.yaml
   - sonarr/ingress.yaml
+  # Prowlarr
+  # - prowlarr/service.yaml
+  # - prowlarr/statefulset.yaml
+  # - prowlarr/ingress.yaml
+  # Tautulli
+  - tautulli/service.yaml
+  - tautulli/statefulset.yaml
+  - tautulli/ingress.yaml
   # SanNZBd
   - sabnzbd/service.yaml
   - sabnzbd/statefulset.yaml

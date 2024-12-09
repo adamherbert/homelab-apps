@@ -1,0 +1,19 @@
+---
+# Source: tautulli/templates/common.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: tautulli
+  labels:
+    app: tautulli
+    part-of: media
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8181
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: tautulli
+    part-of: media

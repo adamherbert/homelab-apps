@@ -1,0 +1,72 @@
+---
+# Source: tautulli/templates/common.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: tautulli
+  labels:
+    app: tautulli
+    part-of: media
+spec:
+  serviceName: tautulli
+  revisionHistoryLimit: 3
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tautulli
+      part-of: media
+  template:
+    metadata:
+      labels:
+        app: tautulli
+        part-of: media
+    spec:
+      containers:
+        - name: tautulli
+          image: "lscr.io/linuxserver/tautulli:2.15.0"
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: arr-env
+          ports:
+            - name: http
+              containerPort: 8181
+              protocol: TCP
+          volumeMounts:
+            - name: tautulli-config
+              mountPath: /config
+          livenessProbe:
+            tcpSocket:
+              port: 8181
+            initialDelaySeconds: 0
+            failureThreshold: 3
+            timeoutSeconds: 1
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: 8181
+            initialDelaySeconds: 0
+            failureThreshold: 3
+            timeoutSeconds: 1
+            periodSeconds: 10
+          startupProbe:
+            tcpSocket:
+              port: 8181
+            initialDelaySeconds: 0
+            failureThreshold: 30
+            timeoutSeconds: 1
+            periodSeconds: 5
+      volumes:
+        - name: tautulli-config
+          persistentVolumeClaim:
+            claimName: tautulli-config
+  volumeClaimTemplates:
+    - metadata:
+        name: tautulli-config
+        namespace: media
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 2Gi
