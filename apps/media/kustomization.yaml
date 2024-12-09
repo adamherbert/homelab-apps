@@ -17,6 +17,10 @@ resources:
   - sonarr/statefulset.yaml
   - sonarr/service.yaml
   - sonarr/ingress.yaml
+  # SanNZBd
+  - sabnzbd/service.yaml
+  - sabnzbd/statefulset.yaml
+  - sabnzbd/ingress.yaml
   # - plex
 
 configMapGenerator:

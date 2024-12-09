@@ -1,0 +1,81 @@
+---
+# Source: sabnzbd/templates/common.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sabnzbd
+  labels:
+    app: sabnzbd
+    part-of: media
+spec:
+  serviceName: sabnzbd
+  revisionHistoryLimit: 3
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sabnzbd
+      part-of: media
+  template:
+    metadata:
+      labels:
+        app: sabnzbd
+        part-of: media
+    spec:
+      containers:
+        - name: sabnzbd
+          image: "lscr.io/linuxserver/sabnzbd:4.3.3-ls192"
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: arr-env
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          volumeMounts:
+            - name: sabnzbd-config
+              mountPath: /config
+            - name: downloads
+              mountPath: /downloads
+            - name: incomplete-downloads
+              mountPath: /incomplete-downloads
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 0
+            failureThreshold: 3
+            timeoutSeconds: 1
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 0
+            failureThreshold: 3
+            timeoutSeconds: 1
+            periodSeconds: 10
+          startupProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 0
+            failureThreshold: 30
+            timeoutSeconds: 1
+            periodSeconds: 5
+      volumes:
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: downloads
+        - name: sabnzbd-config
+          persistentVolumeClaim:
+            claimName: sabnzbd-config
+        - name: incomplete-downloads
+          emptyDir: {}
+  volumeClaimTemplates:
+    - metadata:
+        name: sabnzbd-config
+        namespace: media
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 2Gi

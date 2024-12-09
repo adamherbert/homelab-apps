@@ -1,18 +1,13 @@
+---
+# Source: sabnzbd/templates/common.yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: homepage
-  namespace: homepage
+  name: sabnzbd
   labels:
-    app.kubernetes.io/name: homepage
+    app: sabnzbd
+    part-of: media
   annotations:
-    gethomepage.dev/description: Dynamically Detected Homepage
-    gethomepage.dev/enabled: "true"
-    gethomepage.dev/group: Cluster Management
-    gethomepage.dev/icon: homepage.png
-    gethomepage.dev/name: Homepage
-    cert-manager.io/cluster-issuer: internal
-    traefik.ingress.kubernetes.io/router.middlewares: authentik-ak-outpost-authentik-embedded-outpost@kubernetescrd
     nginx.ingress.kubernetes.io/auth-url: |-
       http://ak-outpost-nginx-ingress.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx
     # If you're using domain-level auth, use the authentication URL instead of the application URL
@@ -25,17 +20,17 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: "home.lab.8none1.com"
+    - host: "sabnzbd.home.8none1.com"
       http:
         paths:
           - path: "/"
             pathType: Prefix
             backend:
               service:
-                name: homepage
+                name: sabnzbd
                 port:
-                  number: 3000
+                  number: 8080
   tls:
     - hosts:
-        - home.lab.8none1.com
-      secretName: homepage-ingress-tls
+        - sabnzbd.home.8none1.com
+      secretName: sabnzbd-ingress-tls
