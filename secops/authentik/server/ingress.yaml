@@ -12,7 +12,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: external
 spec:
-  ingressClassName: traefik
+  ingressClassName: nginx
   rules:
     - host: "auth.home.8none1.com"
       http:
