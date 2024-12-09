@@ -9,6 +9,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: external
 spec:
+  ingressClassName: nginx
   rules:
     - host: paperless.home.8none1.com
       http:
