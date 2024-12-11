@@ -30,7 +30,7 @@ spec:
             - name: overseerr-config
               mountPath: /config
       containers:
-        - image: linuxserver/overseerr:1.33.2
+        - image: linuxserver/overseerr:2021.12.12
           name: overseerr
           envFrom:
             - configMapRef:
