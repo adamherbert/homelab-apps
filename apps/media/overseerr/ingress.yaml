@@ -4,7 +4,10 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: sonarr
+  name: overseerr
+  labels:
+    app: overseerr
+    part-of: media
   annotations:
     cert-manager.io/cluster-issuer: external
     nginx.ingress.kubernetes.io/auth-url: |-
@@ -16,30 +19,30 @@ metadata:
       Set-Cookie,X-authentik-username,X-authentik-groups,X-authentik-email,X-authentik-name,X-authentik-uid
     nginx.ingress.kubernetes.io/auth-snippet: |
       proxy_set_header X-Forwarded-Host $http_host;
-    traefik.ingress.kubernetes.io/router.middlewares: authentik-ak-outpost-authentik-embedded-outpost@kubernetescrd
+    # traefik.ingress.kubernetes.io/router.middlewares: authentik-ak-outpost-authentik-embedded-outpost@kubernetescrd
     gethomepage.dev/enabled: "true"
-    gethomepage.dev/description: Sonarr
+    gethomepage.dev/description: Overseerr
     gethomepage.dev/group: Media
-    gethomepage.dev/icon: sonarr.png
-    gethomepage.dev/name: Sonarr
-    gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_SONARR_API_KEY}}"
-    gethomepage.dev/widget.type: "sonarr"
-    gethomepage.dev/widget.url: "https://sonarr.home.8none1.com"
+    gethomepage.dev/icon: overseerr.png
+    gethomepage.dev/name: Overseerr
+    gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_OVERSEERR_API_KEY}}"
+    gethomepage.dev/widget.type: "overseerr"
+    gethomepage.dev/widget.url: "https://overseerr.home.8none1.com"
     gethomepage.dev/pod-selector: ""
 spec:
   ingressClassName: nginx
   rules:
-    - host: sonarr.home.8none1.com
+    - host: overseerr.home.8none1.com
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: sonarr
+                name: overseerr
                 port:
-                  name: sonarr
+                  name: http
   tls:
     - hosts:
-        - sonarr.home.8none1.com
-      secretName: sonarr-ingress-tls
+        - overseerr.home.8none1.com
+      secretName: overseerr-ingress-tls

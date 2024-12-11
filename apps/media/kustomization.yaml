@@ -21,6 +21,14 @@ resources:
   # - prowlarr/service.yaml
   # - prowlarr/statefulset.yaml
   # - prowlarr/ingress.yaml
+  # Overseerr
+  - overseerr/service.yaml
+  - overseerr/statefulset.yaml
+  - overseerr/ingress.yaml
+  # Maintainerr
+  - maintainerr/service.yaml
+  - maintainerr/statefulset.yaml
+  - maintainerr/ingress.yaml
   # Tautulli
   - tautulli/service.yaml
   - tautulli/statefulset.yaml

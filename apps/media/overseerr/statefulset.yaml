@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: overseerr
+    part-of: media
+  name: overseerr
+spec:
+  serviceName: overseerr
+  replicas: 1
+  selector:
+    matchLabels:
+      app: overseerr
+      part-of: media
+  template:
+    metadata:
+      labels:
+        app: overseerr
+        part-of: media
+    spec:
+      initContainers:
+        - name: init-config
+          image: busybox:latest
+          command:
+            - sh
+            - /scripts/arr-init-config.sh
+          volumeMounts:
+            - name: arr-init-config
+              mountPath: /scripts
+            - name: overseerr-config
+              mountPath: /config
+      containers:
+        - image: linuxserver/overseerr:1.33.2
+          name: overseerr
+          envFrom:
+            - configMapRef:
+                name: arr-env
+          volumeMounts:
+            - mountPath: /config
+              name: overseerr-config
+          ports:
+            - name: overseerr
+              containerPort: 5055
+              protocol: TCP
+      volumes:
+        - name: arr-init-config
+          configMap:
+            name: arr-init-config
+        - name: overseerr-config
+          persistentVolumeClaim:
+            claimName: overseerr-config
+      restartPolicy: Always
+  volumeClaimTemplates:
+    - metadata:
+        name: overseerr-config
+        namespace: media
+      spec:
+        accessModes:
+          - ReadWriteMany
+        resources:
+          requests:
+            storage: 2Gi

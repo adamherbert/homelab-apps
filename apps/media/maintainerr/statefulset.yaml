@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: maintainerr
+    part-of: media
+  name: maintainerr
+spec:
+  serviceName: maintainerr
+  replicas: 1
+  selector:
+    matchLabels:
+      app: maintainerr
+      part-of: media
+  template:
+    metadata:
+      labels:
+        app: maintainerr
+        part-of: media
+    spec:
+      initContainers:
+        - name: init-config
+          image: busybox:latest
+          command:
+            - sh
+            - /scripts/arr-init-config.sh
+          volumeMounts:
+            - name: arr-init-config
+              mountPath: /scripts
+            - name: maintainerr-config
+              mountPath: /config
+      containers:
+        - image: jorenn92/maintainerr:2.2.1
+          name: maintainerr
+          envFrom:
+            - configMapRef:
+                name: arr-env
+          volumeMounts:
+            - mountPath: /config
+              name: maintainerr-config
+          ports:
+            - name: maintainerr
+              containerPort: 6246
+              protocol: TCP
+      volumes:
+        - name: arr-init-config
+          configMap:
+            name: arr-init-config
+        - name: maintainerr-config
+          persistentVolumeClaim:
+            claimName: maintainerr-config
+      restartPolicy: Always
+  volumeClaimTemplates:
+    - metadata:
+        name: maintainerr-config
+        namespace: media
+      spec:
+        accessModes:
+          - ReadWriteMany
+        resources:
+          requests:
+            storage: 2Gi
