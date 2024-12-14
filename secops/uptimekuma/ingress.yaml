@@ -4,7 +4,7 @@ metadata:
   name: uptime-kuma-ingress
   namespace: uptimekuma
   annotations:
-    cert-manager.io/cluster-issuer: internal
+    cert-manager.io/cluster-issuer: external
     nginx.ingress.kubernetes.io/auth-url: |-
       http://ak-outpost-nginx-ingress.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx
     # If you're using domain-level auth, use the authentication URL instead of the application URL
@@ -18,7 +18,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: uptimekuma.lab.8none1.com # Replace with your domain
+    - host: up.home.8none1.com # Replace with your domain
       http:
         paths:
           - path: /
@@ -30,5 +30,5 @@ spec:
                   number: 3001
   tls:
     - hosts:
-        - uptimekuma.lab.8none1.com
+        - up.home.8none1.com
       secretName: uptime-kuma-ingress-tls
