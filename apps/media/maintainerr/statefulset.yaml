@@ -18,17 +18,6 @@ spec:
         app: maintainerr
         part-of: media
     spec:
-      initContainers:
-        - name: init-config
-          image: busybox:latest
-          command:
-            - sh
-            - /scripts/arr-init-config.sh
-          volumeMounts:
-            - name: arr-init-config
-              mountPath: /scripts
-            - name: maintainerr-config
-              mountPath: /config
       containers:
         - image: jorenn92/maintainerr:2.2.1
           name: maintainerr
@@ -36,16 +25,13 @@ spec:
             - configMapRef:
                 name: arr-env
           volumeMounts:
-            - mountPath: /config
+            - mountPath: /opt/data
               name: maintainerr-config
           ports:
             - name: maintainerr
               containerPort: 6246
               protocol: TCP
       volumes:
-        - name: arr-init-config
-          configMap:
-            name: arr-init-config
         - name: maintainerr-config
           persistentVolumeClaim:
             claimName: maintainerr-config
