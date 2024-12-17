@@ -34,7 +34,7 @@ spec:
               weight: 1
       containers:
         - command:
-            - nfd-control-plane
+            - nfd-master
           env:
             - name: NODE_NAME
               valueFrom:
