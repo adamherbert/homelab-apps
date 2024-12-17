@@ -1,0 +1,21 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ClusterRole-nfd-gc.yaml
+  - ClusterRole-nfd-control-plane.yaml
+  - ClusterRoleBinding-nfd-gc.yaml
+  - ClusterRoleBinding-nfd-control-plane.yaml
+  - ConfigMap-nfd-control-plane-conf.yaml
+  - ConfigMap-nfd-worker-conf.yaml
+  - CustomResourceDefinition-nodefeaturegroups.nfd.k8s-sigs.io.yaml
+  - CustomResourceDefinition-nodefeaturerules.nfd.k8s-sigs.io.yaml
+  - CustomResourceDefinition-nodefeatures.nfd.k8s-sigs.io.yaml
+  - DaemonSet-nfd-worker.yaml
+  - Deployment-nfd-gc.yaml
+  - Deployment-nfd-control-plane.yaml
+  - Namespace-node-feature-discovery.yaml
+  - Role-nfd-worker.yaml
+  - RoleBinding-nfd-worker.yaml
+  - ServiceAccount-nfd-gc.yaml
+  - ServiceAccount-nfd-control-plane.yaml
+  - ServiceAccount-nfd-worker.yaml

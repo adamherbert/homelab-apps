@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: intel-i915
+
+resources:
+  - crds
+  - namespace.yaml
+  - gpu.yaml
+  - operator.yaml

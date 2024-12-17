@@ -1,0 +1,100 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nfd
+  name: nfd-control-plane
+  namespace: node-feature-discovery
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nfd-control-plane
+  template:
+    metadata:
+      labels:
+        app: nfd-control-plane
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - preference:
+                matchExpressions:
+                  - key: node-role.kubernetes.io/control-plane
+                    operator: In
+                    values:
+                      - ""
+              weight: 1
+            - preference:
+                matchExpressions:
+                  - key: node-role.kubernetes.io/control-plane
+                    operator: In
+                    values:
+                      - ""
+              weight: 1
+      containers:
+        - command:
+            - nfd-control-plane
+          env:
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: POD_UID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.uid
+          image: registry.k8s.io/nfd/node-feature-discovery:v0.16.5
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            grpc:
+              port: 8082
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          name: nfd-control-plane
+          ports:
+            - containerPort: 8081
+              name: metrics
+          readinessProbe:
+            failureThreshold: 10
+            grpc:
+              port: 8082
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          resources:
+            limits:
+              cpu: 300m
+              memory: 4Gi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+          volumeMounts:
+            - mountPath: /etc/kubernetes/node-feature-discovery
+              name: nfd-control-plane-conf
+              readOnly: true
+      enableServiceLinks: false
+      serviceAccount: nfd-control-plane
+      tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/control-plane
+          operator: Equal
+          value: ""
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/control-plane
+          operator: Equal
+          value: ""
+      volumes:
+        - configMap:
+            name: nfd-control-plane-conf
+          name: nfd-control-plane-conf

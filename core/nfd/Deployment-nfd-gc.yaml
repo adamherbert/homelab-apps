@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nfd
+  name: nfd-gc
+  namespace: node-feature-discovery
+spec:
+  selector:
+    matchLabels:
+      app: nfd-gc
+  template:
+    metadata:
+      labels:
+        app: nfd-gc
+    spec:
+      containers:
+      - command:
+        - nfd-gc
+        env:
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_UID
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.uid
+        image: registry.k8s.io/nfd/node-feature-discovery:v0.16.5
+        imagePullPolicy: IfNotPresent
+        name: nfd-gc
+        ports:
+        - containerPort: 8081
+          name: metrics
+        resources:
+          limits:
+            cpu: 20m
+            memory: 1Gi
+          requests:
+            cpu: 10m
+            memory: 128Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+      dnsPolicy: ClusterFirstWithHostNet
+      serviceAccount: nfd-gc

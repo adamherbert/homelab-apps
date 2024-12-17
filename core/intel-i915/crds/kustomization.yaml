@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - deviceplugin.intel.com_dlbdeviceplugins.yaml
+  - deviceplugin.intel.com_dsadeviceplugins.yaml
+  - deviceplugin.intel.com_fpgadeviceplugins.yaml
+  - deviceplugin.intel.com_gpudeviceplugins.yaml
+  - deviceplugin.intel.com_iaadeviceplugins.yaml
+  - deviceplugin.intel.com_qatdeviceplugins.yaml
+  - deviceplugin.intel.com_sgxdeviceplugins.yaml
+  - fpga.intel.com_acceleratorfunctions.yaml
+  - fpga.intel.com_fpgaregions.yaml
