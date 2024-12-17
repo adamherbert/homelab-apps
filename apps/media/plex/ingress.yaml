@@ -8,8 +8,12 @@ metadata:
     app: plex-server
   annotations:
     cert-manager.io/cluster-issuer: external
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS" # Plex is HTTP (change to HTTPS if applicable)
+    nginx.ingress.kubernetes.io/proxy-body-size: "0" # Allow large media files
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600" # Handle long streams
     external-dns.alpha.kubernetes.io/hostname: plex.home.8none1.com
 spec:
+  ingressClassName: nginx
   rules:
     - host: plex.home.8none1.com
       http:

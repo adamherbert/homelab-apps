@@ -8,6 +8,7 @@ metadata:
     app: tautulli
     part-of: media
   annotations:
+    cert-manager.io/cluster-issuer: external
     nginx.ingress.kubernetes.io/auth-url: |-
       http://ak-outpost-nginx-ingress.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx
     # If you're using domain-level auth, use the authentication URL instead of the application URL

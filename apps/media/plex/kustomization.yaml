@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: media
 resources:
   - serviceaccount.yaml
-  # - statefulset.yaml
+  - pvc.yaml
+  - statefulset.yaml
   - service.yaml
   - ingress.yaml

@@ -15,7 +15,6 @@ spec:
 
   nodeSelector:
     intel.feature.node.kubernetes.io/gpu: "true"
-  tolerations: null
 ---
 # Source: intel-device-plugins-gpu/templates/gpu.yaml
 apiVersion: nfd.k8s-sigs.io/v1alpha1

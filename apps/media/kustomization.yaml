@@ -37,7 +37,7 @@ resources:
   - sabnzbd/service.yaml
   - sabnzbd/statefulset.yaml
   - sabnzbd/ingress.yaml
-  # - plex
+  - plex
 
 configMapGenerator:
   - name: arr-init-config
