@@ -118,7 +118,7 @@ spec:
               mountPath: /var/run/nginx
             - name: nginx-includes
               mountPath: /etc/nginx/includes
-        - image: ghcr.io/nginxinc/nginx-gateway-fabric/nginx:1.5.0
+        - image: ghcr.io/nginxinc/nginx-gateway-fabric/nginx:1.5.1
           resources: {}
           imagePullPolicy: IfNotPresent
           name: nginx
