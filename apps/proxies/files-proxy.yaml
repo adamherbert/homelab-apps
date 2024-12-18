@@ -1,0 +1,50 @@
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: files-proxy
+  namespace: proxies
+subsets:
+  - addresses:
+      - ip: 172.16.0.5
+    ports:
+      - port: 5001
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: files-proxy
+  namespace: proxies
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      targetPort: 5001
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: files-proxy
+  namespace: proxies
+  annotations:
+    cert-manager.io/cluster-issuer: external
+    external-dns.alpha.kubernetes.io/hostname: files.home.8none1.com
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: files.home.8none1.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: files-proxy
+                port:
+                  name: http
+  tls:
+    - hosts:
+        - files.home.8none1.com
+      secretName: files-proxy-ingress-tls

@@ -25,7 +25,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: "home.lab.8none1.com"
+    - host: "home.8none1.com"
       http:
         paths:
           - path: "/"
@@ -37,5 +37,5 @@ spec:
                   number: 3000
   tls:
     - hosts:
-        - home.lab.8none1.com
+        - home.8none1.com
       secretName: homepage-ingress-tls
