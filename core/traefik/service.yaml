@@ -5,7 +5,8 @@ metadata:
   name: traefik
   labels:
     app.kubernetes.io/name: traefik
-  annotations: {}
+  annotations:
+    metallb.universe.tf/loadbalcerIPs: 172.16.1.151
 spec:
   type: LoadBalancer
   selector:

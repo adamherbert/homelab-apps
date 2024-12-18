@@ -11,6 +11,8 @@ metadata:
     app.kubernetes.io/part-of: nginx-ingress
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: controller
+  annotations:
+    ingressclass.kubernetes.io/is-default-class: "true"
   name: nginx
 spec:
   controller: k8s.io/nginx-ingress

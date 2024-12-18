@@ -1,0 +1,16 @@
+---
+# Source: nginx-gateway-fabric/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-includes-bootstrap
+  namespace: nginx-gateway
+  labels:
+    helm.sh/chart: nginx-gateway-fabric-1.5.0
+    app.kubernetes.io/name: nginx-gateway-fabric
+    app.kubernetes.io/instance: nginx-gateway
+    app.kubernetes.io/version: "1.5.0"
+    app.kubernetes.io/managed-by: Helm
+data:
+  main.conf: |
+    error_log stderr info;
