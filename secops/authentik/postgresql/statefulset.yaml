@@ -153,6 +153,8 @@ spec:
               mountPath: /dev/shm
             - name: data
               mountPath: /bitnami/postgresql
+            - name: data-nfs
+              mountPath: /bitnami/postgresql-old
       volumes:
         - name: postgresql-extended-config
           configMap:
@@ -164,8 +166,21 @@ spec:
     - apiVersion: v1
       kind: PersistentVolumeClaim
       metadata:
+        name: data-nfs
+      spec:
+        storageClassName: nfs-subdir-external-provisioner
+        accessModes:
+          - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: "8Gi"
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
         name: data
       spec:
+        storageClassName: longhorn
+        volumeName: authentik-postgresql-data
         accessModes:
           - "ReadWriteOnce"
         resources:
