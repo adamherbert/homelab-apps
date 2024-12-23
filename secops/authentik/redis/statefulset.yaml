@@ -145,6 +145,7 @@ spec:
           app.kubernetes.io/component: redis
           app.kubernetes.io/part-of: authentik
       spec:
+        storageClassName: longhorn
         accessModes:
           - "ReadWriteOnce"
         resources:
