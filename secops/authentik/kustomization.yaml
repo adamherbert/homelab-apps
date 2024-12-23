@@ -8,11 +8,13 @@ resources:
   - rbac.yaml
   - intermal-ca-external-secret.yaml
   # Postgres Components
+  - postgresql/pvc.yaml
   - postgresql/secrets.yaml
   - postgresql/configmap.yaml
   - postgresql/service.yaml
   - postgresql/statefulset.yaml
   # Redis Components
+  - redis/pvc.yaml
   - redis/serviceaccount.yaml
   - redis/configmap.yaml
   - redis/service.yaml

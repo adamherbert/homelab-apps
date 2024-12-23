@@ -120,6 +120,9 @@ spec:
             - name: tmp
               mountPath: /tmp
       volumes:
+        - name: redis-data
+          persistentVolumeClaim:
+            claimName: authentik-redis-data
         - name: start-scripts
           configMap:
             name: redis-scripts
@@ -135,19 +138,3 @@ spec:
           emptyDir: {}
         - name: tmp
           emptyDir: {}
-  volumeClaimTemplates:
-    - apiVersion: v1
-      kind: PersistentVolumeClaim
-      metadata:
-        name: redis-data
-        labels:
-          app.kubernetes.io/name: redis
-          app.kubernetes.io/component: redis
-          app.kubernetes.io/part-of: authentik
-      spec:
-        storageClassName: longhorn
-        accessModes:
-          - "ReadWriteOnce"
-        resources:
-          requests:
-            storage: "8Gi"
