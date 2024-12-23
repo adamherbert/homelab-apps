@@ -1,0 +1,5 @@
+# Builtin: "helm template" does not respect --create-namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: longhorn-system
