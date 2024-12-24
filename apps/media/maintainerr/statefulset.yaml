@@ -20,6 +20,7 @@ spec:
     spec:
       containers:
         - image: jorenn92/maintainerr:2.4.0
+          imagePullPolicy: IfNotPresent
           name: maintainerr
           envFrom:
             - configMapRef:
@@ -34,15 +35,5 @@ spec:
       volumes:
         - name: maintainerr-config
           persistentVolumeClaim:
-            claimName: maintainerr-config
+            claimName: media-maintainerr-config
       restartPolicy: Always
-  volumeClaimTemplates:
-    - metadata:
-        name: maintainerr-config
-        namespace: media
-      spec:
-        accessModes:
-          - ReadWriteMany
-        resources:
-          requests:
-            storage: 2Gi

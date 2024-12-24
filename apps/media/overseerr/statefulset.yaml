@@ -48,15 +48,5 @@ spec:
             name: arr-init-config
         - name: overseerr-config
           persistentVolumeClaim:
-            claimName: overseerr-config
+            claimName: media-overseerr-config
       restartPolicy: Always
-  volumeClaimTemplates:
-    - metadata:
-        name: overseerr-config
-        namespace: media
-      spec:
-        accessModes:
-          - ReadWriteMany
-        resources:
-          requests:
-            storage: 2Gi

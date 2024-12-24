@@ -25,9 +25,6 @@ metadata:
     gethomepage.dev/group: Media
     gethomepage.dev/icon: maintainerr.png
     gethomepage.dev/name: Maintainerr
-    gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_MAINTAINERR_API_KEY}}"
-    gethomepage.dev/widget.type: "maintainerr"
-    gethomepage.dev/widget.url: "https://maintainerr.home.8none1.com"
     gethomepage.dev/pod-selector: ""
 spec:
   ingressClassName: nginx

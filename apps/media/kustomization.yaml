@@ -25,10 +25,12 @@ resources:
   - overseerr/service.yaml
   - overseerr/statefulset.yaml
   - overseerr/ingress.yaml
+  - overseerr/pvc.yaml
   # Maintainerr
   - maintainerr/service.yaml
   - maintainerr/statefulset.yaml
   - maintainerr/ingress.yaml
+  - maintainerr/pvc.yaml
   # Tautulli
   - tautulli/service.yaml
   - tautulli/statefulset.yaml
@@ -38,6 +40,7 @@ resources:
   - sabnzbd/service.yaml
   - sabnzbd/statefulset.yaml
   - sabnzbd/ingress.yaml
+  - sabnzbd/pvc.yaml
   - plex
 
 configMapGenerator:

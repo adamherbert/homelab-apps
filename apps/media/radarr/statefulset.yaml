@@ -58,5 +58,5 @@ spec:
             name: arr-init-config
         - name: radarr-config
           persistentVolumeClaim:
-            claimName: radarr-config
+            claimName: media-radarr-config
       restartPolicy: Always

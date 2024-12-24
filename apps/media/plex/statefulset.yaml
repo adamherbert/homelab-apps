@@ -46,11 +46,11 @@ spec:
           resources:
             requests:
               cpu: 500m
-              memory: 2Gi
+              memory: 3Gi
               gpu.intel.com/i915: "1"
             limits:
-              cpu: 2000m
-              memory: 4Gi
+              cpu: 1000m
+              memory: 5Gi
               gpu.intel.com/i915: "1"
           env:
             - name: ADVERTISE_IP

@@ -66,16 +66,6 @@ spec:
             claimName: downloads
         - name: sabnzbd-config
           persistentVolumeClaim:
-            claimName: sabnzbd-config
+            claimName: media-sabnzbd-config
         - name: incomplete-downloads
           emptyDir: {}
-  volumeClaimTemplates:
-    - metadata:
-        name: sabnzbd-config
-        namespace: media
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 2Gi

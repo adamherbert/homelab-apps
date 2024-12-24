@@ -2,35 +2,34 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  annotations:
-    pv.kubernetes.io/provisioned-by: csi.san.synology.com
-  name: sonarr-config
-  labels:
-    app: sonarr
+  name: media-sonarr-config-longhorn
 spec:
-  accessModes:
-    - ReadWriteOnce
   capacity:
     storage: 20Gi
-  csi:
-    driver: csi.san.synology.com
-    volumeHandle: f26b6e37-fd8d-44b0-8843-af232cfa0a04
   volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: synology-iscsi-storage
+  storageClassName: longhorn-static
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "3"
+      staleReplicaTimeout: "20"
+    volumeHandle: media-sonarr-config
 ---
-# Source: phpipam/templates/pvc.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: sonarr-config
-  labels:
-    app: sonarr
+  name: media-sonarr-config
+  namespace: media
 spec:
-  accessModes:
-    - ReadWriteOnce
+  storageClassName: longhorn-static
   resources:
     requests:
       storage: 20Gi
-  storageClassName: synology-iscsi-storage
-  volumeName: sonarr-config
+  volumeMode: Filesystem
+  volumeName: media-sonarr-config-longhorn
+  accessModes:
+    - ReadWriteOnce

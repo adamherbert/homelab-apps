@@ -1,3 +1,24 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: media-tautulli-config-longhorn
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: longhorn-static
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "3"
+      staleReplicaTimeout: "20"
+    volumeHandle: media-tautulli-config
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -11,7 +32,7 @@ spec:
       storage: 5Gi
   storageClassName: longhorn-static
   volumeMode: Filesystem
-  volumeName: media-tautulli-config
+  volumeName: media-tautulli-config-longhorn
 status:
   accessModes:
     - ReadWriteOnce

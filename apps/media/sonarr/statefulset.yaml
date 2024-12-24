@@ -55,5 +55,5 @@ spec:
             name: arr-init-config
         - name: sonarr-config
           persistentVolumeClaim:
-            claimName: sonarr-config
+            claimName: media-sonarr-config
       restartPolicy: Always
