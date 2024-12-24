@@ -33,6 +33,7 @@ resources:
   - tautulli/service.yaml
   - tautulli/statefulset.yaml
   - tautulli/ingress.yaml
+  - tautulli/pvc.yaml
   # SanNZBd
   - sabnzbd/service.yaml
   - sabnzbd/statefulset.yaml

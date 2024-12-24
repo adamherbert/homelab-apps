@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: media-tautulli-config
+  namespace: media
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: longhorn-static
+  volumeMode: Filesystem
+  volumeName: media-tautulli-config
+status:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 5Gi

@@ -59,14 +59,4 @@ spec:
       volumes:
         - name: tautulli-config
           persistentVolumeClaim:
-            claimName: tautulli-config
-  volumeClaimTemplates:
-    - metadata:
-        name: tautulli-config
-        namespace: media
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 2Gi
+            claimName: media-tautulli-config
