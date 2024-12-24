@@ -45,3 +45,50 @@ spec:
   resources:
     requests:
       storage: "10Gi"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: paperless-ngx-inbox
+  labels:
+    app: paperless-ngx
+    part-of: paperless-ngx
+    volume: paperless-ngx-inbox
+spec:
+  volumeMode: Filesystem
+  capacity:
+    storage: 10Ti
+  persistentVolumeReclaimPolicy: Retain
+  accessModes:
+    - ReadWriteMany
+  mountOptions:
+    - nfsvers=4
+    - rsize=1048576
+    - wsize=1048576
+    - hard
+    - timeo=600
+    - retrans=2
+    - sync
+  nfs:
+    path: /volume1/FilingInbox
+    server: 172.16.2.5
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: paperless-ngx-inbox
+  labels:
+    app: paperless-ngx
+    part-of: paperless-ngx
+    volume: paperless-ngx-inbox
+spec:
+  storageClassName: ""
+  accessModes:
+    - ReadWriteMany
+  selector:
+    matchLabels:
+      app: paperless-ngx
+      volume: paperless-ngx-inbox
+  resources:
+    requests:
+      storage: "10Gi"

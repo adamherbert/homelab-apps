@@ -75,10 +75,15 @@ spec:
             - name: paperless-ngx-data
               mountPath: /usr/src/paperless/media
               subPath: media
+            - name: paperless-ngx-inbox
+              mountPath: /usr/src/paperless/consume
       volumes:
         - name: paperless-ngx-data
           persistentVolumeClaim:
             claimName: paperless-ngx-data
+        - name: paperless-ngx-inbox
+          persistentVolumeClaim:
+            claimName: paperless-ngx-inbox
   persistentVolumeClaimRetentionPolicy:
     whenDeleted: Retain
     whenScaled: Retain
