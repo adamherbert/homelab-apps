@@ -29,6 +29,8 @@ spec:
             - configMapRef:
                 name: paperless-ngx-general
           env:
+            - name: PAPERLESS_CONSUMER_POLLING
+              value: "1"
             - name: PAPERLESS_REDIS
               valueFrom:
                 secretKeyRef:
