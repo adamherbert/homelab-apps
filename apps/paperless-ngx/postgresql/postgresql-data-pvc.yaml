@@ -1,36 +1,71 @@
+# ---
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   annotations:
+#     pv.kubernetes.io/provisioned-by: csi.san.synology.com
+#   name: postgresql-data
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   capacity:
+#     storage: 5Gi
+#   csi:
+#     driver: csi.san.synology.com
+#     volumeHandle: 3f3bd2ea-4838-4a99-9d83-674166884540
+#   volumeMode: Filesystem
+#   persistentVolumeReclaimPolicy: Retain
+#   storageClassName: synology-iscsi-storage
+# ---
+# # Source: phpipam/templates/pvc.yaml
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: postgresql-data
+#   labels:
+#     app: postgresql
+#     part-of: paperless-ngx
+#     volume: postgresql-data
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 5Gi
+#   storageClassName: synology-iscsi-storage
+#   volumeName: postgresql-data
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  annotations:
-    pv.kubernetes.io/provisioned-by: csi.san.synology.com
-  name: postgresql-data
+  name: paperless-ngx-postgresql-data-longhorn
 spec:
+  capacity:
+    storage: 2Gi
+  volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  capacity:
-    storage: 5Gi
-  csi:
-    driver: csi.san.synology.com
-    volumeHandle: 3f3bd2ea-4838-4a99-9d83-674166884540
-  volumeMode: Filesystem
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: synology-iscsi-storage
+  storageClassName: longhorn-static
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "3"
+      staleReplicaTimeout: "20"
+    volumeHandle: paperless-ngx-postgresql-data
 ---
-# Source: phpipam/templates/pvc.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: postgresql-data
-  labels:
-    app: postgresql
-    part-of: paperless-ngx
-    volume: postgresql-data
+  name: paperless-ngx-postgresql-data
+  namespace: media
 spec:
-  accessModes:
-    - ReadWriteOnce
+  storageClassName: longhorn-static
   resources:
     requests:
-      storage: 5Gi
-  storageClassName: synology-iscsi-storage
-  volumeName: postgresql-data
+      storage: 2Gi
+  volumeMode: Filesystem
+  volumeName: paperless-ngx-postgresql-data-longhorn
+  accessModes:
+    - ReadWriteOnce

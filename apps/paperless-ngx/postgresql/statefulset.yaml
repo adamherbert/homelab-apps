@@ -167,4 +167,4 @@ spec:
             medium: Memory
         - name: postgresql-data
           persistentVolumeClaim:
-            claimName: postgresql-data
+            claimName: paperless-ngx-postgresql-data

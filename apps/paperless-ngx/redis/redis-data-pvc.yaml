@@ -1,36 +1,71 @@
+# ---
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   annotations:
+#     pv.kubernetes.io/provisioned-by: csi.san.synology.com
+#   name: redis-data
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   capacity:
+#     storage: 8Gi
+#   csi:
+#     driver: csi.san.synology.com
+#     volumeHandle: dc472254-8acc-4b46-9a6a-92d6071cba34
+#   volumeMode: Filesystem
+#   persistentVolumeReclaimPolicy: Retain
+#   storageClassName: synology-iscsi-storage
+# ---
+# # Source: phpipam/templates/pvc.yaml
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: redis-data
+#   labels:
+#     app: redis
+#     part-of: paperless-ngx
+#     volume: redis-data
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 8Gi
+#   storageClassName: synology-iscsi-storage
+#   volumeName: redis-data
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  annotations:
-    pv.kubernetes.io/provisioned-by: csi.san.synology.com
-  name: redis-data
+  name: paperless-ngx-redis-data-longhorn
 spec:
+  capacity:
+    storage: 2Gi
+  volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  capacity:
-    storage: 8Gi
-  csi:
-    driver: csi.san.synology.com
-    volumeHandle: dc472254-8acc-4b46-9a6a-92d6071cba34
-  volumeMode: Filesystem
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: synology-iscsi-storage
+  storageClassName: longhorn-static
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "3"
+      staleReplicaTimeout: "20"
+    volumeHandle: paperless-ngx-redis-data
 ---
-# Source: phpipam/templates/pvc.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: redis-data
-  labels:
-    app: redis
-    part-of: paperless-ngx
-    volume: redis-data
+  name: paperless-ngx-redis-data
+  namespace: media
 spec:
-  accessModes:
-    - ReadWriteOnce
+  storageClassName: longhorn-static
   resources:
     requests:
-      storage: 8Gi
-  storageClassName: synology-iscsi-storage
-  volumeName: redis-data
+      storage: 2Gi
+  volumeMode: Filesystem
+  volumeName: paperless-ngx-redis-data-longhorn
+  accessModes:
+    - ReadWriteOnce

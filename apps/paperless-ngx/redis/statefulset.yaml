@@ -144,4 +144,4 @@ spec:
           emptyDir: {}
         - name: redis-data
           persistentVolumeClaim:
-            claimName: redis-data
+            claimName: paperless-ngx-redis-data
