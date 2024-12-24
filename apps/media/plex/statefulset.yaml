@@ -20,7 +20,7 @@ spec:
       volumes:
         - name: plex-server-config
           persistentVolumeClaim:
-            claimName: plex-server-config
+            claimName: media-plex-server-config
         - name: plex-server-transcode
           emptyDir: {}
         - name: movies
@@ -74,13 +74,3 @@ spec:
               mountPath: /mnt/HomeMovies
             - name: music
               mountPath: /mnt/Music
-  # volumeClaimTemplates:
-  #   - metadata:
-  #       name: plex-server-config
-  #       namespace: media
-  #     spec:
-  #       accessModes:
-  #         - ReadWriteOnce
-  #       resources:
-  #         requests:
-  #           storage: 20Gi
