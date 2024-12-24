@@ -31,4 +31,4 @@ spec:
       volumes:
         - name: kuma-volume
           persistentVolumeClaim:
-            claimName: uptime-kuma-pvc
+            claimName: uptimekuma-config
