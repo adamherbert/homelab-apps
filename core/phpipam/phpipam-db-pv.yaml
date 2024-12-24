@@ -1,17 +1,37 @@
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: phpipam-db-pv
+#   annotations:
+#     pv.kubernetes.io/provisioned-by: csi.san.synology.com
+# spec:
+#   capacity:
+#     storage: 30Gi
+#   volumeMode: Filesystem
+#   accessModes:
+#     - ReadWriteOnce
+#   persistentVolumeReclaimPolicy: Retain
+#   storageClassName: synology-iscsi-storage
+#   csi:
+#     driver: csi.san.synology.com
+#     volumeHandle: 8362dc6d-804c-454e-98cb-a52fa5c09218
+---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: phpipam-db-pv
-  annotations:
-    pv.kubernetes.io/provisioned-by: csi.san.synology.com
+  name: phpipam-postgres-data
 spec:
   capacity:
-    storage: 30Gi
+    storage: 20Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: synology-iscsi-storage
+  storageClassName: longhorn-static
   csi:
-    driver: csi.san.synology.com
-    volumeHandle: 8362dc6d-804c-454e-98cb-a52fa5c09218
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "3"
+      staleReplicaTimeout: "20"
+    volumeHandle: phpipam-postgres-data

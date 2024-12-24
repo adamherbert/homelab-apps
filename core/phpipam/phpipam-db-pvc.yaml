@@ -1,19 +1,36 @@
+# ---
+# # Source: phpipam/templates/pvc.yaml
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: phpipam-db-pvc
+#   labels:
+#     app: phpipam
+#     component: mysql
+#     part-of: phpipam
+#     volume: phpipam-mysql
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 30Gi
+#   storageClassName: synology-iscsi-storage
+#   volumeName: phpipam-db-pv
 ---
-# Source: phpipam/templates/pvc.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: phpipam-db-pvc
+  name: phpipam-postgres-data
+  namespace: phpipam
   labels:
-    app: phpipam
-    component: mysql
+    app: postgresql
     part-of: phpipam
-    volume: phpipam-mysql
 spec:
+  storageClassName: longhorn-static
+  volumeName: phpipam-postgres-data
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 30Gi
-  storageClassName: synology-iscsi-storage
-  volumeName: phpipam-db-pv
+      storage: 20Gi

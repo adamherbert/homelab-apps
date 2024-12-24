@@ -56,4 +56,4 @@ spec:
       volumes:
         - name: phpipam-db
           persistentVolumeClaim:
-            claimName: phpipam-db-pvc
+            claimName: phpipam-postgres-data
