@@ -10,7 +10,7 @@ if [ ! -f "$CONFIG_FILE" ]; then
   # Create the config file with the required content
   cat <<EOF > "$CONFIG_FILE"
 <Config>
-  <UrlBase></UrlBase>
+  <UrlBase>$URL_BASE</UrlBase>
   <AuthenticationRequired>Enabled</AuthenticationRequired>
   <AuthenticationMethod>External</AuthenticationMethod>
 </Config>

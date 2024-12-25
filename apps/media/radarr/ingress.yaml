@@ -41,7 +41,7 @@ spec:
               service:
                 name: radarr
                 port:
-                  name: radarr
+                  name: http
   tls:
     - hosts:
         - radarr.home.8none1.com

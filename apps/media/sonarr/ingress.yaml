@@ -38,7 +38,7 @@ spec:
               service:
                 name: sonarr
                 port:
-                  name: sonarr
+                  name: http
   tls:
     - hosts:
         - sonarr.home.8none1.com

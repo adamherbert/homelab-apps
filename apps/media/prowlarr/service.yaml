@@ -11,7 +11,7 @@ spec:
     app: prowlarr
   type: ClusterIP
   ports:
-    - name: prowlarr
+    - name: http
       protocol: TCP
       port: 9696
       targetPort: 9696

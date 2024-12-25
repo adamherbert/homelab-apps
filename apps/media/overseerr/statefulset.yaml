@@ -21,6 +21,9 @@ spec:
       initContainers:
         - name: init-config
           image: busybox:latest
+          env:
+            - name: URL_BASE
+              value: "/overseerr"
           command:
             - sh
             - /scripts/arr-init-config.sh
