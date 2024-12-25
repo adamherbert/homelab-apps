@@ -22,7 +22,7 @@ spec:
       serviceAccountName: gotenberg
       containers:
         - name: gotenberg
-          image: "docker.io/gotenberg/gotenberg:8.15.1"
+          image: "docker.io/gotenberg/gotenberg:8.15.2"
           imagePullPolicy: IfNotPresent
           args:
             - gotenberg
