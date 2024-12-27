@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: ombi
+    part-of: media
+  name: ombi
+spec:
+  serviceName: ombi
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ombi
+      part-of: media
+  template:
+    metadata:
+      labels:
+        app: ombi
+        part-of: media
+    spec:
+      containers:
+        - image: linuxserver/ombi:4.44.1
+          name: ombi
+          env:
+            - name: BASE_URL
+              value: /ombi
+          envFrom:
+            - configMapRef:
+                name: arr-env
+          volumeMounts:
+            - mountPath: /config
+              name: ombi-config
+          ports:
+            - name: ombi
+              containerPort: 3579
+              protocol: TCP
+      volumes:
+        - name: ombi-config
+          persistentVolumeClaim:
+            claimName: media-ombi-config
+      restartPolicy: Always

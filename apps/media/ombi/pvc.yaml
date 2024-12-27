@@ -1,0 +1,35 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: media-ombi-config-longhorn
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: longhorn-static
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "3"
+      staleReplicaTimeout: "20"
+    volumeHandle: media-ombi-config
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: media-ombi-config
+  namespace: media
+spec:
+  storageClassName: longhorn-static
+  resources:
+    requests:
+      storage: 5Gi
+  volumeMode: Filesystem
+  volumeName: media-ombi-config-longhorn
+  accessModes:
+    - ReadWriteOnce
