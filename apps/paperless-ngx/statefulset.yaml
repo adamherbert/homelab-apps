@@ -31,6 +31,8 @@ spec:
           env:
             - name: PAPERLESS_CONSUMER_POLLING
               value: "1"
+            - name: PAPERLESS_DATE_ORDER
+              value: "MDY"
             - name: PAPERLESS_REDIS
               valueFrom:
                 secretKeyRef:
