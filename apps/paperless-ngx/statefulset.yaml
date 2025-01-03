@@ -30,7 +30,9 @@ spec:
                 name: paperless-ngx-general
           env:
             - name: PAPERLESS_CONSUMER_POLLING
-              value: "1"
+              value: "60"
+            - name: PAPERLESS_CONSUMER_POLLING_DELAY
+              value: "60"
             - name: PAPERLESS_DATE_ORDER
               value: "MDY"
             - name: PAPERLESS_REDIS
