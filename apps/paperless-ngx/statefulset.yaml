@@ -35,6 +35,10 @@ spec:
               value: "60"
             - name: PAPERLESS_DATE_ORDER
               value: "MDY"
+            - name: PAPERLESS_DISABLE_REGULAR_LOGIN
+              value: "true"
+            - name: PAPERLESS_REDIRECT_LOGIN_TO_SSO
+              value: "true"
             - name: PAPERLESS_REDIS
               valueFrom:
                 secretKeyRef:
