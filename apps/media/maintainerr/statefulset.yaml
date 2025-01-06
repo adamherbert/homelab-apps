@@ -19,7 +19,7 @@ spec:
         part-of: media
     spec:
       containers:
-        - image: jorenn92/maintainerr:2.4.1
+        - image: jorenn92/maintainerr:2.7.0
           imagePullPolicy: IfNotPresent
           name: maintainerr
           envFrom:
