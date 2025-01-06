@@ -39,6 +39,8 @@ spec:
               value: "true"
             - name: PAPERLESS_REDIRECT_LOGIN_TO_SSO
               value: "true"
+            - name: PAPERLESS_CONSUMER_IGNORE_PATTERNS
+              value: '[".DS_Store", ".DS_STORE", "._*", ".stfolder/*", ".stversions/*", ".localized/*", "desktop.ini", "@eaDir/*", "Thumbs.db", "#recycle/*"]'
             - name: PAPERLESS_REDIS
               valueFrom:
                 secretKeyRef:
