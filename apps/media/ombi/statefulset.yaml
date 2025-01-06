@@ -19,7 +19,7 @@ spec:
         part-of: media
     spec:
       containers:
-        - image: linuxserver/ombi:4.44.1
+        - image: linuxserver/ombi:4.47.1
           name: ombi
           env:
             - name: BASE_URL
