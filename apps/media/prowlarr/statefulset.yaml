@@ -54,15 +54,5 @@ spec:
             name: arr-init-config
         - name: prowlarr-config
           persistentVolumeClaim:
-            claimName: prowlarr-config
+            claimName: media-prowlarr-config
       restartPolicy: Always
-  volumeClaimTemplates:
-    - metadata:
-        name: prowlarr-config
-        namespace: media
-      spec:
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 2Gi

@@ -18,9 +18,10 @@ resources:
   - sonarr/service.yaml
   - sonarr/ingress.yaml
   # Prowlarr
-  # - prowlarr/service.yaml
-  # - prowlarr/statefulset.yaml
-  # - prowlarr/ingress.yaml
+  - prowlarr/pvc.yaml
+  - prowlarr/service.yaml
+  - prowlarr/statefulset.yaml
+  - prowlarr/ingress.yaml
   # Overseerr
   # - overseerr/service.yaml
   # - overseerr/statefulset.yaml
