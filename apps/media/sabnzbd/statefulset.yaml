@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: sabnzbd
-          image: "lscr.io/linuxserver/sabnzbd:4.3.3-ls192"
+          image: "lscr.io/linuxserver/sabnzbd:4.4.1"
           imagePullPolicy: IfNotPresent
           envFrom:
             - configMapRef:
