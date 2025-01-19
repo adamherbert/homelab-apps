@@ -23,10 +23,10 @@ resources:
   - prowlarr/statefulset.yaml
   - prowlarr/ingress.yaml
   # Overseerr
-  # - overseerr/service.yaml
-  # - overseerr/statefulset.yaml
-  # - overseerr/ingress.yaml
-  # - overseerr/pvc.yaml
+  - overseerr/service.yaml
+  - overseerr/statefulset.yaml
+  - overseerr/ingress.yaml
+  - overseerr/pvc.yaml
   # Ombi
   - ombi/service.yaml
   - ombi/statefulset.yaml
