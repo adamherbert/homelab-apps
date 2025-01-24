@@ -16,7 +16,10 @@ spec:
     spec:
       containers:
         - args:
-            - -server=nfd-control-plane:8080
+            - "-feature-gates=NodeFeatureGroupAPI=false"
+            #- "-server=nfd-control-plane:8080"
+            - "-metrics=8081"
+            - "-grpc-health=8082"
           command:
             - nfd-worker
           env:
