@@ -5,7 +5,7 @@ metadata:
   labels:
     app.kubernetes.io/name: longhorn
     app.kubernetes.io/instance: longhorn
-    app.kubernetes.io/version: v1.7.2
+    app.kubernetes.io/version: v1.8.0
     app: longhorn-ui
   name: longhorn-frontend
   namespace: longhorn-system
@@ -14,7 +14,7 @@ spec:
   selector:
     app: longhorn-ui
   ports:
-  - name: http
-    port: 80
-    targetPort: http
-    nodePort: null
+    - name: http
+      port: 80
+      targetPort: http
+      nodePort: null
