@@ -30,7 +30,7 @@ spec:
             - name: prowlarr-config
               mountPath: /config
       containers:
-        - image: linuxserver/prowlarr:1.29.2.4915-ls99
+        - image: linuxserver/prowlarr:1.30.2
           name: prowlarr
           envFrom:
             - configMapRef:
