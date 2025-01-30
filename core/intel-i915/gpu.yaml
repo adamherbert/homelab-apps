@@ -6,7 +6,7 @@ metadata:
   name: gpudeviceplugin
   annotations: null
 spec:
-  image: "intel/intel-gpu-plugin:0.31.1"
+  image: "intel/intel-gpu-plugin:0.32.0"
   logLevel: 2
   sharedDevNum: 2
   resourceManager: false
