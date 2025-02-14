@@ -4,24 +4,11 @@ kind: Kustomization
 namespace: external-secrets
 
 resources:
+  - crds/
   - namespace.yaml
   - cert-controller-deployment.yaml
   - cert-controller-rbac.yaml
   - cert-controller-serviceaccount.yaml
-  - crds/acraccesstoken.yaml
-  - crds/clusterexternalsecret.yaml
-  - crds/clustersecretstore.yaml
-  - crds/ecrauthorizationtoken.yaml
-  - crds/externalsecret.yaml
-  - crds/fake.yaml
-  - crds/gcraccesstoken.yaml
-  - crds/githubaccesstoken.yaml
-  - crds/password.yaml
-  - crds/pushsecret.yaml
-  - crds/secretstore.yaml
-  - crds/uuid.yaml
-  - crds/vaultdynamicsecret.yaml
-  - crds/webhook.yaml
   - deployment.yaml
   - rbac.yaml
   - serviceaccount.yaml
