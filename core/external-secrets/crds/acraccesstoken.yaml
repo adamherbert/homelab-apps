@@ -213,6 +213,6 @@ spec:
         - v1
       clientConfig:
         service:
-          name: release-name-external-secrets-webhook
+          name: external-secrets-webhook
           namespace: "external-secrets"
           path: /convert
