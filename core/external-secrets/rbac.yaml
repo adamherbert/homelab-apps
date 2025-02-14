@@ -4,6 +4,12 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: external-secrets-controller
+  labels:
+    helm.sh/chart: external-secrets-0.14.2
+    app.kubernetes.io/name: external-secrets
+    app.kubernetes.io/instance: external-secrets
+    app.kubernetes.io/version: "v0.14.2"
+    app.kubernetes.io/managed-by: Helm
 rules:
   - apiGroups:
       - "external-secrets.io"
@@ -42,14 +48,32 @@ rules:
   - apiGroups:
       - "generators.external-secrets.io"
     resources:
+      - "generatorstates"
+    verbs:
+      - "get"
+      - "list"
+      - "watch"
+      - "create"
+      - "update"
+      - "patch"
+      - "delete"
+      - "deletecollection"
+  - apiGroups:
+      - "generators.external-secrets.io"
+    resources:
       - "acraccesstokens"
+      - "clustergenerators"
       - "ecrauthorizationtokens"
       - "fakes"
       - "gcraccesstokens"
       - "githubaccesstokens"
+      - "quayaccesstokens"
       - "passwords"
+      - "stssessiontokens"
+      - "uuids"
       - "vaultdynamicsecrets"
       - "webhooks"
+      - "grafanas"
     verbs:
       - "get"
       - "list"
@@ -111,6 +135,11 @@ kind: ClusterRole
 metadata:
   name: external-secrets-view
   labels:
+    helm.sh/chart: external-secrets-0.14.2
+    app.kubernetes.io/name: external-secrets
+    app.kubernetes.io/instance: external-secrets
+    app.kubernetes.io/version: "v0.14.2"
+    app.kubernetes.io/managed-by: Helm
     rbac.authorization.k8s.io/aggregate-to-view: "true"
     rbac.authorization.k8s.io/aggregate-to-edit: "true"
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
@@ -130,13 +159,17 @@ rules:
       - "generators.external-secrets.io"
     resources:
       - "acraccesstokens"
+      - "clustergenerators"
       - "ecrauthorizationtokens"
       - "fakes"
       - "gcraccesstokens"
       - "githubaccesstokens"
+      - "quayaccesstokens"
       - "passwords"
       - "vaultdynamicsecrets"
       - "webhooks"
+      - "grafanas"
+      - "generatorstates"
     verbs:
       - "get"
       - "watch"
@@ -148,6 +181,11 @@ kind: ClusterRole
 metadata:
   name: external-secrets-edit
   labels:
+    helm.sh/chart: external-secrets-0.14.2
+    app.kubernetes.io/name: external-secrets
+    app.kubernetes.io/instance: external-secrets
+    app.kubernetes.io/version: "v0.14.2"
+    app.kubernetes.io/managed-by: Helm
     rbac.authorization.k8s.io/aggregate-to-edit: "true"
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
 rules:
@@ -168,13 +206,17 @@ rules:
       - "generators.external-secrets.io"
     resources:
       - "acraccesstokens"
+      - "clustergenerators"
       - "ecrauthorizationtokens"
       - "fakes"
       - "gcraccesstokens"
       - "githubaccesstokens"
+      - "quayaccesstokens"
       - "passwords"
       - "vaultdynamicsecrets"
       - "webhooks"
+      - "grafanas"
+      - "generatorstates"
     verbs:
       - "create"
       - "delete"
@@ -189,6 +231,11 @@ metadata:
   name: external-secrets-servicebindings
   labels:
     servicebinding.io/controller: "true"
+    helm.sh/chart: external-secrets-0.14.2
+    app.kubernetes.io/name: external-secrets
+    app.kubernetes.io/instance: external-secrets
+    app.kubernetes.io/version: "v0.14.2"
+    app.kubernetes.io/managed-by: Helm
 rules:
   - apiGroups:
       - "external-secrets.io"
@@ -204,6 +251,12 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: external-secrets-controller
+  labels:
+    helm.sh/chart: external-secrets-0.14.2
+    app.kubernetes.io/name: external-secrets
+    app.kubernetes.io/instance: external-secrets
+    app.kubernetes.io/version: "v0.14.2"
+    app.kubernetes.io/managed-by: Helm
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -219,6 +272,12 @@ kind: Role
 metadata:
   name: external-secrets-leaderelection
   namespace: external-secrets
+  labels:
+    helm.sh/chart: external-secrets-0.14.2
+    app.kubernetes.io/name: external-secrets
+    app.kubernetes.io/instance: external-secrets
+    app.kubernetes.io/version: "v0.14.2"
+    app.kubernetes.io/managed-by: Helm
 rules:
   - apiGroups:
       - ""
@@ -252,6 +311,12 @@ kind: RoleBinding
 metadata:
   name: external-secrets-leaderelection
   namespace: external-secrets
+  labels:
+    helm.sh/chart: external-secrets-0.14.2
+    app.kubernetes.io/name: external-secrets
+    app.kubernetes.io/instance: external-secrets
+    app.kubernetes.io/version: "v0.14.2"
+    app.kubernetes.io/managed-by: Helm
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
