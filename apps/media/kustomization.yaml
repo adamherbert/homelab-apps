@@ -28,10 +28,10 @@ resources:
   - overseerr/ingress.yaml
   - overseerr/pvc.yaml
   # Ombi
-  - ombi/service.yaml
-  - ombi/statefulset.yaml
-  - ombi/ingress.yaml
-  - ombi/pvc.yaml
+  # - ombi/service.yaml
+  # - ombi/statefulset.yaml
+  # - ombi/ingress.yaml
+  # - ombi/pvc.yaml
   # Maintainerr
   - maintainerr/service.yaml
   - maintainerr/statefulset.yaml
