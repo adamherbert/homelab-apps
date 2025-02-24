@@ -48,6 +48,11 @@ resources:
   - sabnzbd/ingress.yaml
   - sabnzbd/pvc.yaml
   - plex
+  # Kavita
+  - kavita/service.yaml
+  - kavita/statefulset.yaml
+  - kavita/ingress.yaml
+  - kavita/pvc.yaml
 
 configMapGenerator:
   - name: arr-init-config

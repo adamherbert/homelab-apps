@@ -86,6 +86,27 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  name: books
+  labels:
+    app: media
+    part-of: media
+    volume: books
+spec:
+  storageClassName: ""
+  accessModes:
+    - ReadWriteMany
+  selector:
+    matchLabels:
+      app: media
+      part-of: media
+      volume: books
+  resources:
+    requests:
+      storage: 10Ti
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
   name: downloads
   labels:
     app: media

@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: kavita
+    part-of: media
+  name: kavita
+spec:
+  serviceName: kavita
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kavita
+      part-of: media
+  template:
+    metadata:
+      labels:
+        app: kavita
+        part-of: media
+    spec:
+      containers:
+        - image: linuxserver/kavita:v0.8.4.2-ls64
+          name: kavita
+          envFrom:
+            - configMapRef:
+                name: arr-env
+          volumeMounts:
+            - mountPath: /config
+              name: kavita-config
+            - mountPath: /data
+              name: books
+          ports:
+            - name: kavita
+              containerPort: 5000
+              protocol: TCP
+      volumes:
+        - name: books
+          persistentVolumeClaim:
+            claimName: books
+        - name: kavita-config
+          persistentVolumeClaim:
+            claimName: media-kavita-config
+      restartPolicy: Always
