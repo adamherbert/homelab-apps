@@ -53,6 +53,11 @@ resources:
   - kavita/statefulset.yaml
   - kavita/ingress.yaml
   - kavita/pvc.yaml
+  # Calibre
+  - calibre/service.yaml
+  - calibre/statefulset.yaml
+  - calibre/ingress.yaml
+  - calibre/pvc.yaml
 
 configMapGenerator:
   - name: arr-init-config

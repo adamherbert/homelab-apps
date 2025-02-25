@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: calibre
+    part-of: media
+  name: calibre
+spec:
+  serviceName: calibre
+  replicas: 1
+  selector:
+    matchLabels:
+      app: calibre
+      part-of: media
+  template:
+    metadata:
+      labels:
+        app: calibre
+        part-of: media
+    spec:
+      containers:
+        - image: linuxserver/calibre:v0.8.4.2-ls64
+          name: calibre
+          env:
+            - name: DOCKER_MODS
+              value: linuxserver/mods:universal-calibre
+          envFrom:
+            - configMapRef:
+                name: arr-env
+          volumeMounts:
+            - mountPath: /config
+              name: calibre-config
+            - mountPath: /books
+              name: books
+          ports:
+            - name: calibre
+              containerPort: 8083
+              protocol: TCP
+      volumes:
+        - name: books
+          persistentVolumeClaim:
+            claimName: books
+        - name: calibre-config
+          persistentVolumeClaim:
+            claimName: media-calibre-config
+      restartPolicy: Always
