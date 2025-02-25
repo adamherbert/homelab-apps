@@ -19,7 +19,7 @@ spec:
         part-of: media
     spec:
       containers:
-        - image: linuxserver/calibre:0.6.24-ls316
+        - image: linuxserver/calibre:v7.24.0-ls316
           name: calibre
           env:
             - name: DOCKER_MODS
