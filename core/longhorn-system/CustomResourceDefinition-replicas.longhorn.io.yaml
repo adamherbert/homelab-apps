@@ -1,3 +1,4 @@
+---
 # Source: longhorn/templates/crds.yaml
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
@@ -151,7 +152,7 @@ spec:
                 diskPath:
                   type: string
                 engineImage:
-                  description: "Deprecated: Replaced by field `image`."
+                  description: 'Deprecated: Replaced by field `image`.'
                   type: string
                 engineName:
                   type: string
@@ -198,6 +199,11 @@ spec:
                   type: string
                 logRequested:
                   type: boolean
+                migrationEngineName:
+                  description: |-
+                    MigrationEngineName is indicating the migrating engine which current connected to this replica. This is only
+                    used for live migration of v2 data engine
+                  type: string
                 nodeID:
                   type: string
                 rebuildRetryCount:
@@ -220,9 +226,7 @@ spec:
                   type: string
               type: object
             status:
-              description:
-                ReplicaStatus defines the observed state of the Longhorn
-                replica
+              description: ReplicaStatus defines the observed state of the Longhorn replica
               properties:
                 conditions:
                   items:
@@ -231,19 +235,13 @@ spec:
                         description: Last time we probed the condition.
                         type: string
                       lastTransitionTime:
-                        description:
-                          Last time the condition transitioned from one status
-                          to another.
+                        description: Last time the condition transitioned from one status to another.
                         type: string
                       message:
-                        description:
-                          Human-readable message indicating details about
-                          last transition.
+                        description: Human-readable message indicating details about last transition.
                         type: string
                       reason:
-                        description:
-                          Unique, one-word, CamelCase reason for the condition's
-                          last transition.
+                        description: Unique, one-word, CamelCase reason for the condition's last transition.
                         type: string
                       status:
                         description: |-
@@ -261,7 +259,7 @@ spec:
                 currentState:
                   type: string
                 evictionRequested:
-                  description: "Deprecated: Replaced by field `spec.evictionRequested`."
+                  description: 'Deprecated: Replaced by field `spec.evictionRequested`.'
                   type: boolean
                 instanceManagerName:
                   type: string

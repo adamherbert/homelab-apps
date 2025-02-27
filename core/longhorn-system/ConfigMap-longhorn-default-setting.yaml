@@ -1,3 +1,4 @@
+---
 # Source: longhorn/templates/default-setting.yaml
 apiVersion: v1
 kind: ConfigMap

@@ -1,3 +1,4 @@
+---
 # Source: longhorn/templates/crds.yaml
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
@@ -115,15 +116,24 @@ spec:
             metadata:
               type: object
             spec:
-              description:
-                BackingImageSpec defines the desired state of the Longhorn
-                backing image
+              description: BackingImageSpec defines the desired state of the Longhorn backing image
               properties:
                 checksum:
+                  type: string
+                dataEngine:
+                  default: v1
+                  enum:
+                    - v1
+                    - v2
                   type: string
                 diskFileSpecMap:
                   additionalProperties:
                     properties:
+                      dataEngine:
+                        enum:
+                          - v1
+                          - v2
+                        type: string
                       evictionRequested:
                         type: boolean
                     type: object
@@ -135,9 +145,7 @@ spec:
                 disks:
                   additionalProperties:
                     type: string
-                  description:
-                    Deprecated. We are now using DiskFileSpecMap to assign
-                    different spec to the file on different disks.
+                  description: Deprecated. We are now using DiskFileSpecMap to assign different spec to the file on different disks.
                   type: object
                 minNumberOfCopies:
                   type: integer
@@ -163,15 +171,18 @@ spec:
                   type: string
               type: object
             status:
-              description:
-                BackingImageStatus defines the observed state of the Longhorn
-                backing image status
+              description: BackingImageStatus defines the observed state of the Longhorn backing image status
               properties:
                 checksum:
                   type: string
                 diskFileStatusMap:
                   additionalProperties:
                     properties:
+                      dataEngine:
+                        enum:
+                          - v1
+                          - v2
+                        type: string
                       lastStateTransitionTime:
                         type: string
                       message:
@@ -190,15 +201,22 @@ spec:
                   type: object
                 ownerID:
                   type: string
+                realSize:
+                  description: Real size of image in bytes, which may be smaller than the size when the file is a sparse file. Will be zero until known (e.g. while a backing image is uploading)
+                  format: int64
+                  type: integer
                 size:
                   format: int64
                   type: integer
                 uuid:
                   type: string
+                v2FirstCopyDisk:
+                  type: string
+                v2FirstCopyStatus:
+                  description: It is pending -> in-progress -> ready/failed
+                  type: string
                 virtualSize:
-                  description:
-                    Virtual size of image, which may be larger than physical
-                    size. Will be zero until known (e.g. while a backing image is uploading)
+                  description: Virtual size of image in bytes, which may be larger than physical size. Will be zero until known (e.g. while a backing image is uploading)
                   format: int64
                   type: integer
               type: object

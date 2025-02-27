@@ -1,3 +1,4 @@
+---
 # Source: longhorn/templates/crds.yaml
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
@@ -48,9 +49,7 @@ spec:
       name: v1beta1
       schema:
         openAPIV3Schema:
-          description:
-            BackingImageManager is where Longhorn stores backing image manager
-            object.
+          description: BackingImageManager is where Longhorn stores backing image manager object.
           properties:
             apiVersion:
               description: |-
@@ -105,9 +104,7 @@ spec:
       name: v1beta2
       schema:
         openAPIV3Schema:
-          description:
-            BackingImageManager is where Longhorn stores backing image manager
-            object.
+          description: BackingImageManager is where Longhorn stores backing image manager object.
           properties:
             apiVersion:
               description: |-
@@ -127,9 +124,7 @@ spec:
             metadata:
               type: object
             spec:
-              description:
-                BackingImageManagerSpec defines the desired state of the
-                Longhorn backing image manager
+              description: BackingImageManagerSpec defines the desired state of the Longhorn backing image manager
               properties:
                 backingImages:
                   additionalProperties:
@@ -145,9 +140,7 @@ spec:
                   type: string
               type: object
             status:
-              description:
-                BackingImageManagerStatus defines the observed state of the
-                Longhorn backing image manager
+              description: BackingImageManagerStatus defines the observed state of the Longhorn backing image manager
               properties:
                 apiMinVersion:
                   type: integer
@@ -163,6 +156,9 @@ spec:
                       name:
                         type: string
                       progress:
+                        type: integer
+                      realSize:
+                        format: int64
                         type: integer
                       senderManagerAddress:
                         type: string

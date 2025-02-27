@@ -1,11 +1,13 @@
 ---
-# Source: longhorn/templates/serviceaccount.yaml
+# Source: longhorn/templates/default-resource.yaml
 apiVersion: v1
-kind: ServiceAccount
+kind: ConfigMap
 metadata:
-  name: longhorn-service-account
+  name: longhorn-default-resource
   namespace: longhorn-system
   labels:
     app.kubernetes.io/name: longhorn
     app.kubernetes.io/instance: longhorn
     app.kubernetes.io/version: v1.8.0
+data:
+  default-resource.yaml: ""

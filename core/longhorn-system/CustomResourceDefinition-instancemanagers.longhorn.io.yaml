@@ -1,3 +1,4 @@
+---
 # Source: longhorn/templates/crds.yaml
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
@@ -112,12 +113,18 @@ spec:
             metadata:
               type: object
             spec:
-              description:
-                InstanceManagerSpec defines the desired state of the Longhorn
-                instance manager
+              description: InstanceManagerSpec defines the desired state of the Longhorn instance manager
               properties:
                 dataEngine:
                   type: string
+                dataEngineSpec:
+                  properties:
+                    v2:
+                      properties:
+                        cpuMask:
+                          type: string
+                      type: object
+                  type: object
                 image:
                   type: string
                 nodeID:
@@ -130,16 +137,45 @@ spec:
                   type: string
               type: object
             status:
-              description:
-                InstanceManagerStatus defines the observed state of the Longhorn
-                instance manager
+              description: InstanceManagerStatus defines the observed state of the Longhorn instance manager
               properties:
                 apiMinVersion:
                   type: integer
                 apiVersion:
                   type: integer
+                backingImages:
+                  additionalProperties:
+                    properties:
+                      currentChecksum:
+                        type: string
+                      diskUUID:
+                        type: string
+                      message:
+                        type: string
+                      name:
+                        type: string
+                      progress:
+                        type: integer
+                      size:
+                        format: int64
+                        type: integer
+                      state:
+                        type: string
+                      uuid:
+                        type: string
+                    type: object
+                  nullable: true
+                  type: object
                 currentState:
                   type: string
+                dataEngineStatus:
+                  properties:
+                    v2:
+                      properties:
+                        cpuMask:
+                          type: string
+                      type: object
+                  type: object
                 instanceEngines:
                   additionalProperties:
                     properties:
@@ -285,7 +321,7 @@ spec:
                             type: string
                         type: object
                     type: object
-                  description: "Deprecated: Replaced by InstanceEngines and InstanceReplicas"
+                  description: 'Deprecated: Replaced by InstanceEngines and InstanceReplicas'
                   nullable: true
                   type: object
                 ip:

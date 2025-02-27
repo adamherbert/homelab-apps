@@ -1,3 +1,4 @@
+---
 # Source: longhorn/templates/deployment-ui.yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -37,7 +38,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: longhorn-ui
-          image: longhornio/longhorn-ui:v1.8.0
+          image: longhornio/longhorn-ui:v1.8.x-head
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: nginx-cache
@@ -62,3 +63,5 @@ spec:
         - emptyDir: {}
           name: var-run
       priorityClassName: "longhorn-critical"
+# Source: longhorn/templates/validate-psp-install.yaml
+#

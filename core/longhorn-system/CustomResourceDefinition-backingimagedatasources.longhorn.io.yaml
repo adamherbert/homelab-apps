@@ -1,3 +1,4 @@
+---
 # Source: longhorn/templates/crds.yaml
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
@@ -22,9 +23,7 @@ spec:
   scope: Namespaced
   versions:
     - additionalPrinterColumns:
-        - description:
-            The current state of the pod used to provision the backing image
-            file from source
+        - description: The current state of the pod used to provision the backing image file from source
           jsonPath: .status.currentState
           name: State
           type: string
@@ -46,9 +45,7 @@ spec:
       name: v1beta1
       schema:
         openAPIV3Schema:
-          description:
-            BackingImageDataSource is where Longhorn stores backing image
-            data source object.
+          description: BackingImageDataSource is where Longhorn stores backing image data source object.
           properties:
             apiVersion:
               description: |-
@@ -81,9 +78,7 @@ spec:
           jsonPath: .spec.uuid
           name: UUID
           type: string
-        - description:
-            The current state of the pod used to provision the backing image
-            file from source
+        - description: The current state of the pod used to provision the backing image file from source
           jsonPath: .status.currentState
           name: State
           type: string
@@ -109,9 +104,7 @@ spec:
       name: v1beta2
       schema:
         openAPIV3Schema:
-          description:
-            BackingImageDataSource is where Longhorn stores backing image
-            data source object.
+          description: BackingImageDataSource is where Longhorn stores backing image data source object.
           properties:
             apiVersion:
               description: |-
@@ -131,9 +124,7 @@ spec:
             metadata:
               type: object
             spec:
-              description:
-                BackingImageDataSourceSpec defines the desired state of the
-                Longhorn backing image data source
+              description: BackingImageDataSourceSpec defines the desired state of the Longhorn backing image data source
               properties:
                 checksum:
                   type: string
@@ -161,9 +152,7 @@ spec:
                   type: string
               type: object
             status:
-              description:
-                BackingImageDataSourceStatus defines the observed state of
-                the Longhorn backing image data source
+              description: BackingImageDataSourceStatus defines the observed state of the Longhorn backing image data source
               properties:
                 checksum:
                   type: string
