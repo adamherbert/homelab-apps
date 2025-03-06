@@ -20,15 +20,18 @@ metadata:
     # nginx.ingress.kubernetes.io/auth-snippet: |
     #   proxy_set_header X-Forwarded-Host $http_host;
     # traefik.ingress.kubernetes.io/router.middlewares: authentik-ak-outpost-authentik-embedded-outpost@kubernetescrd
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header X-SCRIPT-NAME /;
+      proxy_set_header X-Scheme $scheme;
+      proxy_buffer_size 128k;
+      proxy_buffers 4 256k;
+      proxy_busy_buffers_size 256k;
+    nginx.ingress.kubernetes.io/proxy-body-size: "20m"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/description: Calibre
     gethomepage.dev/group: Media
     gethomepage.dev/icon: calibre.png
     gethomepage.dev/name: Calibre
-    gethomepage.dev/widget.key: "{{HOMEPAGE_VAR_CALIBRE_API_KEY}}"
-    gethomepage.dev/widget.type: "calibre"
-    gethomepage.dev/widget.url: "https://calibre.home.8none1.com/"
-    gethomepage.dev/pod-selector: ""
 spec:
   ingressClassName: nginx
   rules:
