@@ -18,8 +18,8 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: nginx-ingress-controller
-  minReplicas: 3
-  maxReplicas: 6
+  minReplicas: 1
+  maxReplicas: 3
   metrics:
     - type: Resource
       resource:
