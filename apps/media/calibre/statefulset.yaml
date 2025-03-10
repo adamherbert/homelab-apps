@@ -24,6 +24,8 @@ spec:
           env:
             - name: DOCKER_MODS
               value: linuxserver/mods:universal-calibre
+            - name: ENABLE_API
+              value: "true"
           envFrom:
             - configMapRef:
                 name: arr-env
