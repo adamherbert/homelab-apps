@@ -33,7 +33,7 @@ spec:
             runAsUser: 1000
             seccompProfile:
               type: RuntimeDefault
-          image: oci.external-secrets.io/external-secrets/external-secrets:v0.14.3
+          image: oci.external-secrets.io/external-secrets/external-secrets:v0.14.4
           imagePullPolicy: IfNotPresent
           args:
             - webhook
