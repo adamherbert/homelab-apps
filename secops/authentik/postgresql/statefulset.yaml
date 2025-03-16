@@ -67,6 +67,8 @@ spec:
               value: "/bitnami/postgresql"
             - name: PGDATA
               value: "/bitnami/postgresql/data"
+            - name: POSTGRESQL_PERFORM_RESTORE
+              value: "true"
             # Authentication
             - name: POSTGRES_USER
               valueFrom:
