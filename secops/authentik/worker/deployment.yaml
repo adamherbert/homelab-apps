@@ -28,7 +28,7 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
         - name: worker
-          image: ghcr.io/goauthentik/server:2025.2.3
+          image: ghcr.io/goauthentik/server:2025.2.4
           volumeMounts:
             - name: cm-internal-intermediate-ca
               mountPath: /usr/local/share/ca-certificates/cm-internal-intermediate-fullchain.crt
