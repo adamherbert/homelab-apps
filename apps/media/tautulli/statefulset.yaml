@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: tautulli
-          image: "lscr.io/linuxserver/tautulli:2.15.1"
+          image: "lscr.io/linuxserver/tautulli:2.15.2"
           imagePullPolicy: IfNotPresent
           envFrom:
             - configMapRef:
