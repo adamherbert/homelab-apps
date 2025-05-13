@@ -38,7 +38,7 @@ spec:
       terminationGracePeriodSeconds: 120
       containers:
         - name: plex-server
-          image: index.docker.io/plexinc/pms-docker:1.41.4.9463-630c9f557
+          image: index.docker.io/plexinc/pms-docker:1.41.6.9685-d301f511a
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 32400
