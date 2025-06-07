@@ -47,7 +47,7 @@ spec:
             limits:
               cpu: 250m # 0.25 CPU
               memory: 256Mi # 256 MB RAM
-          image: registry.k8s.io/external-dns/external-dns:v0.16.1
+          image: registry.k8s.io/external-dns/external-dns:v0.17.0
           imagePullPolicy: IfNotPresent
           args:
             - --log-level=debug
