@@ -14,5 +14,13 @@
       "(^|/)kustomization\\.ya?ml$"
     ],
     "pinDigests": false
-  }
+  },
+  "packageRules": [
+    {
+      "matchPackageNames": [
+        "lscr.io/linuxserver/tautulli"
+      ],
+      "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-ls(?<compatibility>\\d+)$"
+    }
+  ]
 }
