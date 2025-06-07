@@ -4,14 +4,14 @@
     "config:recommended"
   ],
   "kubernetes": {
-    "fileMatch": [
-      "\\.yml$",
-      "\\.yaml$"
+    "managerFilePatterns": [
+      "/\\.yml$/",
+      "/\\.yaml$/"
     ]
   },
   "kustomize": {
-    "fileMatch": [
-      "(^|/)kustomization\\.ya?ml$"
+    "managerFilePatterns": [
+      "/(^|/)kustomization\\.ya?ml$/"
     ],
     "pinDigests": false
   },
