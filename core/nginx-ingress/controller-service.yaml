@@ -4,7 +4,7 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    metallb.universe.tf/loadbalcerIPs: 172.16.1.152
+    metallb.io/loadBalancerIPs: 172.16.1.152
   labels:
     helm.sh/chart: nginx-ingress-4.11.3
     app.kubernetes.io/name: nginx-ingress
