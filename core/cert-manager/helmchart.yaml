@@ -1,0 +1,10 @@
+apiVersion: builtin
+kind: HelmChartGenerator
+metadata:
+  name: cert-manager
+name: cert-manager
+namespace: cert-manager
+releaseName: cert-manager
+repo: https://charts.jetstack.io
+valuesFile: values.yaml
+version: v1.17.2

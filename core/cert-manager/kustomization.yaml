@@ -2,26 +2,14 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: cert-manager
 resources:
-  - namespace.yaml
-  - cainjector-deployment.yaml
-  - cainjector-rbac.yaml
-  - cainjector-service.yaml
-  - cainjector-serviceaccount.yaml
-  - crds.yaml
-  - deployment.yaml
-  - rbac.yaml
-  - service.yaml
-  - serviceaccount.yaml
-  - startupapicheck-rbac.yaml
-  - startupapicheck-job.yaml
-  - startupapicheck-serviceaccount.yaml
-  - webhook-deployment.yaml
-  - webhook-mutating-webhook.yaml
-  - webhook-rbac.yaml
-  - webhook-service.yaml
-  - webhook-serviceaccount.yaml
-  - webhook-validating-webhook.yaml
   - internal-cluster-issuer/external-secret.yaml
   - internal-cluster-issuer/internal-cluster-issuer.yaml
   - external-cluster-issuer/external-secret.yaml
   - external-cluster-issuer/external-cluster-issuer.yaml
+helmCharts:
+  - name: cert-manager
+    namespace: cert-manager
+    releaseName: cert-manager
+    repo: https://charts.jetstack.io
+    valuesFile: values.yaml
+    version: v1.17.2
