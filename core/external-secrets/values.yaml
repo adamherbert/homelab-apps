@@ -1,0 +1,77 @@
+# -- If set, install and upgrade CRDs through helm chart.
+installCRDs: true
+
+crds:
+  # -- If true, create CRDs for Cluster External Secret.
+  createClusterExternalSecret: true
+  # -- If true, create CRDs for Cluster Secret Store.
+  createClusterSecretStore: true
+  # -- If true, create CRDs for Cluster Generator.
+  createClusterGenerator: true
+  # -- If true, create CRDs for Push Secret.
+  createPushSecret: true
+  annotations: {}
+  conversion:
+    # -- If webhook is set to false this also needs to be set to false otherwise the kubeapi will be hammered because the conversion is looking for a webhook endpoint.
+    enabled: true
+
+# -- If set external secrets are only reconciled in the
+# provided namespace
+scopedNamespace: ""
+
+# -- if true, the operator will process cluster external secret. Else, it will ignore them.
+processClusterExternalSecret: true
+
+# -- if true, the operator will process cluster store. Else, it will ignore them.
+processClusterStore: true
+
+# -- if true, the operator will process push secret. Else, it will ignore them.
+processPushSecret: true
+
+# -- Specifies whether an external secret operator deployment be created.
+createOperator: true
+
+serviceAccount:
+  # -- Specifies whether a service account should be created.
+  create: true
+  # -- Automounts the service account token in all containers of the pod
+  automount: true
+  # -- The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template.
+  name: "external-secrets"
+
+rbac:
+  # -- Specifies whether role and rolebinding resources should be created.
+  create: true
+
+  servicebindings:
+    # -- Specifies whether a clusterrole to give servicebindings read access should be created.
+    create: true
+
+  certManager:
+    # -- Enabling cert-manager support will disable the built in secret and
+    # switch to using cert-manager (installed separately) to automatically issue
+    # and renew the webhook certificate. This chart does not install
+    # cert-manager for you, See https://cert-manager.io/docs/
+    enabled: false
+
+certController:
+  # -- Specifies whether a certificate controller deployment be created.
+  create: true
+  requeueInterval: "5m"
+  replicaCount: 1
+  # -- Specifices Log Params to the Webhook
+  log:
+    level: info
+    timeEncoding: epoch
+  # -- Specifies the amount of historic ReplicaSets k8s should keep (see https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#clean-up-policy)
+  revisionHistoryLimit: 10
+
+# -- Specifies `dnsPolicy` to deployment
+dnsPolicy: ClusterFirst
+
+# -- Specifies `dnsOptions` to deployment
+dnsConfig: {}
+
+# -- Any extra pod spec on the deployment
+podSpecExtra: {}

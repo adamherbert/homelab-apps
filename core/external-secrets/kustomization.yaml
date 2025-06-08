@@ -4,17 +4,12 @@ kind: Kustomization
 namespace: external-secrets
 
 resources:
-  - crds/
-  - namespace.yaml
-  - cert-controller-deployment.yaml
-  - cert-controller-rbac.yaml
-  - cert-controller-serviceaccount.yaml
-  - deployment.yaml
-  - rbac.yaml
-  - serviceaccount.yaml
-  - validatingwebhook.yaml
-  - webhook-deployment.yaml
-  - webhook-secret.yaml
-  - webhook-service.yaml
-  - webhook-serviceaccount.yaml
-  - onepassword-connect
+  - onepassword-connect/
+
+helmCharts:
+  - name: external-secrets
+    namespace: external-secrets
+    releaseName: external-secrets
+    repo: https://charts.external-secrets.io
+    valuesFile: values.yaml
+    version: v0.17.0
