@@ -15,3 +15,25 @@ spec:
       name: plex-server
   selector:
     app: plex-server
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    metallb.universe.tf/loadbalcerIPs: 172.16.1.152
+  labels:
+    app: plex-server
+  name: plex-external-service
+spec:
+  type: LoadBalancer
+  ipFamilyPolicy: SingleStack
+  externalTrafficPolicy: Local
+  ipFamilies:
+    - IPv4
+  ports:
+    - name: plex-external
+      port: 32400
+      protocol: TCP
+      targetPort: plex-server
+  selector:
+    app: plex-server
