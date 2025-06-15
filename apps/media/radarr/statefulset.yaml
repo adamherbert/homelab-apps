@@ -33,7 +33,7 @@ spec:
             - name: radarr-config
               mountPath: /config
       containers:
-        - image: linuxserver/radarr:5.25.0
+        - image: linuxserver/radarr:5.26.2
           name: radarr
           envFrom:
             - configMapRef:
