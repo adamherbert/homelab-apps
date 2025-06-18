@@ -1,0 +1,88 @@
+### traefik-values.yaml (Helm Chart v34+ compatible)
+
+# Use CRD-only deployment pattern
+# You'll need to install CRDs separately (via traefik-crds chart or kubectl apply)
+skipCRDs: false  # Set true if using separate traefik-crds Helm chart
+
+global:
+  # Overrides to pass CLI args
+  debug: false
+  checkNewVersion: true
+  sendAnonymousUsage: false
+
+deployment:
+  kind: DaemonSet
+
+image:
+  # Override registry or tag if needed
+  registry: docker.io
+  repository: traefik
+
+ingressClass:
+  enabled: true
+  isDefaultClass: true
+  name: traefik
+
+ports:
+  web:
+    port: 80
+    exposedPort: 80
+    expose: {}
+  websecure:
+    port: 443
+    exposedPort: 443
+    expose: {}
+  gateway-status:
+    port: 8000
+    expose: false  # Don't expose externally unless needed
+    protocol: TCP
+
+entryPoints:
+  web:
+    address: ":80"
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+          permanent: true
+    forwardedHeaders:
+      insecure: true
+
+  websecure:
+    address: ":443"
+    forwardedHeaders:
+      insecure: true
+
+providers:
+  kubernetesCRD:
+    enabled: true
+  kubernetesIngress:
+    enabled: true
+  kubernetesGateway:
+    enabled: true
+    statusAddress:
+      # Mirror LB IP into Gateway.Status.Addresses
+      service:
+        enabled: true
+
+ingressRoute:
+  dashboard:
+    enabled: false
+  healthcheck:
+    enabled: false
+
+metrics:
+  prometheus:
+    enabled: true
+    # Optionally expose metrics on entrypoint
+    entryPoint: web
+
+logs:
+  general:
+    level: "INFO"
+  access:
+    enabled: true
+
+persistence:
+  enabled: false
