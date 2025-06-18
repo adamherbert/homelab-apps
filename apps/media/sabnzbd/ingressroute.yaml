@@ -1,0 +1,22 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: sabnzbd
+  namespace: media
+  labels:
+    app: sabnzbd
+    part-of: media
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`sabnzbd.home.8none1.com`)
+      kind: Rule
+      services:
+        - name: sabnzbd
+          port: 8080
+      middlewares:
+        - name: authentik-forward-auth
+          namespace: media
+  tls:
+    secretName: sabnzbd-ingress-tls
