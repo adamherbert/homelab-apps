@@ -46,7 +46,7 @@ spec:
       terminationGracePeriodSeconds: 120
       containers:
         - name: tdarr-server
-          image: ghcr.io/haveagitgat/tdarr:2.43.01
+          image: ghcr.io/haveagitgat/tdarr:2.45.01
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8265
