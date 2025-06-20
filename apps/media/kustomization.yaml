@@ -43,10 +43,7 @@ resources:
   - tautulli/ingress.yaml
   - tautulli/pvc.yaml
   # SanNZBd
-  - sabnzbd/service.yaml
-  - sabnzbd/statefulset.yaml
-  - sabnzbd/ingress.yaml
-  - sabnzbd/pvc.yaml
+  - sabnzbd
   - plex
   # Kavita
   - kavita/service.yaml
@@ -58,6 +55,8 @@ resources:
   - calibre/statefulset.yaml
   - calibre/ingress.yaml
   - calibre/pvc.yaml
+  # Autnentik Middleware
+  - authentik-middleware.yaml
 
 configMapGenerator:
   - name: arr-init-config
