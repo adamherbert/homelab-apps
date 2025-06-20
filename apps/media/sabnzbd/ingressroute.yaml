@@ -3,6 +3,9 @@ kind: IngressRoute
 metadata:
   name: sabnzbd
   namespace: media
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: sabnzbd.home.8none1.com
+    external-dns.alpha.kubernetes.io/target: traefik.srv.8none1.com
   labels:
     app: sabnzbd
     part-of: media
