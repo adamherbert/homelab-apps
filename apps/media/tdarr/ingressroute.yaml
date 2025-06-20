@@ -1,0 +1,25 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: tdarr-server
+  namespace: media
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: tdarr.home.8none1.com
+    external-dns.alpha.kubernetes.io/target: traefik.srv.8none1.com
+  labels:
+    app: tdarr-server
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`tdarr.home.8none1.com`) && PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: tdarr-webui
+          port: tdarr-webui
+      middlewares:
+        - name: authentik-forward-auth
+          namespace: media
+  tls:
+    secretName: tdarr-server-ingress-tls

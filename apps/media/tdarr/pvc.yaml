@@ -1,0 +1,105 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: media-tdarr-server-config-longhorn
+spec:
+  capacity:
+    storage: 200Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: longhorn-static
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "3"
+      staleReplicaTimeout: "20"
+    volumeHandle: media-tdarr-server-config
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: media-tdarr-server-config
+  namespace: media
+spec:
+  storageClassName: longhorn-static
+  resources:
+    requests:
+      storage: 200Gi
+  volumeMode: Filesystem
+  volumeName: media-tdarr-server-config-longhorn
+  accessModes:
+    - ReadWriteOnce
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: media-tdarr-server-log-longhorn
+spec:
+  capacity:
+    storage: 200Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: longhorn-static
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "3"
+      staleReplicaTimeout: "20"
+    volumeHandle: media-tdarr-server-log
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: media-tdarr-server-log
+  namespace: media
+spec:
+  storageClassName: longhorn-static
+  resources:
+    requests:
+      storage: 200Gi
+  volumeMode: Filesystem
+  volumeName: media-tdarr-server-log-longhorn
+  accessModes:
+    - ReadWriteOnce
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: media-tdarr-server-server-longhorn
+spec:
+  capacity:
+    storage: 200Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: longhorn-static
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicas: "3"
+      staleReplicaTimeout: "20"
+    volumeHandle: media-tdarr-server-server
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: media-tdarr-server-server
+  namespace: media
+spec:
+  storageClassName: longhorn-static
+  resources:
+    requests:
+      storage: 200Gi
+  volumeMode: Filesystem
+  volumeName: media-tdarr-server-server-longhorn
+  accessModes:
+    - ReadWriteOnce

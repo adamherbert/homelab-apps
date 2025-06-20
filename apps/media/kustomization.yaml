@@ -44,6 +44,8 @@ resources:
   - tautulli/pvc.yaml
   # SanNZBd
   - sabnzbd
+  # Tdarr
+  - tdarr
   - plex
   # Kavita
   - kavita/service.yaml

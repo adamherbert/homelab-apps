@@ -1,0 +1,112 @@
+---
+# Source: plex-media-server/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: tdarr-server
+  labels:
+    app: tdarr-server
+automountServiceAccountToken: false
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: tdarr-server
+  labels:
+    app: tdarr-server
+spec:
+  serviceName: tdarr-server
+  selector:
+    matchLabels:
+      app: tdarr-server
+  template:
+    metadata:
+      labels:
+        app: tdarr-server
+    spec:
+      serviceAccountName: tdarr-server
+      volumes:
+        - name: tdarr-server-config
+          persistentVolumeClaim:
+            claimName: media-tdarr-server-config
+        - name: tdarr-server-log
+          persistentVolumeClaim:
+            claimName: media-tdarr-server-log
+        - name: tdarr-server-server
+          persistentVolumeClaim:
+            claimName: media-tdarr-server-server
+        - name: tdarr-server-transcode
+          emptyDir: {}
+        - name: movies
+          persistentVolumeClaim:
+            claimName: movies
+        - name: tv
+          persistentVolumeClaim:
+            claimName: tv
+      terminationGracePeriodSeconds: 120
+      containers:
+        - name: tdarr-server
+          image: ghcr.io/haveagitgat/tdarr:2.43.01
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8265
+              name: tdarr-webui
+            - containerPort: 8266
+              name: tdarr-server
+          resources:
+            requests:
+              cpu: 1000m
+              memory: 3Gi
+              gpu.intel.com/i915: "1"
+            limits:
+              cpu: 4000m
+              memory: 5Gi
+              gpu.intel.com/i915: "1"
+          env:
+            - name: PUID
+              value: "1030"
+            - name: PGID
+              value: "65536"
+            - name: UMASK_SET
+              value: "002"
+            - name: TZ
+              value: America/New_York
+            - name: serverIP
+              value: "0.0.0.0"
+            - name: webUIPort
+              value: "8265"
+            - name: serverPort
+              value: "8266"
+            - name: internalNode
+              value: "true"
+            - name: inContainer
+              value: "true"
+            - name: ffmpegVersion
+              value: "7"
+            - name: nodeName
+              value: "ServerNode"
+            - name: auth
+              value: "false"
+            - name: openBrowser
+              value: "false"
+            - name: maxLogSizeMB
+              value: "10"
+            - name: cronPluginUpdate
+              value: ""
+            - name: NVIDIA_DRIVER_CAPABILITIES
+              value: "all"
+            - name: NVIDIA_VISIBLE_DEVICES
+              value: "all"
+          volumeMounts:
+            - name: tdarr-server-config
+              mountPath: /app/configs
+            - name: tdarr-server-log
+              mountPath: /app/logs
+            - name: tdarr-server-server
+              mountPath: /app/server
+            - name: tdarr-server-transcode
+              mountPath: /temp
+            - name: movies
+              mountPath: /media/Movies
+            - name: tv
+              mountPath: /media/TV
