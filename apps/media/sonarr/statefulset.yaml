@@ -30,7 +30,7 @@ spec:
             - name: sonarr-config
               mountPath: /config
       containers:
-        - image: linuxserver/sonarr:4.0.14
+        - image: linuxserver/sonarr:4.0.15
           name: sonarr
           envFrom:
             - configMapRef:
