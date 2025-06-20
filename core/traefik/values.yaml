@@ -37,6 +37,10 @@ ports:
     expose: false  # Don't expose externally unless needed
     protocol: TCP
 
+service:
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: traefik.srv.8none1.com
+
 entryPoints:
   web:
     address: ":80"
