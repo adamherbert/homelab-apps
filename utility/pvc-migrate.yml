@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pvc-data-copy
+spec:
+  backoffLimit: 1 # Retry limit if the job fails
+  template:
+    spec:
+      containers:
+        - name: data-sync
+          image: alpine:latest # Lightweight image with `rsync` installed
+          command:
+            - /bin/sh
+            - -c
+            - |
+              echo "Installing rsync..."
+              apk add --no-cache rsync
+              echo "Starting data sync..."
+              rsync -a --progress /source/ /destination/
+              echo "Data sync complete."
+          volumeMounts:
+            - name: source-pvc
+              mountPath: /source # Mount path for the source PVC
+            - name: destination-pvc
+              mountPath: /destination # Mount path for the destination PVC
+      restartPolicy: Never
+      volumes:
+        - name: source-pvc
+          persistentVolumeClaim:
+            claimName: plex-server-config # Replace with the name of the source PVC
+        - name: destination-pvc
+          persistentVolumeClaim:
+            claimName: media-plex-server-config
