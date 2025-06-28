@@ -27,17 +27,37 @@ ports:
   web:
     port: 80
     exposedPort: 80
-    expose: {}
+    expose: 
+      default: true
   websecure:
     port: 443
     exposedPort: 443
-    expose: {}
+    expose:
+      default: true
   gateway-status:
     port: 8000
-    expose: false  # Don't expose externally unless needed
+    expose:
+      default: false  # Don't expose externally unless needed
     protocol: TCP
 
+# Disable hostPorts
+hostPort:
+  enabled: false
+
 service:
+  enabled: true
+  type: LoadBalancer
+  loadBalancerIP: "172.16.1.153"  # Optional: specify if you have a static IP
+  spec:
+    externalTrafficPolicy: Local
+    allocateLoadBalancerNodePorts: false
+  ports:
+    web:
+      port: 80
+      targetPort: 80
+    websecure:
+      port: 443
+      targetPort: 443
   annotations:
     external-dns.alpha.kubernetes.io/hostname: traefik.srv.8none1.com
 
