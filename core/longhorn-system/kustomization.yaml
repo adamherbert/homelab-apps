@@ -19,8 +19,6 @@ helmCharts:
 
 resources:
   - namespace.yaml
-  # - https://raw.githubusercontent.com/longhorn/longhorn/v1.9.0/deploy/longhorn.yaml
-  # - ingress.yaml
   - certificate.yaml
   - authentik-middleware.yaml
   - ingressroute.yaml
