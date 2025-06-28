@@ -1,45 +1,26 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+metadata:
+  name: longhorn-system
+  namespace: longhorn-system
+
+namespace: longhorn-system
+
+helmCharts:
+  - name: longhorn
+    version: 1.9.0
+    repo: https://charts.longhorn.io
+    releaseName: longhorn
+    includeCRDs: true
+    valuesFile: values.yaml
+    namespace: longhorn-system
+    skipHooks: true
+    skipTests: true
+
 resources:
-  - clusterrole-longhorn-role.yaml
-  - clusterrolebinding-longhorn-bind.yaml
-  - clusterrolebinding-longhorn-support-bundle.yaml
-  - configmap-longhorn-default-resource.yaml
-  - configmap-longhorn-default-setting.yaml
-  - configmap-longhorn-storageclass.yaml
-  - customresourcedefinition-backingimagedatasources.longhorn.io.yaml
-  - customresourcedefinition-backingimagemanagers.longhorn.io.yaml
-  - customresourcedefinition-backingimages.longhorn.io.yaml
-  - customresourcedefinition-backupbackingimages.longhorn.io.yaml
-  - customresourcedefinition-backups.longhorn.io.yaml
-  - customresourcedefinition-backuptargets.longhorn.io.yaml
-  - customresourcedefinition-backupvolumes.longhorn.io.yaml
-  - customresourcedefinition-engineimages.longhorn.io.yaml
-  - customresourcedefinition-engines.longhorn.io.yaml
-  - customresourcedefinition-instancemanagers.longhorn.io.yaml
-  - customresourcedefinition-nodes.longhorn.io.yaml
-  - customresourcedefinition-orphans.longhorn.io.yaml
-  - customresourcedefinition-recurringjobs.longhorn.io.yaml
-  - customresourcedefinition-replicas.longhorn.io.yaml
-  - customresourcedefinition-settings.longhorn.io.yaml
-  - customresourcedefinition-sharemanagers.longhorn.io.yaml
-  - customresourcedefinition-snapshots.longhorn.io.yaml
-  - customresourcedefinition-supportbundles.longhorn.io.yaml
-  - customresourcedefinition-systembackups.longhorn.io.yaml
-  - customresourcedefinition-systemrestores.longhorn.io.yaml
-  - customresourcedefinition-volumeattachments.longhorn.io.yaml
-  - customresourcedefinition-volumes.longhorn.io.yaml
-  - daemonset-longhorn-manager.yaml
-  - deployment-longhorn-driver-deployer.yaml
-  - deployment-longhorn-ui.yaml
-  - ingress.yaml
-  - namespace-longhorn-system.yaml
-  - priorityclass-longhorn-critical.yaml
-  - service-longhorn-admission-webhook.yaml
-  - service-longhorn-backend.yaml
-  - service-longhorn-conversion-webhook.yaml
-  - service-longhorn-frontend.yaml
-  - service-longhorn-recovery-backend.yaml
-  - serviceaccount-longhorn-service-account.yaml
-  - serviceaccount-longhorn-support-bundle.yaml
-  - serviceaccount-longhorn-ui-service-account.yaml
+  - namespace.yaml
+  # - https://raw.githubusercontent.com/longhorn/longhorn/v1.9.0/deploy/longhorn.yaml
+  # - ingress.yaml
+  - certificate.yaml
+  - authentik-middleware.yaml
+  - ingressroute.yaml

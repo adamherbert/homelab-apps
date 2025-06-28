@@ -1,0 +1,25 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: longhorn-ingress
+  namespace: media
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: longhorn.home.8none1.com
+    external-dns.alpha.kubernetes.io/target: traefik.srv.8none1.com
+  labels:
+    app: longhorn
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`longhorn.home.8none1.com`) && PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: longhorn-frontend
+          port: 80
+      middlewares:
+        - name: authentik-forward-auth
+          namespace: longhorn-system
+  tls:
+    secretName: longhorn-frontend-ingress-tls
