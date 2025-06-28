@@ -3,7 +3,6 @@ apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   name: longhorn-ingress
-  namespace: media
   annotations:
     external-dns.alpha.kubernetes.io/hostname: longhorn.home.8none1.com
     external-dns.alpha.kubernetes.io/target: traefik.srv.8none1.com
