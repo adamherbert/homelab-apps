@@ -1,0 +1,15 @@
+installCRDs: true
+namespace: metallb-system
+controller:
+  serviceAccount:
+    create: true
+    name: metallb-controller
+  tolerations:
+    - key: "node-role.kubernetes.io/master"
+      operator: "Exists"
+      effect: "NoSchedule"
+speaker:
+  tolerateMaster: false
+  serviceAccount:
+    create: true
+    name: metallb-speaker
