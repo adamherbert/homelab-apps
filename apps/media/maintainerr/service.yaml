@@ -4,11 +4,17 @@ kind: Service
 metadata:
   name: maintainerr
   labels:
-    app: maintainerr
-    part-of: media
+    app.kubernetes.io/name: maintainerr
+    app.kubernetes.io/instance: maintainerr
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: media
+    app.kubernetes.io/managed-by: kustomize
 spec:
   selector:
-    app: maintainerr
+    app.kubernetes.io/name: maintainerr
+    app.kubernetes.io/instance: maintainerr
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: media
   type: ClusterIP
   ports:
     - name: http

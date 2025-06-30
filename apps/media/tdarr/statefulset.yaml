@@ -1,28 +1,29 @@
 ---
-# Source: plex-media-server/templates/serviceaccount.yaml
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: tdarr-server
-  labels:
-    app: tdarr-server
-automountServiceAccountToken: false
----
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: tdarr-server
   labels:
-    app: tdarr-server
+    app.kubernetes.io/name: tdarr-server
+    app.kubernetes.io/instance: tdarr-server
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: media
+    app.kubernetes.io/managed-by: kustomize
 spec:
   serviceName: tdarr-server
   selector:
     matchLabels:
-      app: tdarr-server
+      app.kubernetes.io/name: tdarr-server
+      app.kubernetes.io/instance: tdarr-server
+      app.kubernetes.io/component: frontend
+      app.kubernetes.io/part-of: media
   template:
     metadata:
       labels:
-        app: tdarr-server
+        app.kubernetes.io/name: tdarr-server
+        app.kubernetes.io/instance: tdarr-server
+        app.kubernetes.io/component: frontend
+        app.kubernetes.io/part-of: media
     spec:
       serviceAccountName: tdarr-server
       volumes:

@@ -1,0 +1,37 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: calibre
+  labels:
+    app.kubernetes.io/name: calibre
+    app.kubernetes.io/instance: calibre
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: media
+    app.kubernetes.io/managed-by: kustomize
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: calibre.home.8none1.com
+    external-dns.alpha.kubernetes.io/target: traefik.srv.8none1.com
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`calibre.home.8none1.com`) && PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: calibre
+          port: http
+  tls:
+    secretName: calibre-ingress-tls
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: calibre-ingress-tls
+spec:
+  secretName: calibre-ingress-tls
+  issuerRef:
+    name: external
+    kind: ClusterIssuer
+  commonName: calibre.home.8none1.com
+  dnsNames:
+    - calibre.home.8none1.com

@@ -2,21 +2,28 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   labels:
-    app: overseerr
-    part-of: media
+    app.kubernetes.io/name: overseerr
+    app.kubernetes.io/instance: overseerr
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: media
+    app.kubernetes.io/managed-by: kustomize
   name: overseerr
 spec:
   serviceName: overseerr
   replicas: 1
   selector:
     matchLabels:
-      app: overseerr
-      part-of: media
+      app.kubernetes.io/name: overseerr
+      app.kubernetes.io/instance: overseerr
+      app.kubernetes.io/component: frontend
+      app.kubernetes.io/part-of: media
   template:
     metadata:
       labels:
-        app: overseerr
-        part-of: media
+        app.kubernetes.io/name: overseerr
+        app.kubernetes.io/instance: overseerr
+        app.kubernetes.io/component: frontend
+        app.kubernetes.io/part-of: media
     spec:
       initContainers:
         - name: init-config

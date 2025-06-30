@@ -5,8 +5,11 @@ kind: Service
 metadata:
   name: sabnzbd
   labels:
-    app: sabnzbd
-    part-of: media
+    app.kubernetes.io/name: sabnzbd
+    app.kubernetes.io/instance: sabnzbd
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: media
+    app.kubernetes.io/managed-by: kustomize
 spec:
   type: ClusterIP
   ports:
@@ -15,5 +18,8 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app: sabnzbd
-    part-of: media
+    app.kubernetes.io/name: sabnzbd
+    app.kubernetes.io/instance: sabnzbd
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: media
+---

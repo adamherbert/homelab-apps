@@ -1,22 +1,29 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  labels:
-    app: calibre
-    part-of: media
   name: calibre
+  labels:
+    app.kubernetes.io/name: calibre
+    app.kubernetes.io/instance: calibre
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: media
+    app.kubernetes.io/managed-by: kustomize
 spec:
   serviceName: calibre
   replicas: 1
   selector:
     matchLabels:
-      app: calibre
-      part-of: media
+      app.kubernetes.io/name: calibre
+      app.kubernetes.io/instance: calibre
+      app.kubernetes.io/component: frontend
+      app.kubernetes.io/part-of: media
   template:
     metadata:
       labels:
-        app: calibre
-        part-of: media
+        app.kubernetes.io/name: calibre
+        app.kubernetes.io/instance: calibre
+        app.kubernetes.io/component: frontend
+        app.kubernetes.io/part-of: media
     spec:
       containers:
         - image: linuxserver/calibre-web:0.6.24-ls316

@@ -2,21 +2,28 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   labels:
-    app: kavita
-    part-of: media
+    app.kubernetes.io/name: kavita
+    app.kubernetes.io/instance: kavita
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: media
+    app.kubernetes.io/managed-by: kustomize
   name: kavita
 spec:
   serviceName: kavita
   replicas: 1
   selector:
     matchLabels:
-      app: kavita
-      part-of: media
+      app.kubernetes.io/name: kavita
+      app.kubernetes.io/instance: kavita
+      app.kubernetes.io/component: frontend
+      app.kubernetes.io/part-of: media
   template:
     metadata:
       labels:
-        app: kavita
-        part-of: media
+        app.kubernetes.io/name: kavita
+        app.kubernetes.io/instance: kavita
+        app.kubernetes.io/component: frontend
+        app.kubernetes.io/part-of: media
     spec:
       containers:
         - image: linuxserver/kavita:v0.8.4.2-ls64

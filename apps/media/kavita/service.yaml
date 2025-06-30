@@ -4,11 +4,17 @@ kind: Service
 metadata:
   name: kavita
   labels:
-    app: kavita
-    part-of: media
+    app.kubernetes.io/name: kavita
+    app.kubernetes.io/instance: kavita
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: media
+    app.kubernetes.io/managed-by: kustomize
 spec:
   selector:
-    app: kavita
+    app.kubernetes.io/name: kavita
+    app.kubernetes.io/instance: kavita
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: media
   type: ClusterIP
   ports:
     - name: http

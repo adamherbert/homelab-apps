@@ -5,16 +5,27 @@ kind: StatefulSet
 metadata:
   name: plex-server
   labels:
-    app: plex-server
+    app.kubernetes.io/name: plex-server
+    app.kubernetes.io/instance: plex-server
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: media
+    app.kubernetes.io/managed-by: kustomize
 spec:
   serviceName: plex-server
   selector:
     matchLabels:
-      app: plex-server
+      app.kubernetes.io/name: plex-server
+      app.kubernetes.io/instance: plex-server
+      app.kubernetes.io/component: frontend
+      app.kubernetes.io/part-of: media
   template:
     metadata:
       labels:
-        app: plex-server
+        app.kubernetes.io/name: plex-server
+        app.kubernetes.io/instance: plex-server
+        app.kubernetes.io/component: frontend
+        app.kubernetes.io/part-of: media
+        app.kubernetes.io/managed-by: kustomize
     spec:
       serviceAccountName: plex-server
       volumes:

@@ -4,11 +4,17 @@ kind: Service
 metadata:
   name: prowlarr
   labels:
-    app: prowlarr
-    part-of: media
+    app.kubernetes.io/name: prowlarr
+    app.kubernetes.io/instance: prowlarr
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: media
+    app.kubernetes.io/managed-by: kustomize
 spec:
   selector:
-    app: prowlarr
+    app.kubernetes.io/name: prowlarr
+    app.kubernetes.io/instance: prowlarr
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: media
   type: ClusterIP
   ports:
     - name: http

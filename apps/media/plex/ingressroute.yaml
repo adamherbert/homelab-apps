@@ -1,0 +1,53 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: ServersTransport
+metadata:
+  name: insecure-https
+spec:
+  insecureSkipVerify: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: plex-server
+  labels:
+    app.kubernetes.io/name: plex-server
+    app.kubernetes.io/instance: plex-server
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: media
+    app.kubernetes.io/managed-by: kustomize
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: plex.home.8none1.com
+    external-dns.alpha.kubernetes.io/target: traefik.srv.8none1.com
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`plex.home.8none1.com`) && PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: plex-server
+          port: plex-server
+          scheme: https
+          serversTransport: insecure-https
+  tls:
+    secretName: plex-server-ingress-tls
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: plex-server-ingress-tls
+  labels:
+    app.kubernetes.io/name: plex-server
+    app.kubernetes.io/instance: plex-server
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: media
+    app.kubernetes.io/managed-by: kustomize
+spec:
+  secretName: plex-server-ingress-tls
+  issuerRef:
+    name: external
+    kind: ClusterIssuer
+  commonName: plex.home.8none1.com
+  dnsNames:
+    - plex.home.8none1.com

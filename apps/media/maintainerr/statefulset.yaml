@@ -2,21 +2,28 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   labels:
-    app: maintainerr
-    part-of: media
+    app.kubernetes.io/name: maintainerr
+    app.kubernetes.io/instance: maintainerr
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: media
+    app.kubernetes.io/managed-by: kustomize
   name: maintainerr
 spec:
   serviceName: maintainerr
   replicas: 1
   selector:
     matchLabels:
-      app: maintainerr
-      part-of: media
+      app.kubernetes.io/name: maintainerr
+      app.kubernetes.io/instance: maintainerr
+      app.kubernetes.io/component: frontend
+      app.kubernetes.io/part-of: media
   template:
     metadata:
       labels:
-        app: maintainerr
-        part-of: media
+        app.kubernetes.io/name: maintainerr
+        app.kubernetes.io/instance: maintainerr
+        app.kubernetes.io/component: frontend
+        app.kubernetes.io/part-of: media
     spec:
       containers:
         - image: jorenn92/maintainerr:2.18.1

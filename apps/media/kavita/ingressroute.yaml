@@ -1,0 +1,37 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: kavita
+  labels:
+    app.kubernetes.io/name: kavita
+    app.kubernetes.io/instance: kavita
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: media
+    app.kubernetes.io/managed-by: kustomize
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: kavita.home.8none1.com
+    external-dns.alpha.kubernetes.io/target: traefik.srv.8none1.com
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`kavita.home.8none1.com`) && PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: kavita
+          port: http
+  tls:
+    secretName: kavita-ingress-tls
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: kavita-ingress-tls
+spec:
+  secretName: kavita-ingress-tls
+  issuerRef:
+    name: external
+    kind: ClusterIssuer
+  commonName: kavita.home.8none1.com
+  dnsNames:
+    - kavita.home.8none1.com

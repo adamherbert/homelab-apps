@@ -2,18 +2,28 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   labels:
-    app: sonarr
+    app.kubernetes.io/name: sonarr
+    app.kubernetes.io/instance: sonarr
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: media
+    app.kubernetes.io/managed-by: kustomize
   name: sonarr
 spec:
   serviceName: sonarr
   replicas: 1
   selector:
     matchLabels:
-      app: sonarr
+      app.kubernetes.io/name: sonarr
+      app.kubernetes.io/instance: sonarr
+      app.kubernetes.io/component: frontend
+      app.kubernetes.io/part-of: media
   template:
     metadata:
       labels:
-        app: sonarr
+        app.kubernetes.io/name: sonarr
+        app.kubernetes.io/instance: sonarr
+        app.kubernetes.io/component: frontend
+        app.kubernetes.io/part-of: media
     spec:
       initContainers:
         - name: init-config

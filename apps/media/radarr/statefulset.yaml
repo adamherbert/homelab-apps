@@ -2,21 +2,28 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   labels:
-    app: radarr
-    part-of: media
+    app.kubernetes.io/name: radarr
+    app.kubernetes.io/instance: radarr
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: media
+    app.kubernetes.io/managed-by: kustomize
   name: radarr
 spec:
   serviceName: radarr
   replicas: 1
   selector:
     matchLabels:
-      app: radarr
-      part-of: media
+      app.kubernetes.io/name: radarr
+      app.kubernetes.io/instance: radarr
+      app.kubernetes.io/component: frontend
+      app.kubernetes.io/part-of: media
   template:
     metadata:
       labels:
-        app: radarr
-        part-of: media
+        app.kubernetes.io/name: radarr
+        app.kubernetes.io/instance: radarr
+        app.kubernetes.io/component: frontend
+        app.kubernetes.io/part-of: media
     spec:
       initContainers:
         - name: init-config

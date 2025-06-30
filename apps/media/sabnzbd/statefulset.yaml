@@ -5,21 +5,28 @@ kind: StatefulSet
 metadata:
   name: sabnzbd
   labels:
-    app: sabnzbd
-    part-of: media
+    app.kubernetes.io/name: sabnzbd
+    app.kubernetes.io/instance: sabnzbd
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: media
+    app.kubernetes.io/managed-by: kustomize
 spec:
   serviceName: sabnzbd
   revisionHistoryLimit: 3
   replicas: 1
   selector:
     matchLabels:
-      app: sabnzbd
-      part-of: media
+      app.kubernetes.io/name: sabnzbd
+      app.kubernetes.io/part-of: media
+      app.kubernetes.io/instance: sabnzbd
+      app.kubernetes.io/component: frontend
   template:
     metadata:
       labels:
-        app: sabnzbd
-        part-of: media
+        app.kubernetes.io/name: sabnzbd
+        app.kubernetes.io/part-of: media
+        app.kubernetes.io/instance: sabnzbd
+        app.kubernetes.io/component: frontend
     spec:
       containers:
         - name: sabnzbd

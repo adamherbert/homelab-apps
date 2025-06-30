@@ -11,51 +11,53 @@ resources:
   - radarr/pvc.yaml
   - radarr/statefulset.yaml
   - radarr/service.yaml
-  - radarr/ingress.yaml
+  - radarr/ingressroute.yaml
   # Sonarr
   - sonarr/pvc.yaml
   - sonarr/statefulset.yaml
   - sonarr/service.yaml
-  - sonarr/ingress.yaml
+  - sonarr/ingressroute.yaml
   # Prowlarr
   - prowlarr/pvc.yaml
   - prowlarr/service.yaml
   - prowlarr/statefulset.yaml
-  - prowlarr/ingress.yaml
+  - prowlarr/ingressroute.yaml
   # Overseerr
   - overseerr/service.yaml
   - overseerr/statefulset.yaml
-  - overseerr/ingress.yaml
+  - overseerr/ingressroute.yaml
   - overseerr/pvc.yaml
-  # Ombi
-  # - ombi/service.yaml
-  # - ombi/statefulset.yaml
-  # - ombi/ingress.yaml
-  # - ombi/pvc.yaml
   # Maintainerr
   - maintainerr/service.yaml
   - maintainerr/statefulset.yaml
-  - maintainerr/ingress.yaml
+  - maintainerr/ingressroute.yaml
   - maintainerr/pvc.yaml
   # Tautulli
   - tautulli/service.yaml
   - tautulli/statefulset.yaml
-  - tautulli/ingress.yaml
+  - tautulli/ingressroute.yaml
   - tautulli/pvc.yaml
   # SanNZBd
-  - sabnzbd
+  - sabnzbd/ingressroute.yaml
+  - sabnzbd/service.yaml
+  - sabnzbd/statefulset.yaml
+  - sabnzbd/pvc.yaml
   # Tdarr
-  - tdarr
+  - tdarr/ingressroute.yaml
+  - tdarr/service.yaml
+  - tdarr/statefulset.yaml
+  - tdarr/pvc.yaml
+  # Plex
   - plex
   # Kavita
   - kavita/service.yaml
   - kavita/statefulset.yaml
-  - kavita/ingress.yaml
+  - kavita/ingressroute.yaml
   - kavita/pvc.yaml
   # Calibre
   - calibre/service.yaml
   - calibre/statefulset.yaml
-  - calibre/ingress.yaml
+  - calibre/ingressroute.yaml
   - calibre/pvc.yaml
   # Autnentik Middleware
   - authentik-middleware.yaml

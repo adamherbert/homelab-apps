@@ -5,8 +5,11 @@ kind: Service
 metadata:
   name: tautulli
   labels:
-    app: tautulli
-    part-of: media
+    app.kubernetes.io/name: tautulli
+    app.kubernetes.io/instance: tautulli
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: media
+    app.kubernetes.io/managed-by: kustomize
 spec:
   type: ClusterIP
   ports:
@@ -15,5 +18,8 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app: tautulli
-    part-of: media
+    app.kubernetes.io/name: tautulli
+    app.kubernetes.io/instance: tautulli
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: media
+---

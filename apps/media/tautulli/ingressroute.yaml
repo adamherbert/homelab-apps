@@ -1,48 +1,45 @@
----
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
-  name: tdarr-server
+  name: tautulli
   labels:
-    app.kubernetes.io/name: tdarr-server
-    app.kubernetes.io/instance: tdarr-server
+    app.kubernetes.io/name: tautulli
+    app.kubernetes.io/instance: tautulli
     app.kubernetes.io/component: frontend
     app.kubernetes.io/part-of: media
     app.kubernetes.io/managed-by: kustomize
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: tdarr.home.8none1.com
+    external-dns.alpha.kubernetes.io/hostname: tautulli.home.8none1.com
     external-dns.alpha.kubernetes.io/target: traefik.srv.8none1.com
 spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`tdarr.home.8none1.com`) && PathPrefix(`/`)
+    - match: Host(`tautulli.home.8none1.com`) && PathPrefix(`/`)
       kind: Rule
       services:
-        - name: tdarr-webui
-          port: tdarr-webui
+        - name: tautulli
+          port: http
       middlewares:
         - name: authentik-forward-auth
-          namespace: media
   tls:
-    secretName: tdarr-server-ingress-tls
+    secretName: tautulli-ingress-tls
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: tdarr-server-ingress-tls
+  name: tautulli-ingress-tls
   labels:
-    app.kubernetes.io/name: tdarr-server
-    app.kubernetes.io/instance: tdarr-server
+    app.kubernetes.io/name: tautulli
+    app.kubernetes.io/instance: tautulli
     app.kubernetes.io/component: frontend
     app.kubernetes.io/part-of: media
     app.kubernetes.io/managed-by: kustomize
 spec:
-  secretName: tdarr-server-ingress-tls
+  secretName: tautulli-ingress-tls
   issuerRef:
     name: external
     kind: ClusterIssuer
-  commonName: tdarr.home.8none1.com
+  commonName: tautulli.home.8none1.com
   dnsNames:
-    - tdarr.home.8none1.com
----
+    - tautulli.home.8none1.com

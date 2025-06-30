@@ -4,11 +4,17 @@ kind: Service
 metadata:
   name: radarr
   labels:
-    app: radarr
-    part-of: media
+    app.kubernetes.io/name: radarr
+    app.kubernetes.io/instance: radarr
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: media
+    app.kubernetes.io/managed-by: kustomize
 spec:
   selector:
-    app: radarr
+    app.kubernetes.io/name: radarr
+    app.kubernetes.io/instance: radarr
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: media
   type: ClusterIP
   ports:
     - name: http
