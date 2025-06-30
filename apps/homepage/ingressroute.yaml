@@ -1,0 +1,46 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: homepage
+  labels:
+    app.kubernetes.io/name: homepage
+    app.kubernetes.io/instance: homepage
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: homepage
+    app.kubernetes.io/managed-by: kustomize
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: home.8none1.com
+    external-dns.alpha.kubernetes.io/target: traefik.srv.8none1.com
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`home.8none1.com`) && PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: homepage
+          port: http
+      middlewares:
+        - name: authentik-forward-auth
+  tls:
+    secretName: homepage-ingress-tls
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: homepage-ingress-tls
+  labels:
+    app.kubernetes.io/name: homepage
+    app.kubernetes.io/instance: homepage
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: homepage
+    app.kubernetes.io/managed-by: kustomize
+spec:
+  secretName: homepage-ingress-tls
+  issuerRef:
+    name: external
+    kind: ClusterIssuer
+  commonName: home.8none1.com
+  dnsNames:
+    - home.8none1.com
+---
