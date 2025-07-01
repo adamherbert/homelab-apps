@@ -22,6 +22,11 @@ spec:
           port: http
       middlewares:
         - name: authentik-forward-auth
+    - match: Host(`sabnzbd.home.8none1.com`) && PathPrefix(`/sabnzbd/api/`)
+      kind: Rule
+      services:
+        - name: sabnzbd
+          port: http
   tls:
     secretName: sabnzbd-ingress-tls
 ---
@@ -44,3 +49,4 @@ spec:
   dnsNames:
     - sabnzbd.home.8none1.com
 ---
+
