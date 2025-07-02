@@ -5,20 +5,26 @@ kind: Deployment
 metadata:
   name: tika
   labels:
-    helm.sh/chart: tika-2.9.0
-    app: tika
-    part-of: paperless-ngx
+    app.kubernetes.io/name: paperless-ngx
+    app.kubernetes.io/instance: paperless-ngx
+    app.kubernetes.io/component: tika
+    app.kubernetes.io/part-of: paperless-ngx
+    app.kubernetes.io/managed-by: kustomize
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: tika
-      part-of: paperless-ngx
+      app.kubernetes.io/name: paperless-ngx
+      app.kubernetes.io/instance: paperless-ngx
+      app.kubernetes.io/component: tika
+      app.kubernetes.io/part-of: paperless-ngx
   template:
     metadata:
       labels:
-        app: tika
-        part-of: paperless-ngx
+        app.kubernetes.io/name: paperless-ngx
+        app.kubernetes.io/instance: paperless-ngx
+        app.kubernetes.io/component: tika
+        app.kubernetes.io/part-of: paperless-ngx
     spec:
       serviceAccountName: tika
       securityContext: {}

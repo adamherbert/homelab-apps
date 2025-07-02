@@ -5,11 +5,16 @@ kind: PodDisruptionBudget
 metadata:
   name: postgresql
   labels:
-    app: postgresql
-    part-of: paperless-ngx
+    app.kubernetes.io/name: paperless-ngx
+    app.kubernetes.io/instance: paperless-ngx
+    app.kubernetes.io/component: postgresql
+    app.kubernetes.io/part-of: paperless-ngx
+    app.kubernetes.io/managed-by: kustomize
 spec:
   maxUnavailable: 1
   selector:
     matchLabels:
-      app: postgresql
-      part-of: paperless-ngx
+      app.kubernetes.io/name: postgresql
+      app.kubernetes.io/part-of: paperless-ngx
+      app.kubernetes.io/instance: paperless-ngx
+      app.kubernetes.io/component: postgresql

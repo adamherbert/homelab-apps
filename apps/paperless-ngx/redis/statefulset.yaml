@@ -5,22 +5,29 @@ kind: StatefulSet
 metadata:
   name: redis-master
   labels:
-    app: redis
-    part-of: paperless-ngx
+    app.kubernetes.io/name: paperless-ngx
+    app.kubernetes.io/instance: paperless-ngx
+    app.kubernetes.io/component: redis
+    app.kubernetes.io/part-of: paperless-ngx
+    app.kubernetes.io/managed-by: kustomize
 spec:
   replicas: 1
   selector:
     matchLabels:
-      part-of: paperless-ngx
-      app: redis
+      app.kubernetes.io/name: paperless-ngx
+      app.kubernetes.io/instance: paperless-ngx
+      app.kubernetes.io/component: redis
+      app.kubernetes.io/part-of: paperless-ngx
   serviceName: redis-headless
   updateStrategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        app: redis
-        part-of: paperless-ngx
+        app.kubernetes.io/name: paperless-ngx
+        app.kubernetes.io/instance: paperless-ngx
+        app.kubernetes.io/component: redis
+        app.kubernetes.io/part-of: paperless-ngx
     spec:
       securityContext:
         fsGroup: 65538

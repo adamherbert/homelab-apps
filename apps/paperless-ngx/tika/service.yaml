@@ -5,15 +5,20 @@ kind: Service
 metadata:
   name: tika
   labels:
-    app: tika
-    part-of: paperless-ngx
+    app.kubernetes.io/name: paperless-ngx
+    app.kubernetes.io/instance: paperless-ngx
+    app.kubernetes.io/component: tika
+    app.kubernetes.io/part-of: paperless-ngx
+    app.kubernetes.io/managed-by: kustomize
 spec:
   type: ClusterIP
   ports:
-    - port: 9998
+    - port: 80
       targetPort: http
       protocol: TCP
       name: http
   selector:
-    app: tika
-    part-of: paperless-ngx
+    app.kubernetes.io/name: paperless-ngx
+    app.kubernetes.io/instance: paperless-ngx
+    app.kubernetes.io/component: tika
+    app.kubernetes.io/part-of: paperless-ngx

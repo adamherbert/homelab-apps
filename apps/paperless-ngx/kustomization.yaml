@@ -30,7 +30,6 @@ resources:
   - redis/redis-data-pvc.yaml
   - redis/statefulset.yaml
   - redis/service.yaml
-  - redis/headless-svc.yaml
   # Gotenberg
   - gotenberg/serviceaccount.yaml
   - gotenberg/deployment.yaml
@@ -42,4 +41,4 @@ resources:
   # Paperless
   - statefulset.yaml
   - svc.yaml
-  - ingress.yaml
+  - ingressroute.yaml

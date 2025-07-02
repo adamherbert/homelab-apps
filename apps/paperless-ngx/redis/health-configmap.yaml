@@ -5,8 +5,11 @@ kind: ConfigMap
 metadata:
   name: redis-health
   labels:
-    app: redis
-    part-of: paperless-ngx
+    app.kubernetes.io/name: paperless-ngx
+    app.kubernetes.io/instance: paperless-ngx
+    app.kubernetes.io/component: redis
+    app.kubernetes.io/part-of: paperless-ngx
+    app.kubernetes.io/managed-by: kustomize
 data:
   ping_readiness_local.sh: |-
     #!/bin/bash

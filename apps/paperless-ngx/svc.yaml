@@ -5,16 +5,22 @@ kind: Service
 metadata:
   name: paperless-ngx
   labels:
-    app: paperless-ngx
-    part-of: paperless-ngx
+    app.kubernetes.io/name: paperless-ngx
+    app.kubernetes.io/instance: paperless-ngx
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: paperless-ngx
+    app.kubernetes.io/managed-by: kustomize
 spec:
   type: ClusterIP
   selector:
-    app: paperless-ngx
+    app.kubernetes.io/name: paperless-ngx
+    app.kubernetes.io/instance: paperless-ngx
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: paperless-ngx
   internalTrafficPolicy: Cluster
   sessionAffinity: None
   ports:
-    - port: 8000
-      targetPort: 8000
+    - port: 80
+      targetPort: http
       protocol: TCP
       name: http

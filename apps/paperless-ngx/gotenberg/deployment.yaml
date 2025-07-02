@@ -5,19 +5,26 @@ kind: Deployment
 metadata:
   name: gotenberg
   labels:
-    app: gotenberg
-    part-of: paperless-ngx
+    app.kubernetes.io/name: paperless-ngx
+    app.kubernetes.io/instance: paperless-ngx
+    app.kubernetes.io/component: gotenberg
+    app.kubernetes.io/part-of: paperless-ngx
+    app.kubernetes.io/managed-by: kustomize
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gotenberg
-      part-of: paperless-ngx
+      app.kubernetes.io/name: paperless-ngx
+      app.kubernetes.io/instance: paperless-ngx
+      app.kubernetes.io/component: gotenberg
+      app.kubernetes.io/part-of: paperless-ngx
   template:
     metadata:
       labels:
-        app: gotenberg
-        part-of: paperless-ngx
+        app.kubernetes.io/name: paperless-ngx
+        app.kubernetes.io/part-of: paperless-ngx
+        app.kubernetes.io/component: gotenberg
+        app.kubernetes.io/instance: paperless-ngx
     spec:
       serviceAccountName: gotenberg
       containers:

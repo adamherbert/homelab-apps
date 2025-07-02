@@ -5,6 +5,11 @@ kind: StatefulSet
 metadata:
   name: paperless-ngx
   labels:
+    app.kubernetes.io/name: paperless-ngx
+    app.kubernetes.io/instance: paperless-ngx
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: paperless-ngx
+    app.kubernetes.io/managed-by: kustomize
     app: paperless-ngx
     part-of: paperless-ngx
 spec:
@@ -12,12 +17,17 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: paperless-ngx
+      app.kubernetes.io/name: paperless-ngx
+      app.kubernetes.io/instance: paperless-ngx
+      app.kubernetes.io/component: frontend
+      app.kubernetes.io/part-of: paperless-ngx
   template:
     metadata:
       labels:
-        app: paperless-ngx
-        part-of: paperless-ngx
+        app.kubernetes.io/name: paperless-ngx
+        app.kubernetes.io/instance: paperless-ngx
+        app.kubernetes.io/component: frontend
+        app.kubernetes.io/part-of: paperless-ngx
     spec:
       serviceAccountName: paperless-ngx
       automountServiceAccountToken: false

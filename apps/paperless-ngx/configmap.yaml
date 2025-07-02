@@ -5,8 +5,11 @@ kind: ConfigMap
 metadata:
   name: paperless-ngx-general
   labels:
-    app: paperless-ngx
-    part-of: paperless-ngx
+    app.kubernetes.io/name: paperless-ngx
+    app.kubernetes.io/instance: paperless-ngx
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: paperless-ngx
+    app.kubernetes.io/managed-by: kustomize
 data:
   PAPERLESS_PORT: "8000"
   USERMAP_UID: "1035"

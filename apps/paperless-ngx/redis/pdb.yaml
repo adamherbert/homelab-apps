@@ -5,11 +5,16 @@ kind: PodDisruptionBudget
 metadata:
   name: redis-master
   labels:
-    app: redis
-    part-of: paperless-ngx
+    app.kubernetes.io/name: paperless-ngx
+    app.kubernetes.io/instance: paperless-ngx
+    app.kubernetes.io/component: redis
+    app.kubernetes.io/part-of: paperless-ngx
+    app.kubernetes.io/managed-by: kustomize
 spec:
   maxUnavailable: 1
   selector:
     matchLabels:
-      app: redis
-      part-of: paperless-ngx
+      app.kubernetes.io/name: paperless-ngx
+      app.kubernetes.io/instance: paperless-ngx
+      app.kubernetes.io/component: redis
+      app.kubernetes.io/part-of: paperless-ngx
