@@ -23,7 +23,7 @@ resources:
   # Authentik Server Components
   - server/service.yaml
   - server/deployment.yaml
-  - server/ingress.yaml
+  - server/ingressroute.yaml
   # Authentik Worker Components
   - worker/deployment.yaml
   # Certificate for embeded outpost
