@@ -1,50 +1,81 @@
 ---
-apiVersion: v1
-kind: Endpoints
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: files-proxy
   namespace: proxies
-subsets:
-  - addresses:
-      - ip: 172.16.0.5
-    ports:
-      - port: 5001
+  labels:
+    app: files-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: files-proxy
+  template:
+    metadata:
+      labels:
+        app: files-proxy
+    spec:
+      containers:
+        - name: socat
+          image: alpine/socat
+          args:
+            - TCP4-LISTEN:443,fork,reuseaddr
+            - TCP4:172.16.1.5:5001
+          ports:
+            - containerPort: 443
+              name: https
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: files-proxy
-  namespace: proxies
 spec:
   type: ClusterIP
+  selector:
+    app: files-proxy
   ports:
-    - name: http
-      port: 80
-      targetPort: 5001
+    - name: https
+      port: 443
+      targetPort: https
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
 metadata:
   name: files-proxy
-  namespace: proxies
-  annotations:
-    cert-manager.io/cluster-issuer: external
-    external-dns.alpha.kubernetes.io/hostname: files.home.8none1.com
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
-  ingressClassName: nginx
-  rules:
-    - host: files.home.8none1.com
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: files-proxy
-                port:
-                  name: http
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`files.home.8none1.com`)
+      kind: Rule
+      services:
+        - name: files-proxy
+          port: https
+          scheme: https
+          serversTransport: files-proxy-transport
   tls:
-    - hosts:
-        - files.home.8none1.com
-      secretName: files-proxy-ingress-tls
+    secretName: files-proxy-ingress-tls
+---
+apiVersion: traefik.io/v1alpha1
+kind: ServersTransport
+metadata:
+  name: files-proxy-transport
+spec:
+  insecureSkipVerify: true
+  serverName: files.home.8none1.com
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: files-proxy-ingress-tls
+  namespace: proxies
+  labels:
+    app: files-proxy
+spec:
+  secretName: files-proxy-ingress-tls
+  issuerRef:
+    name: external
+    kind: ClusterIssuer
+  dnsNames:
+    - files.home.8none1.com

@@ -4,4 +4,5 @@ namespace: proxies
 
 resources:
   - homeassistant.yaml
+  - files-proxy.yaml
   - namespace.yaml
