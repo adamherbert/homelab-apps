@@ -1,0 +1,66 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: uptime-kuma
+  labels:
+    app.kubernetes.io/name: uptime-kuma
+    app.kubernetes.io/instance: uptime-kuma
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: uptime-kuma
+    app.kubernetes.io/managed-by: kustomize
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: up.home.8none1.com
+    external-dns.alpha.kubernetes.io/target: traefik.home.8none1.com
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`up.home.8none1.com`) && PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: uptime-kuma
+          port: http
+      middlewares:
+        - name: authentik-forward-auth
+  tls:
+    secretName: uptime-kuma-ingress-tls
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: authentik-forward-auth
+  labels:
+    app.kubernetes.io/name: authentik
+    app.kubernetes.io/instance: authentik
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: authentik
+    app.kubernetes.io/managed-by: kustomize
+spec:
+  forwardAuth:
+    address: "http://ak-outpost-authentik-embedded-outpost.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/traefik"
+    trustForwardHeader: true
+    authResponseHeaders:
+      - X-authentik-username
+      - X-authentik-groups
+      - X-authentik-email
+      - X-authentik-name
+      - Set-Cookie
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: uptime-kuma-ingress-tls
+  labels:
+    app.kubernetes.io/name: uptime-kuma
+    app.kubernetes.io/instance: uptime-kuma
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: uptime-kuma
+    app.kubernetes.io/managed-by: kustomize
+spec:
+  secretName: uptime-kuma-ingress-tls
+  issuerRef:
+    name: external
+    kind: ClusterIssuer
+  commonName: uptime-kuma.example.com
+  dnsNames:
+    - uptime-kuma.example.com

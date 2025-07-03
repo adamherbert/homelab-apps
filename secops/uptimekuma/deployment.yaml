@@ -2,22 +2,34 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: uptime-kuma
-  namespace: uptimekuma
+  labels:
+    app.kubernetes.io/name: uptime-kuma
+    app.kubernetes.io/instance: uptime-kuma
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: uptime-kuma
+    app.kubernetes.io/managed-by: kustomize
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: uptime-kuma
+      app.kubernetes.io/name: uptime-kuma
+      app.kubernetes.io/instance: uptime-kuma
+      app.kubernetes.io/component: frontend
+      app.kubernetes.io/part-of: uptime-kuma
   template:
     metadata:
       labels:
-        app: uptime-kuma
+        app.kubernetes.io/name: uptime-kuma
+        app.kubernetes.io/instance: uptime-kuma
+        app.kubernetes.io/component: frontend
+        app.kubernetes.io/part-of: uptime-kuma
     spec:
       containers:
         - name: uptime-kuma
-          image: louislam/uptime-kuma:latest
+          image: louislam/uptime-kuma:1.23.16
           ports:
             - containerPort: 3001
+              name: http
           resources:
             requests:
               memory: "256Mi"
