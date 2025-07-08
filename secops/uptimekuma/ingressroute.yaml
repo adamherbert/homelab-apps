@@ -15,6 +15,11 @@ spec:
   entryPoints:
     - websecure
   routes:
+    - match: Host(`up.home.8none1.com`) && PathPrefix(`/status/`)
+      kind: Rule
+      services:
+        - name: uptime-kuma
+          port: http
     - match: Host(`up.home.8none1.com`) && PathPrefix(`/`)
       kind: Rule
       services:
