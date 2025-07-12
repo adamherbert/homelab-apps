@@ -26,7 +26,7 @@ spec:
         app.kubernetes.io/part-of: media
     spec:
       containers:
-        - image: jorenn92/maintainerr:2.18.1
+        - image: jorenn92/maintainerr:2.18.2
           imagePullPolicy: IfNotPresent
           name: maintainerr
           envFrom:
