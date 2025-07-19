@@ -1,0 +1,113 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/instance: vikunja
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: vikunja
+  name: vikunja
+  namespace: vikunja
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: vikunja
+      app.kubernetes.io/name: vikunja
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: vikunja
+        app.kubernetes.io/name: vikunja
+    spec:
+      automountServiceAccountToken: true
+      containers:
+        - image: vikunja/vikunja:0.24.6
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: VIKUNJA_AUTH_OPENID_AUTHENTIK_CLIENTID
+              valueFrom:
+                secretKeyRef:
+                  key: VIKUNJA_AUTH_OPENID_AUTHENTIK_CLIENTID
+                  name: vikunja-authentik-secrets
+            - name: VIKUNJA_AUTH_OPENID_AUTHENTIK_CLIENTSECRET
+              valueFrom:
+                secretKeyRef:
+                  key: VIKUNJA_AUTH_OPENID_AUTHENTIK_CLIENTSECRET
+                  name: vikunja-authentik-secrets
+            - name: VIKUNJA_DATABASE_TYPE
+              value: postgres
+            - name: VIKUNJA_DATABASE_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: host
+                  name: vikunja-database-app
+            - name: VIKUNJA_DATABASE_PORT
+              valueFrom:
+                secretKeyRef:
+                  key: port
+                  name: vikunja-database-app
+            - name: VIKUNJA_DATABASE_NAME
+              valueFrom:
+                secretKeyRef:
+                  key: dbname
+                  name: vikunja-database-app
+            - name: VIKUNJA_DATABASE_USER
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: vikunja-database-app
+            - name: VIKUNJA_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: vikunja-database-app
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /api/v1/info
+              port: http
+            initialDelaySeconds: 0
+            periodSeconds: 10
+            timeoutSeconds: 1
+          name: vikunja
+          ports:
+            - containerPort: 3456
+              name: http
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /api/v1/info
+              port: http
+            initialDelaySeconds: 0
+            periodSeconds: 10
+            timeoutSeconds: 1
+          volumeMounts:
+            - mountPath: /etc/vikunja/config.yml
+              name: config
+              subPath: config.yml
+            - mountPath: /app/vikunja/files
+              name: data
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 1000m
+              memory: 512Mi
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      securityContext:
+        fsGroup: 1000
+      serviceAccountName: default
+      volumes:
+        - configMap:
+            name: vikunja-config
+          name: config
+        - name: data
+          persistentVolumeClaim:
+            claimName: vikunja-data

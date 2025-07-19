@@ -1,0 +1,24 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: vikunja
+  namespace: vikunja
+  labels:
+    app.kubernetes.io/name: vikunja
+    app.kubernetes.io/instance: vikunja
+    app.kubernetes.io/managed-by: kustomize
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: project.home.8none1.com
+    external-dns.alpha.kubernetes.io/target: traefik.srv.8none1.com
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`project.home.8none1.com`) && PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: vikunja
+          port: http
+  tls:
+    secretName: vikunja-ingress-tls

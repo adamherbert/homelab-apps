@@ -1,0 +1,19 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: vikunja-database
+  namespace: vikunja
+spec:
+  instances: 3
+  primaryUpdateStrategy: unsupervised
+  imageCatalogRef:
+    apiGroup: postgresql.cnpg.io
+    kind: ClusterImageCatalog
+    name: postgresql
+    major: 17
+  storage:
+    size: 10Gi
+    storageClass: "longhorn"
+  bootstrap:
+    initdb:
+      database: vikunja

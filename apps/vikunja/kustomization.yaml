@@ -1,0 +1,31 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: vikunja
+
+resources:
+  # Base resources
+  - externalsecret.yaml
+  - namespace-vikunja.yaml
+  # Vikunja resources
+  - pvc-vikunja-data.yaml
+  - deployment-vikunja.yaml
+  - service-vikunja.yaml
+  - certificate-vikunja.yaml
+  - ingressroute-vikunja.yaml
+  # Typesense resources
+  - pvc-typesense-data.yaml
+  - deployment-typesense.yaml
+  - service-typesense.yaml
+  # CNPG Cluster
+  - cnpg-database.yaml
+  # PostgreSQL resources
+  # - secret-postgresql.yaml
+  # - statefulset-postgresql.yaml
+  # - service-postgresql.yaml
+
+configMapGenerator:
+  - name: vikunja-config
+    files:
+      - config.yml=./config/vikunja-config.yaml
+  - name: typesense-env
+    env: ./config/typesense-env.env

@@ -1,0 +1,17 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: vikunja-ingress-tls
+  namespace: vikunja
+  labels:
+    app.kubernetes.io/name: vikunja
+    app.kubernetes.io/instance: vikunja
+    app.kubernetes.io/managed-by: kustomize
+spec:
+  secretName: vikunja-ingress-tls
+  issuerRef:
+    name: external
+    kind: ClusterIssuer
+  commonName: project.home.8none1.com
+  dnsNames:
+    - project.home.8none1.com

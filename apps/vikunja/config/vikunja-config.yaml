@@ -1,0 +1,20 @@
+typesense:
+  # Typesense will only work if it is enabled below (typesense.enabled).
+  enabled: true
+  url: "http://typesense:8108/"
+  apiKey: "f72a4bd6-657d-4862-884c-44359d8ae07c"
+
+auth:
+  local:
+    enabled: false
+  # Enable OIDC authentication.
+  openid:
+    enabled: true
+    redirecturl: "https://project.home.8none1.com/auth/openid/"
+    providers:
+      - name: "Authentik"
+        authurl: "https://auth.home.8none1.com/application/o/vikunja/"
+        logouturl: "https://auth.home.8none1.com/application/o/vikunja/end-session/"
+        clientid: "86gYP1rkivs6CEdTpv2HLIQgafustFJgLvrSkypa"
+        # This needs to be moved to a secret
+        clientsecret: "nG7iX85FXs7166HlZHzxR2X3hhgWaiV8IrWAweeB8sof57OFQOKed9FlFGYF6dnOHhkml5QrKEpYg5MrXC7Kht8l8nUqMAtM0BMrPenzRi2l4w9B8FDa936VGnrCCPe3"
