@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: cnpg-system
 
 resources:
-  - cnpg-1.26.0.yaml
-  - cpng-clusterimagecatalog-bookworm.yaml
-  - cpng-cluster.yaml
+  #- cnpg-1.26.0.yaml
+  #- cpng-clusterimagecatalog-bookworm.yaml
+  - https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/release-1.26/releases/cnpg-1.26.0.yaml
+  - https://raw.githubusercontent.com/cloudnative-pg/postgres-containers/main/Debian/ClusterImageCatalog-bookworm.yaml
