@@ -67,7 +67,7 @@ spec:
               name: credentials
               readOnly: true
         - name: connect-sync
-          image: 1password/connect-sync:1.7.3
+          image: 1password/connect-sync:1.7.4
           imagePullPolicy: IfNotPresent
           securityContext:
             runAsUser: 999
