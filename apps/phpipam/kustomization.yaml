@@ -11,4 +11,4 @@ resources:
   - phpipam-cron-deployment.yaml
   - phpipam-web-deployment.yaml
   - service.yaml
-  - ingress.yaml
+  - ingressroute.yaml

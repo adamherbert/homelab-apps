@@ -1,0 +1,43 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: phpipam-ingress-tls
+  namespace: phpipam
+  labels:
+    app.kubernetes.io/name: phpipam
+    app.kubernetes.io/instance: phpipam
+    app.kubernetes.io/managed-by: kustomize
+spec:
+  secretName: phpipam-ingress-tls
+  issuerRef:
+    name: external
+    kind: ClusterIssuer
+  commonName: ipam.home.8none1.com
+  dnsNames:
+    - ipam.home.8none1.com
+
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: phpipam
+  namespace: phpipam
+  labels:
+    app.kubernetes.io/name: phpipam
+    app.kubernetes.io/instance: phpipam
+    app.kubernetes.io/managed-by: kustomize
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: ipam.home.8none1.com
+    external-dns.alpha.kubernetes.io/target: traefik.srv.8none1.com
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`ipam.home.8none1.com`) && PathPrefix(`/`)
+      kind: Rule
+      services:
+        - name: phpipam-web
+          port: http
+  tls:
+    secretName: phpipam-ingress-tls
