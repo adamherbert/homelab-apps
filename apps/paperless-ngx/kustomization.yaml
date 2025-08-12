@@ -24,9 +24,6 @@ resources:
   - redis/networkpolicy.yaml
   - redis/serviceaccount.yaml
   - redis/secret.yaml
-  - redis/configmap.yaml
-  - redis/health-configmap.yaml
-  - redis/scripts-configmap.yaml
   - redis/redis-data-pvc.yaml
   - redis/statefulset.yaml
   - redis/service.yaml

@@ -30,8 +30,6 @@ spec:
         app.kubernetes.io/part-of: paperless-ngx
     spec:
       securityContext:
-        fsGroup: 65538
-        fsGroupChangePolicy: Always
         supplementalGroups: []
         sysctls: []
       serviceAccountName: redis-master
@@ -50,7 +48,7 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
         - name: redis
-          image: docker.io/bitnami/redis:8.0.3-debian-12-r2
+          image: docker.io/library/redis:8.2.0
           imagePullPolicy: "IfNotPresent"
           securityContext:
             allowPrivilegeEscalation: false
@@ -58,40 +56,32 @@ spec:
               drop:
                 - ALL
             readOnlyRootFilesystem: true
-            runAsGroup: 65538
-            runAsNonRoot: true
-            runAsUser: 1035
             seLinuxOptions: {}
             seccompProfile:
               type: RuntimeDefault
+            runAsNonRoot: true
+            runAsUser: 1001
+            runAsGroup: 1001
           command:
-            - /bin/bash
-          args:
+            - sh
             - -c
-            - /opt/bitnami/scripts/start-scripts/start-master.sh
+            - >-
+              exec redis-server --appendonly yes
+              --requirepass "$REDIS_PASSWORD"
+              --rename-command FLUSHDB ""
+              --rename-command FLUSHALL ""
           env:
-            - name: BITNAMI_DEBUG
-              value: "false"
-            - name: REDIS_REPLICATION_MODE
-              value: master
-            - name: ALLOW_EMPTY_PASSWORD
-              value: "no"
             - name: REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: redis
                   key: redis-password
-            - name: REDIS_TLS_ENABLED
-              value: "no"
-            - name: REDIS_PORT
-              value: "6379"
           ports:
             - name: redis
               containerPort: 6379
           livenessProbe:
             initialDelaySeconds: 20
             periodSeconds: 5
-            # One second longer than command timeout should prevent generation of zombie processes.
             timeoutSeconds: 6
             successThreshold: 1
             failureThreshold: 5
@@ -99,18 +89,18 @@ spec:
               command:
                 - sh
                 - -c
-                - /health/ping_liveness_local.sh 5
+                - 'test -w /data && redis-cli -a "$REDIS_PASSWORD" ping | grep -q PONG'
           readinessProbe:
-            initialDelaySeconds: 20
+            initialDelaySeconds: 10
             periodSeconds: 5
-            timeoutSeconds: 2
+            timeoutSeconds: 3
             successThreshold: 1
             failureThreshold: 5
             exec:
               command:
                 - sh
                 - -c
-                - /health/ping_readiness_local.sh 1
+                - 'test -w /data && redis-cli -a "$REDIS_PASSWORD" ping | grep -q PONG'
           resources:
             limits:
               cpu: 150m
@@ -121,32 +111,12 @@ spec:
               ephemeral-storage: 50Mi
               memory: 128Mi
           volumeMounts:
-            - name: start-scripts
-              mountPath: /opt/bitnami/scripts/start-scripts
-            - name: health
-              mountPath: /health
             - name: redis-data
               mountPath: /data
-            - name: config
-              mountPath: /opt/bitnami/redis/mounted-etc
-            - name: empty-dir
-              mountPath: /opt/bitnami/redis/etc/
-              subPath: app-conf-dir
             - name: empty-dir
               mountPath: /tmp
               subPath: tmp-dir
       volumes:
-        - name: start-scripts
-          configMap:
-            name: redis-scripts
-            defaultMode: 0755
-        - name: health
-          configMap:
-            name: redis-health
-            defaultMode: 0755
-        - name: config
-          configMap:
-            name: redis-configuration
         - name: empty-dir
           emptyDir: {}
         - name: redis-data
